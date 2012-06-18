@@ -2,12 +2,24 @@
   BioLogica.Species = {};
   BioLogica.Species.Drake = {
     name: "Drake",
-    allAlleles: [['T', 'Tk', 't'], ['M', 'm'], ['W', 'w'], ['H', 'h'], ['C', 'c'], ['Fl', 'fl'], ['Hl', 'hl'], ['A1', 'A2', 'a'], ['B', 'b'], ['D', 'd', 'dl'], ['Rh', 'rh']],
-    chromosomes: ['1', '2', 'X', 'Y'],
+    chromosomeNames: ['1', '2', 'X', 'Y'],
     chromosomeAllelesMap: {
       '1': ['t', 'm', 'w'],
       '2': ['h', 'c', 'fl', 'hl', 'a'],
       'X': ['b', 'd', 'rh']
+    },
+    geneList: {
+      tail: ['T', 'Tk', 't'],
+      metalic: ['M', 'm'],
+      wings: ['W', 'w'],
+      horns: ['H', 'h'],
+      color: ['C', 'c'],
+      forelimbs: ['Fl', 'fl'],
+      hindlimbs: ['Hl', 'hl'],
+      armor: ['A1', 'A2', 'a'],
+      black: ['B', 'b'],
+      dilute: ['D', 'd', 'dl'],
+      nose: ['Rh', 'rh']
     },
     alleleLabelMap: {
       'T': 'Long tail',

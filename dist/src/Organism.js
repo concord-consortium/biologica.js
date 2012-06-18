@@ -4,7 +4,7 @@
       this.species = species;
       this.sex = sex;
       this.alleles = alleles;
-      this.chromosomes = {};
+      this.genetics = new BioLogica.Genetics(this.species, this.alleles);
       ({
         /*
               For a given trait (a species-level property), returns this organism's

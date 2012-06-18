@@ -1,7 +1,7 @@
 class BioLogica.Organism
 
   constructor: (@species, @sex, @alleles) ->
-    @chromosomes = {}
+    @genetics = new BioLogica.Genetics(@species, @alleles)
 
     ###
       For a given trait (a species-level property), returns this organism's
