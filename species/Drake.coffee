@@ -4,12 +4,12 @@ BioLogica.Species.Drake =
 
   name: "Drake"
 
-  chromosomeNames: ['1', '2', 'X', 'Y']
+  chromosomeNames: ['1', '2', 'XY']
 
-  chromosomeAllelesMap:
+  chromosomeGeneMap:
      '1': ['t','m','w']
      '2': ['h', 'c', 'fl', 'hl', 'a']
-     'X': ['b', 'd', 'rh']
+     'XY': ['b', 'd', 'rh']
 
   geneList:
     tail:       ['T', 'Tk', 't'],

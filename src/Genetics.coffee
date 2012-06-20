@@ -1,15 +1,49 @@
 class BioLogica.Genetics
 
-  constructor: (@species, @alleles) ->
+  constructor: (@species, @sex, @alleles) ->
+    # create chromosome if a specification is given
+    genotypeHash = if (@alleles)
+      if (typeof @alleles == "string")
+        @convertAlleleStringToGenotypeHash(@alleles)
+      else
+        @alleles
+    else
+      {}
 
-  convertAlleleStringToChromosomes = (alleleString) ->
-    @chromosomes = {}
-    @chromosomes[chromoName] = {} for chromoName in @species.chromosomes
+    # after initial chromosomes are created, fill in any missing genes with random alleles
+    @topUpChromosomes(genotypeHash)
 
-    for own alleleSpec in alleleString.split(",")
-      split = alleleSpec.split(":")
-      side = split[0]
-      allele = split[1]
+    @genotype = new BioLogica.Genotype(genotypeHash)
+
+  ###
+    Converts an alleleString to a genotype hash
+    e.g. convertAlleleStringToChromosomes("a:t,b:t,a:h,b:H,a:Dl") =>
+      {"1": {a: ["t"], b: ["t"]}, "2": {a: ["h"], b: ["H"]}, "XY": {a: ["Dl"]}}
+  ###
+  convertAlleleStringToGenotypeHash: (alleleString) ->
+    split = BioLogica.Genetics.parseAlleleString alleleString
+    genotypeHash = {}
+    genotypeHash[chromoName] = {a: [], b: []} for chromoName in @species.chromosomeNames
+    for own side, alleles of split
+      for allele in alleles
+        chromoName = @findChromosome allele
+        genotypeHash[chromoName][side].push allele
+    genotypeHash
+
+  ###
+    "tops-up" the chromosomes: fills in any missing genes with random alleles
+  ###
+  topUpChromosomes: (genotypeHash) ->
+    for own chromosome, genes of @species.chromosomeGeneMap
+      genotypeHash[chromosome] ?= {}
+      genotypeHash[chromosome].a ?= []
+      genotypeHash[chromosome].b ?= []
+
+      for gene in genes
+        unless @chromosomeContainsGene genotypeHash[chromosome].a, gene
+          genotypeHash[chromosome].a.push @getRandomAllele(gene)
+        unless @chromosomeContainsGene genotypeHash[chromosome].b, gene
+          genotypeHash[chromosome].b.push @getRandomAllele(gene)
 
   ###
     Returns true if the allele passed is a member of the gene, where the
@@ -24,9 +58,34 @@ class BioLogica.Genetics
         return true
     false
 
+  ###
+    Finds the chromosome that a given allele is part of
+  ###
   findChromosome: (allele) ->
-    for chromosome, alleles of @species.chromosomeAllelesMap
-      return chromosome if allele in alleles
+    for chromosome, genes of @species.chromosomeGeneMap
+      for gene in genes
+        return chromosome if @isAlleleOfGene(allele, gene)
+    false
+
+  ###
+    Returns true if chromosome array contains any allele of the gene
+  ###
+  chromosomeContainsGene: (chromosome, exampleOfGene) ->
+    for allele in chromosome
+      return true if @isAlleleOfGene(allele, exampleOfGene)
+    false
+
+  ###
+    Returns random allele of the gene
+  ###
+  getRandomAllele: (exampleOfGene) ->
+    for own gene of @species.geneList
+      _allelesOfGene = @species.geneList[gene]
+      if exampleOfGene in _allelesOfGene
+        allelesOfGene = _allelesOfGene
+        break
+    rand = Math.floor Math.random() * allelesOfGene.length
+    allelesOfGene[rand]
 
   ###
     Given an array of alleles and an array of genes, filter the alleles to return only
@@ -39,6 +98,15 @@ class BioLogica.Genetics
         if @isAlleleOfGene(allele, gene)
           return true
       false
+
+  ###
+    Given a genotype object, generate the hash of characteristics
+  ###
+  getCharacteristics: (genotype) ->
+    characteristics = {}
+   # for own trait, possibleCharacteristic of @species.traitRules
+   #   for genotype in possibleCharacteristic
+   #     if
 
 ### Class methods (non-instance) ###
 
