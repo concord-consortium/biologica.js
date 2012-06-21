@@ -12,5 +12,6 @@ class BioLogica.Organism
     getCharacteristic("horns") may return "no horns".
   ###
   getCharacteristic: (trait) ->
+    return @genetics.characteristics[trait]
 
   performMeiosis: (crossover) ->

@@ -21,7 +21,9 @@
     */
 
 
-    Organism.prototype.getCharacteristic = function(trait) {};
+    Organism.prototype.getCharacteristic = function(trait) {
+      return this.genetics.characteristics[trait];
+    };
 
     Organism.prototype.performMeiosis = function(crossover) {};
 

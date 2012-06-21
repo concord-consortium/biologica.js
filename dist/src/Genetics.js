@@ -12,7 +12,8 @@
       this.alleles = alleles;
       genotypeHash = this.alleles ? typeof this.alleles === "string" ? this.convertAlleleStringToGenotypeHash(this.alleles) : this.alleles : {};
       this.topUpChromosomes(genotypeHash);
-      this.genotype = new BioLogica.Genotype(genotypeHash);
+      this.genotype = new BioLogica.Genotype(this.sex, genotypeHash);
+      this.characteristics = this.getCharacteristics(this.genotype);
     }
 
     /*
@@ -37,6 +38,9 @@
       for (side in split) {
         if (!__hasProp.call(split, side)) continue;
         alleles = split[side];
+        if (!alleles) {
+          continue;
+        }
         for (_j = 0, _len1 = alleles.length; _j < _len1; _j++) {
           allele = alleles[_j];
           chromoName = this.findChromosome(allele);
@@ -191,8 +195,28 @@
 
 
     Genetics.prototype.getCharacteristics = function(genotype) {
-      var characteristics;
-      return characteristics = {};
+      var alleles, characteristics, possibleAlleles, possibleCharacteristic, possibleCharacteristics, trait, _i, _len, _ref;
+      characteristics = {};
+      _ref = this.species.traitRules;
+      for (trait in _ref) {
+        if (!__hasProp.call(_ref, trait)) continue;
+        possibleCharacteristics = _ref[trait];
+        for (possibleCharacteristic in possibleCharacteristics) {
+          if (!__hasProp.call(possibleCharacteristics, possibleCharacteristic)) continue;
+          possibleAlleles = possibleCharacteristics[possibleCharacteristic];
+          for (_i = 0, _len = possibleAlleles.length; _i < _len; _i++) {
+            alleles = possibleAlleles[_i];
+            if (genotype.containsAlleles(alleles)) {
+              characteristics[trait] = possibleCharacteristic;
+              break;
+            }
+          }
+          if (characteristics[trait]) {
+            break;
+          }
+        }
+      }
+      return characteristics;
     };
 
     return Genetics;
@@ -212,13 +236,14 @@
 
 
   BioLogica.Genetics.parseAlleleString = function(alleleString) {
+    var _ref, _ref1;
     return {
-      a: alleleString.match(/a:([^,])*/g).map(function(short) {
+      a: (_ref = alleleString.match(/a:([^,])*/g)) != null ? _ref.map(function(short) {
         return short.match(/[^:]+$/)[0];
-      }),
-      b: alleleString.match(/b:([^,])*/g).map(function(short) {
+      }) : void 0,
+      b: (_ref1 = alleleString.match(/b:([^,])*/g)) != null ? _ref1.map(function(short) {
         return short.match(/[^:]+$/)[0];
-      })
+      }) : void 0
     };
   };
 

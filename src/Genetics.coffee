@@ -13,7 +13,8 @@ class BioLogica.Genetics
     # after initial chromosomes are created, fill in any missing genes with random alleles
     @topUpChromosomes(genotypeHash)
 
-    @genotype = new BioLogica.Genotype(genotypeHash)
+    @genotype = new BioLogica.Genotype(@sex, genotypeHash)
+    @characteristics = @getCharacteristics(@genotype)
 
   ###
     Converts an alleleString to a genotype hash
@@ -105,9 +106,14 @@ class BioLogica.Genetics
   ###
   getCharacteristics: (genotype) ->
     characteristics = {}
-   # for own trait, possibleCharacteristic of @species.traitRules
-   #   for genotype in possibleCharacteristic
-   #     if
+    for own trait, possibleCharacteristics of @species.traitRules
+      for own possibleCharacteristic, possibleAlleles of possibleCharacteristics
+        for alleles in possibleAlleles
+          if genotype.containsAlleles(alleles)
+            characteristics[trait] = possibleCharacteristic
+            break
+        break if characteristics[trait]
+    characteristics
 
 ### Class methods (non-instance) ###
 

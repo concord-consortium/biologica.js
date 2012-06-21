@@ -79,7 +79,7 @@
       },
       "nose spike": {
         "Nose spike": [["Rh", "Rh"], ["Rh", "rh"]],
-        "No nose spike": [["rh", "rh"]]
+        "No nose spike": [["rh", "rh"], ["rh"]]
       },
       "wings": {
         "Wings": [["W", "W"], ["W", "w"]],
@@ -93,7 +93,19 @@
         "Charcoal": [["m", "m", "B", "B", "D", "D"], ["m", "m", "B", "b", "D", "D"], ["m", "m", "B", "B", "D", "d"], ["m", "m", "B", "b", "D", "d"]],
         "Earth": [["m", "m", "b", "b", "D", "D"], ["m", "m", "b", "b", "D", "d"]],
         "Dust": [["m", "m", "B", "B", "d", "d"], ["m", "m", "B", "b", "d", "d"]],
-        "Sand": [["m", "m", "b", "b", "d", "d"]]
+        "Sand": [["m", "m", "b", "b", "d", "d"]],
+        "Steel": [["M", "M", "B", "D"], ["M", "m", "B", "D"]],
+        "Copper": [["M", "M", "b", "D"], ["M", "m", "b", "D"]],
+        "Argent": [["M", "M", "B", "d"], ["M", "m", "B", "d"]],
+        "Gold": [["M", "M", "b", "d"], ["M", "m", "b", "d"]],
+        "Charcoal": [["m", "m", "B", "D"], ["m", "m", "B", "D"]],
+        "Earth": [["m", "m", "b", "D"]],
+        "Dust": [["m", "m", "B", "d"]],
+        "Sand": [["m", "m", "b", "d"]]
+      },
+      "liveliness": {
+        "Alive": [["D"], ["d"]],
+        "Dead": [[]]
       }
     }
   };

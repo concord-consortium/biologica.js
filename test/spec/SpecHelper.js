@@ -20,6 +20,12 @@ beforeEach(function() {
           contains = true;
       }
       return contains;
+    },
+    toHaveCharacteristic: function(trait, characteristic) {
+      var sex = this.actual[0],
+          alleles = this.actual[1],
+          org = new BioLogica.Organism(BioLogica.Species.Drake, sex, alleles);
+      return org.getCharacteristic(trait) == characteristic;
     }
   });
 });
