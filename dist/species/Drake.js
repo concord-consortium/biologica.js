@@ -101,11 +101,11 @@
         "Charcoal": [["m", "m", "B", "D"], ["m", "m", "B", "D"]],
         "Earth": [["m", "m", "b", "D"]],
         "Dust": [["m", "m", "B", "d"]],
-        "Sand": [["m", "m", "b", "d"]]
+        "Sand": [["m", "m", "b", "d"], []]
       },
       "liveliness": {
         "Alive": [["D"], ["d"]],
-        "Dead": [[]]
+        "Dead": [["dl", "dl"], ["dl"], []]
       }
     }
   };
