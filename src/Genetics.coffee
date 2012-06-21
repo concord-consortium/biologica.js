@@ -25,6 +25,7 @@ class BioLogica.Genetics
     genotypeHash = {}
     genotypeHash[chromoName] = {a: [], b: []} for chromoName in @species.chromosomeNames
     for own side, alleles of split
+      continue unless alleles
       for allele in alleles
         chromoName = @findChromosome allele
         genotypeHash[chromoName][side].push allele
@@ -117,5 +118,5 @@ class BioLogica.Genetics
     { a: ["h", "t", "Dl"], b: ["H", "t", "D"] }
 ###
 BioLogica.Genetics.parseAlleleString = (alleleString) ->
-  a: alleleString.match(/a:([^,])*/g).map (short) -> short.match(/[^:]+$/)[0]
-  b: alleleString.match(/b:([^,])*/g).map (short) -> short.match(/[^:]+$/)[0]
+  a: alleleString.match(/a:([^,])*/g)?.map (short) -> short.match(/[^:]+$/)[0]
+  b: alleleString.match(/b:([^,])*/g)?.map (short) -> short.match(/[^:]+$/)[0]
