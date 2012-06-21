@@ -7,6 +7,7 @@
     function Genotype(genotypeHash) {
       var alleles, chromosome, side, sides;
       this.chromosomes = {};
+      this.allAlleles = [];
       for (chromosome in genotypeHash) {
         if (!__hasProp.call(genotypeHash, chromosome)) continue;
         sides = genotypeHash[chromosome];
@@ -15,6 +16,7 @@
           if (!__hasProp.call(sides, side)) continue;
           alleles = sides[side];
           this.chromosomes[chromosome][side] = alleles.slice(0);
+          this.allAlleles = this.allAlleles.concat(alleles.slice(0));
         }
       }
     }

@@ -6,9 +6,11 @@ class BioLogica.Genotype
 
     # copy genotypeHash into @chromosomes
     @chromosomes = {}
+    @allAlleles = []
     for own chromosome, sides of genotypeHash
       @chromosomes[chromosome] = {}
       for own side, alleles of sides
         @chromosomes[chromosome][side] = alleles[..]
+        @allAlleles = @allAlleles.concat alleles[..]
 
   containsAlleles: (alleles) ->
