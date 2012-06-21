@@ -2,10 +2,33 @@
 (function() {
   var __hasProp = {}.hasOwnProperty;
 
+  Array.prototype.remove = function(from, to) {
+    var rest;
+    rest = this.slice((to || from) + 1 || this.length);
+    this.length = from < 0 ? this.length + from : from;
+    return this.push.apply(this, rest);
+  };
+
+  Array.prototype.removeObj = function(obj) {
+    var i;
+    i = this.indexOf(obj);
+    if (~i) {
+      this.remove(i);
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   BioLogica.Genotype = (function() {
 
-    function Genotype(genotypeHash) {
-      var alleles, chromosome, side, sides;
+    function Genotype(sex, genotypeHash) {
+      var alleles, chromosome, side, sides, _ref;
+      if (sex === BioLogica.MALE) {
+        if ((_ref = genotypeHash.XY) != null) {
+          _ref.b = [];
+        }
+      }
       this.chromosomes = {};
       this.allAlleles = [];
       for (chromosome in genotypeHash) {
@@ -21,7 +44,17 @@
       }
     }
 
-    Genotype.prototype.containsAlleles = function(alleles) {};
+    Genotype.prototype.containsAlleles = function(alleles) {
+      var allAllelesCopy, allele, _i, _len;
+      allAllelesCopy = this.allAlleles.slice(0);
+      for (_i = 0, _len = alleles.length; _i < _len; _i++) {
+        allele = alleles[_i];
+        if (!allAllelesCopy.removeObj(allele)) {
+          return false;
+        }
+      }
+      return true;
+    };
 
     return Genotype;
 

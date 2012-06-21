@@ -1,3 +1,17 @@
+Array.prototype.remove = (from, to) ->
+  rest = this.slice((to || from) + 1 || this.length);
+  this.length = if from < 0 then this.length + from else from;
+  return this.push.apply(this, rest);
+
+Array.prototype.removeObj = (obj) ->
+  i = this.indexOf(obj)
+  if ~i
+    this.remove(i)
+    true
+  else
+    false
+
+
 class BioLogica.Genotype
 
   constructor: (sex, genotypeHash) ->
@@ -14,3 +28,6 @@ class BioLogica.Genotype
         @allAlleles = @allAlleles.concat alleles[..]
 
   containsAlleles: (alleles) ->
+    allAllelesCopy = @allAlleles[..]
+    (return false unless allAllelesCopy.removeObj(allele)) for allele in alleles
+    true
