@@ -12,91 +12,104 @@ BioLogica.Species.Drake =
      'XY': ['b', 'd', 'rh']
 
   geneList:
-    tail:       ['T', 'Tk', 't'],
-    metalic:    ['M', 'm'],
-    wings:      ['W', 'w'],
-    horns:      ['H', 'h'],
-    color:      ['C', 'c'],
-    forelimbs:  ['Fl', 'fl'],
-    hindlimbs:  ['Hl', 'hl'],
-    armor:      ['A1', 'A2', 'a'],
-    black:      ['B', 'b'],
-    dilute:     ['D', 'd', 'dl'],
+    tail:       ['T', 'Tk', 't']
+    metalic:    ['M', 'm']
+    wings:      ['W', 'w']
+    horns:      ['H', 'h']
+    color:      ['C', 'c']
+    forelimbs:  ['Fl', 'fl']
+    hindlimbs:  ['Hl', 'hl']
+    armor:      ['A1', 'A2', 'a']
+    black:      ['B', 'b']
+    dilute:     ['D', 'd', 'dl']
     nose:       ['Rh', 'rh']
 
   alleleLabelMap:
-      'T': 'Long tail',
-      'Tk': 'Kinked tail',
-      't': 'Short tail',
-      'M': 'Metallic',
-      'm': 'Nonmetallic',
-      'W': 'Wings',
-      'w': 'No wings',
-      'H': 'No horns',
-      'h': 'Horns',
-      'C': 'Colored',
-      'c': 'Colorless',
-      'Fl': 'Forelimbs',
-      'fl': 'No forelimbs',
-      'Hl': 'Hindlimbs',
-      'hl': 'No hindlimbs',
-      'A1': "'A1' armor",
-      'A2': "'A2' armor",
-      'a': "'a' armor",
-      'B': 'Black',
-      'b': 'Brown',
-      'D': 'Full color',
-      'd': 'Dilute color',
-      'dl': 'dl',
-      'Rh': 'Nose spike',
-      'rh': 'No nose spike',
-      'Y' : 'Y',
+      'T': 'Long tail'
+      'Tk': 'Kinked tail'
+      't': 'Short tail'
+      'M': 'Metallic'
+      'm': 'Nonmetallic'
+      'W': 'Wings'
+      'w': 'No wings'
+      'H': 'No horns'
+      'h': 'Horns'
+      'C': 'Colored'
+      'c': 'Colorless'
+      'Fl': 'Forelimbs'
+      'fl': 'No forelimbs'
+      'Hl': 'Hindlimbs'
+      'hl': 'No hindlimbs'
+      'A1': "'A1' armor"
+      'A2': "'A2' armor"
+      'a': "'a' armor"
+      'B': 'Black'
+      'b': 'Brown'
+      'D': 'Full color'
+      'd': 'Dilute color'
+      'dl': 'dl'
+      'Rh': 'Nose spike'
+      'rh': 'No nose spike'
+      'Y' : 'Y'
       '' : ''
 
   traitRules:
     "armor":
-      "Five armor": [["A1", "A1"], ["A1", "A2"]],
-      "Three armor": [["A1", "a"], ["A2", "A2"]],
-      "One armor": [["A2", "a"]],
+      "Five armor": [["A1", "A1"], ["A1", "A2"]]
+      "Three armor": [["A1", "a"], ["A2", "A2"]]
+      "One armor": [["A2", "a"]]
       "No armor": [["a", "a"]]
 
     "tail":
-      "Long tail": [["T", "T"], ["T", "Tk"], ["T", "t"]],
+      "Long tail": [["T", "T"], ["T", "Tk"], ["T", "t"]]
       "Kinked tail": [["Tk", "Tk"], ["Tk", "t"]],
       "Short tail": [["t", "t"]]
 
     "forelimbs":
-      "Forelimbs": [["Fl", "Fl"], ["Fl", "fl"]],
+      "Forelimbs": [["Fl", "Fl"], ["Fl", "fl"]]
       "No forelimbs": [["fl", "fl"]]
 
     "hindlimbs":
-      "Hindlimbs": [["Hl", "Hl"], ["Hl", "hl"]],
+      "Hindlimbs": [["Hl", "Hl"], ["Hl", "hl"]]
       "No hindlimbs": [["hl", "hl"]]
 
     "horns":
-      "Hornless": [["H", "H"], ["H", "h"]],
+      "Hornless": [["H", "H"], ["H", "h"]]
       "Horns": [["h", "h"]]
 
     "nose spike":
-      "Nose spike": [["Rh", "Rh"], ["Rh", "rh"]],
-      "No nose spike": [["rh", "rh"]]
+      "Nose spike": [["Rh", "Rh"], ["Rh", "rh"]]
+      "No nose spike": [["rh", "rh"], ["rh"]]
 
     "wings":
-      "Wings": [["W", "W"], ["W", "w"]],
+      "Wings": [["W", "W"], ["W", "w"]]
       "No wings": [["w", "w"]]
 
     "color":
-      "Steel":    [["M", "M", "B", "B", "D", "D"], ["M", "m", "B", "B", "D", "D"],
-                   ["M", "M", "B", "b", "D", "D"], ["M", "M", "B", "B", "D", "d"],
-                   ["M", "m", "B", "b", "D", "D"], ["M", "m", "B", "B", "D", "d"],
-                   ["M", "M", "B", "b", "D", "d"], ["M", "m", "B", "b", "D", "d"]],
-      "Copper":   [["M", "M", "b", "b", "D", "D"], ["M", "m", "b", "b", "D", "D"],
-                   ["M", "M", "b", "b", "D", "d"], ["M", "m", "b", "b", "D", "d"]],
-      "Argent":   [["M", "M", "B", "B", "d", "d"], ["M", "m", "B", "B", "d", "d"],
-                   ["M", "M", "B", "b", "d", "d"], ["M", "m", "B", "b", "d", "d"]],
-      "Gold":     [["M", "M", "b", "b", "d", "d"], ["M", "m", "b", "b", "d", "d"]],
-      "Charcoal": [["m", "m", "B", "B", "D", "D"], ["m", "m", "B", "b", "D", "D"],
-                   ["m", "m", "B", "B", "D", "d"], ["m", "m", "B", "b", "D", "d"]],
-      "Earth":    [["m", "m", "b", "b", "D", "D"], ["m", "m", "b", "b", "D", "d"]],
-      "Dust":     [["m", "m", "B", "B", "d", "d"], ["m", "m", "B", "b", "d", "d"]],
+      "Steel":    [["M", "M", "B", "B", "D", "D"], ["M", "m", "B", "B", "D", "D"]
+                   ["M", "M", "B", "b", "D", "D"], ["M", "M", "B", "B", "D", "d"]
+                   ["M", "m", "B", "b", "D", "D"], ["M", "m", "B", "B", "D", "d"]
+                   ["M", "M", "B", "b", "D", "d"], ["M", "m", "B", "b", "D", "d"]]
+      "Copper":   [["M", "M", "b", "b", "D", "D"], ["M", "m", "b", "b", "D", "D"]
+                   ["M", "M", "b", "b", "D", "d"], ["M", "m", "b", "b", "D", "d"]]
+      "Argent":   [["M", "M", "B", "B", "d", "d"], ["M", "m", "B", "B", "d", "d"]
+                   ["M", "M", "B", "b", "d", "d"], ["M", "m", "B", "b", "d", "d"]]
+      "Gold":     [["M", "M", "b", "b", "d", "d"], ["M", "m", "b", "b", "d", "d"]]
+      "Charcoal": [["m", "m", "B", "B", "D", "D"], ["m", "m", "B", "b", "D", "D"]
+                   ["m", "m", "B", "B", "D", "d"], ["m", "m", "B", "b", "D", "d"]]
+      "Earth":    [["m", "m", "b", "b", "D", "D"], ["m", "m", "b", "b", "D", "d"]]
+      "Dust":     [["m", "m", "B", "B", "d", "d"], ["m", "m", "B", "b", "d", "d"]]
       "Sand":     [["m", "m", "b", "b", "d", "d"]]
+      # males
+      "Steel":    [["M", "M", "B", "D"], ["M", "m", "B", "D"]]
+      "Copper":   [["M", "M", "b", "D"], ["M", "m", "b", "D"]]
+      "Argent":   [["M", "M", "B", "d"], ["M", "m", "B", "d"]]
+      "Gold":     [["M", "M", "b", "d"], ["M", "m", "b", "d"]]
+      "Charcoal": [["m", "m", "B", "D"], ["m", "m", "B", "D"]]
+      "Earth":    [["m", "m", "b", "D"]]
+      "Dust":     [["m", "m", "B", "d"]]
+      "Sand":     [["m", "m", "b", "d"]]
+
+    "liveliness":
+      "Alive":    [["D"],["d"]]
+      "Dead":     [[]]
