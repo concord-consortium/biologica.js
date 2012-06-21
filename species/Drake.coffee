@@ -100,7 +100,7 @@ BioLogica.Species.Drake =
       "Earth":    [["m", "m", "b", "b", "D", "D"], ["m", "m", "b", "b", "D", "d"]]
       "Dust":     [["m", "m", "B", "B", "d", "d"], ["m", "m", "B", "b", "d", "d"]]
       "Sand":     [["m", "m", "b", "b", "d", "d"]]
-      # males
+      # males and dl
       "Steel":    [["M", "M", "B", "D"], ["M", "m", "B", "D"]]
       "Copper":   [["M", "M", "b", "D"], ["M", "m", "b", "D"]]
       "Argent":   [["M", "M", "B", "d"], ["M", "m", "B", "d"]]
@@ -108,8 +108,8 @@ BioLogica.Species.Drake =
       "Charcoal": [["m", "m", "B", "D"], ["m", "m", "B", "D"]]
       "Earth":    [["m", "m", "b", "D"]]
       "Dust":     [["m", "m", "B", "d"]]
-      "Sand":     [["m", "m", "b", "d"]]
+      "Sand":     [["m", "m", "b", "d"], []]
 
     "liveliness":
       "Alive":    [["D"],["d"]]
-      "Dead":     [[]]
+      "Dead":     [["dl", "dl"], ["dl"], []]

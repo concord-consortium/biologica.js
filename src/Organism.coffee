@@ -15,3 +15,9 @@ class BioLogica.Organism
     return @genetics.characteristics[trait]
 
   performMeiosis: (crossover) ->
+
+  toString: ->
+    sex = if @sex == BioLogica.FEMALE then "female" else "male"
+    alleles = @genetics.genotype.allAlleles
+
+    return  "Organism: {sex: #{sex}, authored alleles: #{@alleles}, alleles: #{alleles}"

@@ -1,9 +1,9 @@
+var female = BioLogica.FEMALE,
+    male   = BioLogica.MALE;
+
 describe("The characteristic", function() {
 
-  var female = BioLogica.FEMALE,
-      male   = BioLogica.MALE,
-
-      phenotypeTests = [
+  var phenotypeTests = [
   //   Sex      Alleles          Trait         Characteristic   //
     [ female,    "a:W",           "wings",        "Wings"         ],
     [ female,    "a:W,b:W",       "wings",        "Wings"         ],
@@ -42,11 +42,14 @@ describe("The characteristic", function() {
     [ female,    "a:c,b:c",                      "color",      "Frost"    ],
     [ female,    "a:C,a:M,b:M,a:B,a:D",          "color",      "Steel"    ],
     [ female,    "a:C,b:c,a:M,b:m,a:B,a:D,b:d",  "color",      "Steel"    ],
+    [ female,    "a:C,b:c,a:M,b:m,a:B,a:D,b:dl", "color",      "Steel"    ],
     [ female,    "a:C,a:M,b:M,a:b,b:b,a:D",      "color",      "Copper"   ],
     [ male,      "a:C,a:M,b:M,a:b,a:D",          "color",      "Copper"   ],
     [ female,    "a:C,a:M,b:M,a:B,a:d,b:d",      "color",      "Argent"   ],
+    [ female,    "a:C,a:M,b:M,a:B,a:dl,b:d",     "color",      "Argent"   ],
     [ male,      "a:C,a:M,b:M,a:B,a:d",          "color",      "Argent"   ],
     [ female,    "a:C,a:M,b:m,a:b,b:b,a:d,b:d",  "color",      "Gold"     ],
+    [ female,    "a:C,a:M,b:m,a:b,b:b,a:d,b:dl", "color",      "Gold"     ],
     [ male,      "a:C,a:M,b:m,a:b,a:d",          "color",      "Gold"     ],
     [ female,    "a:C,a:m,b:m,a:B,a:D",          "color",      "Charcoal" ],
     [ female,    "a:C,a:m,b:m,a:b,b:b,a:D",      "color",      "Earth"    ],
@@ -74,5 +77,45 @@ describe("The characteristic", function() {
     });
   }
 
-
 });
+
+describe("The traits", function() {
+  it ("of an under-specified organism should be fully specified", function() {
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, female, ""),
+        traits = ["wings", "tail", "horns", "forelimbs", "hindlimbs", "armor", "nose spike", "color", "liveliness"],
+        allTraitsSpecified = true;
+
+    for (var i=0, ii=traits.length; i<ii;i++){
+      if (!org.getCharacteristic(traits[i])) {
+        allTraitsSpecified = false;
+        break;
+      }
+    }
+    expect(allTraitsSpecified).toBe(true);
+  });
+
+  it ("of an fully-specified organism should be exactly as defined", function() {
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, female,
+                              "a:t,b:Tk,a:m,b:M,a:w,b:w,a:H,b:H,a:C,b:c,a:Fl,b:fl,a:hl,b:hl,a:a,b:A2,a:B,b:B,a:dl,b:d,a:rh,b:Rh");
+    expect(org).toHaveCharacteristic("tail", "Kinked tail");
+    expect(org).toHaveCharacteristic("color", "Argent");
+    expect(org).toHaveCharacteristic("wings", "No wings");
+    expect(org).toHaveCharacteristic("horns", "Hornless");
+    expect(org).toHaveCharacteristic("forelimbs", "Forelimbs");
+    expect(org).toHaveCharacteristic("hindlimbs", "No hindlimbs");
+    expect(org).toHaveCharacteristic("armor", "One armor");
+    expect(org).toHaveCharacteristic("nose spike", "Nose spike");
+
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, male,
+                              "a:t,b:t,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:fl,a:Hl,b:hl,a:A2,b:A2,a:B,a:d,a:rh");
+    expect(org).toHaveCharacteristic("tail", "Short tail");
+    expect(org).toHaveCharacteristic("color", "Dust");
+    expect(org).toHaveCharacteristic("wings", "Wings");
+    expect(org).toHaveCharacteristic("horns", "Horns");
+    expect(org).toHaveCharacteristic("forelimbs", "No forelimbs");
+    expect(org).toHaveCharacteristic("hindlimbs", "Hindlimbs");
+    expect(org).toHaveCharacteristic("armor", "Three armor");
+    expect(org).toHaveCharacteristic("nose spike", "No nose spike");
+
+  });
+})

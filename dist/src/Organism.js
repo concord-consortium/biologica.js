@@ -27,6 +27,13 @@
 
     Organism.prototype.performMeiosis = function(crossover) {};
 
+    Organism.prototype.toString = function() {
+      var alleles, sex;
+      sex = this.sex === BioLogica.FEMALE ? "female" : "male";
+      alleles = this.genetics.genotype.allAlleles;
+      return "Organism: {sex: " + sex + ", authored alleles: " + this.alleles + ", alleles: " + alleles;
+    };
+
     return Organism;
 
   })();

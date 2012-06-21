@@ -22,9 +22,13 @@ beforeEach(function() {
       return contains;
     },
     toHaveCharacteristic: function(trait, characteristic) {
-      var sex = this.actual[0],
-          alleles = this.actual[1],
-          org = new BioLogica.Organism(BioLogica.Species.Drake, sex, alleles);
+      if (this.actual.length) {
+        var sex = this.actual[0],
+            alleles = this.actual[1],
+            org = new BioLogica.Organism(BioLogica.Species.Drake, sex, alleles);
+      } else {
+        org = this.actual;
+      }
       return org.getCharacteristic(trait) == characteristic;
     }
   });
