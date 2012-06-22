@@ -60,9 +60,9 @@ describe("The characteristic", function() {
     [ male,      "a:C,a:m,b:m,a:b,a:d",          "color",      "Sand"     ],
 
     [ female,    "a:M,b:M,a:dl,b:dl,a:A1,b:A1",  "liveliness", "Dead"     ],
-    [ female,    "a:M,b:M,a:d,b:dl,a:A1",        "liveliness", "Dead"     ],
-    [ female,    "a:M,b:m,a:D,b:dl,a:A2",        "liveliness", "Dead"     ],
     [ male,      "a:dl",                         "liveliness", "Dead"     ],
+    [ female,    "a:M,b:M,a:d,b:dl,a:A1",        "liveliness", "Alive"    ],
+    [ female,    "a:M,b:m,a:D,b:dl,a:A2",        "liveliness", "Alive"    ],
     [ female,    "a:M,b:M,a:D,b:D,a:a,b:a",      "liveliness", "Alive"    ],
     [ male,      "a:D",                          "liveliness", "Alive"    ],
     [ male,      "a:d",                          "liveliness", "Alive"    ]

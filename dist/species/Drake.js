@@ -11,39 +11,66 @@
       '2': ['h', 'c', 'fl', 'hl', 'a'],
       'XY': ['b', 'd', 'rh']
     },
+    chromosomesLength: {
+      '1': 100000000,
+      '2': 100000000,
+      'XY': 70000000
+    },
     geneList: {
       tail: {
-        alleles: ['T', 'Tk', 't']
+        alleles: ['T', 'Tk', 't'],
+        start: 10000000,
+        length: 10584
       },
       metalic: {
-        alleles: ['M', 'm']
+        alleles: ['M', 'm'],
+        start: 20000000,
+        length: 259610
       },
       wings: {
-        alleles: ['W', 'w']
+        alleles: ['W', 'w'],
+        start: 70000000,
+        length: 9094
       },
       horns: {
-        alleles: ['H', 'h']
+        alleles: ['H', 'h'],
+        start: 10000000,
+        length: 19421
       },
       color: {
-        alleles: ['C', 'c']
+        alleles: ['C', 'c'],
+        start: 50000000,
+        length: 64572
       },
       forelimbs: {
-        alleles: ['Fl', 'fl']
+        alleles: ['Fl', 'fl'],
+        start: 80000000,
+        length: 122234
       },
       hindlimbs: {
-        alleles: ['Hl', 'hl']
+        alleles: ['Hl', 'hl'],
+        start: 85000000,
+        length: 6371
       },
       armor: {
-        alleles: ['A1', 'A2', 'a']
+        alleles: ['A1', 'A2', 'a'],
+        start: 90000000,
+        length: 425156
       },
       black: {
-        alleles: ['B', 'b']
+        alleles: ['B', 'b'],
+        start: 20000000,
+        length: 17596
       },
       dilute: {
-        alleles: ['D', 'd', 'dl']
+        alleles: ['D', 'd', 'dl'],
+        start: 40000000,
+        length: 152673
       },
       nose: {
-        alleles: ['Rh', 'rh']
+        alleles: ['Rh', 'rh'],
+        start: 60000000,
+        length: 2950
       }
     },
     alleleLabelMap: {
