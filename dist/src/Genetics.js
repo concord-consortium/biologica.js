@@ -104,7 +104,7 @@
       _ref = this.species.geneList;
       for (gene in _ref) {
         if (!__hasProp.call(_ref, gene)) continue;
-        allelesOfGene = this.species.geneList[gene];
+        allelesOfGene = this.species.geneList[gene].alleles;
         if (__indexOf.call(allelesOfGene, allele) >= 0 && __indexOf.call(allelesOfGene, exampleOfGene) >= 0) {
           return true;
         }
@@ -158,7 +158,7 @@
       _ref = this.species.geneList;
       for (gene in _ref) {
         if (!__hasProp.call(_ref, gene)) continue;
-        _allelesOfGene = this.species.geneList[gene];
+        _allelesOfGene = this.species.geneList[gene].alleles;
         if (__indexOf.call(_allelesOfGene, exampleOfGene) >= 0) {
           allelesOfGene = _allelesOfGene;
           break;

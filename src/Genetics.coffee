@@ -55,7 +55,7 @@ class BioLogica.Genetics
   ###
   isAlleleOfGene: (allele, exampleOfGene) ->
     for own gene of @species.geneList
-      allelesOfGene = @species.geneList[gene]
+      allelesOfGene = @species.geneList[gene].alleles
       if allele in allelesOfGene && exampleOfGene in allelesOfGene
         return true
     false
@@ -82,7 +82,7 @@ class BioLogica.Genetics
   ###
   getRandomAllele: (exampleOfGene) ->
     for own gene of @species.geneList
-      _allelesOfGene = @species.geneList[gene]
+      _allelesOfGene = @species.geneList[gene].alleles
       if exampleOfGene in _allelesOfGene
         allelesOfGene = _allelesOfGene
         break

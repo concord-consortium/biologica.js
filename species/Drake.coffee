@@ -12,17 +12,28 @@ BioLogica.Species.Drake =
      'XY': ['b', 'd', 'rh']
 
   geneList:
-    tail:       ['T', 'Tk', 't']
-    metalic:    ['M', 'm']
-    wings:      ['W', 'w']
-    horns:      ['H', 'h']
-    color:      ['C', 'c']
-    forelimbs:  ['Fl', 'fl']
-    hindlimbs:  ['Hl', 'hl']
-    armor:      ['A1', 'A2', 'a']
-    black:      ['B', 'b']
-    dilute:     ['D', 'd', 'dl']
-    nose:       ['Rh', 'rh']
+    tail:
+      alleles: ['T', 'Tk', 't']
+    metalic:
+      alleles: ['M', 'm']
+    wings:
+      alleles: ['W', 'w']
+    horns:
+      alleles: ['H', 'h']
+    color:
+      alleles: ['C', 'c']
+    forelimbs:
+      alleles: ['Fl', 'fl']
+    hindlimbs:
+      alleles: ['Hl', 'hl']
+    armor:
+      alleles: ['A1', 'A2', 'a']
+    black:
+      alleles: ['B', 'b']
+    dilute:
+      alleles: ['D', 'd', 'dl']
+    nose:
+      alleles: ['Rh', 'rh']
 
   alleleLabelMap:
       'T': 'Long tail'
