@@ -25,7 +25,7 @@ beforeEach(function() {
       if (this.actual.length) {
         var sex = this.actual[0],
             alleles = this.actual[1],
-            org = new BioLogica.Organism(BioLogica.Species.Drake, sex, alleles);
+            org = new BioLogica.Organism(BioLogica.Species.Drake, alleles, sex);
       } else {
         org = this.actual;
       }

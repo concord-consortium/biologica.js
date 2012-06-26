@@ -5,14 +5,14 @@
 
   BioLogica.Genetics = (function() {
 
-    function Genetics(species, sex, alleles) {
+    function Genetics(species, alleles, sex) {
       var genotypeHash;
       this.species = species;
-      this.sex = sex;
       this.alleles = alleles;
+      this.sex = sex;
       genotypeHash = this.alleles ? typeof this.alleles === "string" ? this.convertAlleleStringToGenotypeHash(this.alleles) : this.alleles : {};
       this.topUpChromosomes(genotypeHash);
-      this.genotype = new BioLogica.Genotype(this.sex, genotypeHash);
+      this.genotype = new BioLogica.Genotype(genotypeHash, this.sex);
     }
 
     /*

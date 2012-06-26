@@ -21,7 +21,7 @@
 
   BioLogica.Genotype = (function() {
 
-    function Genotype(sex, genotypeHash) {
+    function Genotype(genotypeHash, sex) {
       var alleles, chromosome, side, sides, _ref;
       if (sex === BioLogica.MALE) {
         if ((_ref = genotypeHash.XY) != null) {

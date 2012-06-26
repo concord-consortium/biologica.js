@@ -1,12 +1,12 @@
 describe("An organism's genetics", function() {
   it("is created when an organism is created", function() {
-    var org = new BioLogica.Organism(BioLogica.Species.Drake, BioLogica.FEMALE, "");
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE);
 
     expect(org.genetics).toExist();
   });
 
   it("creates genotype when an organism is created with an alleleString", function() {
-    var org = new BioLogica.Organism(BioLogica.Species.Drake, BioLogica.FEMALE, "a:h,b:H,a:t,b:Tk,b:dl,a:W,b:w,a:dl"),
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:H,a:t,b:Tk,b:dl,a:W,b:w,a:dl", BioLogica.FEMALE),
         chromosomes = org.getGenotype().chromosomes;
 
     expect(chromosomes["1"].a).toContain("t");
@@ -21,7 +21,7 @@ describe("An organism's genetics", function() {
   });
 
   it("creates genotype when an organism is created with a genotype specification", function() {
-    var org = new BioLogica.Organism(BioLogica.Species.Drake, BioLogica.FEMALE,
+    var org = new BioLogica.Organism(BioLogica.Species.Drake,
                 {
                   "1": {
                     "a": ["t", "W"],
@@ -34,7 +34,7 @@ describe("An organism's genetics", function() {
                   "XY": {
                     "a": ["dl"]
                   }
-                }),
+                }, BioLogica.FEMALE),
         chromosomes = org.getGenotype().chromosomes;
 
     expect(chromosomes["1"].a).toContain("t");
@@ -49,7 +49,7 @@ describe("An organism's genetics", function() {
   });
 
   it("creates complete genotype when an organism is created with an under-specified alleleString", function() {
-    var org = new BioLogica.Organism(BioLogica.Species.Drake, BioLogica.FEMALE, "a:h,b:H"),
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:H", BioLogica.FEMALE),
         chromosomes = org.getGenotype().chromosomes;
 
     expect(chromosomes["1"].a.length).toBe(3);
@@ -69,7 +69,7 @@ describe("An organism's genetics", function() {
 
 describe("An species' genetics", function() {
   it("correctly identifies alleles as belonging to genes", function() {
-    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, BioLogica.FEMALE, "");
+    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "", BioLogica.FEMALE);
 
     expect(genetics.isAlleleOfGene("T", "T")).toBe(true);
     expect(genetics.isAlleleOfGene("dl", "D")).toBe(true);
@@ -78,7 +78,7 @@ describe("An species' genetics", function() {
   });
 
   it("correctly finds the chromosome an allele belongs to", function() {
-    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, BioLogica.FEMALE, "");
+    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "", BioLogica.FEMALE);
 
     expect(genetics.findChromosome("t")).toBe("1");
     expect(genetics.findChromosome("Fl")).toBe("2");
@@ -88,7 +88,7 @@ describe("An species' genetics", function() {
   });
 
   it("correctly filters a set of alleles", function() {
-    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, BioLogica.FEMALE, ""),
+    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "", BioLogica.FEMALE),
         alleles = ["Tk", "m", "W", "dl"],
         geneFilter = ["T", "D"],
         filteredAlleles = genetics.filter(alleles, geneFilter);
@@ -100,7 +100,7 @@ describe("An species' genetics", function() {
   });
 
   it("correctly converts an allele string into genotype", function() {
-    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, BioLogica.FEMALE, ""),
+    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "", BioLogica.FEMALE),
         alleles = "a:h,b:H,a:t,b:Tk,b:dl,a:W,b:w,a:dl",
         chromosomes =genetics.convertAlleleStringToGenotypeHash(alleles);
 
@@ -116,7 +116,7 @@ describe("An species' genetics", function() {
   });
 
   it("finds if a chromosome contains a gene", function() {
-    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, BioLogica.FEMALE, ""),
+    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "", BioLogica.FEMALE),
         chromosome = ["h", "A2"];
 
     expect(genetics.chromosomeContainsGene(chromosome, "h")).toBe(true);
@@ -134,7 +134,7 @@ describe("An species' genetics", function() {
   });
 
   it("can create a random alleles that are uniformly distributed", function() {
-    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, BioLogica.FEMALE, ""),
+    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "", BioLogica.FEMALE),
         alleleCounts = {A1: 0, A2: 0, a: 0},
         i = 10000,
         allele;
@@ -151,7 +151,7 @@ describe("An species' genetics", function() {
   });
 
   it("can create a complete chromosome object from an under-specified alleleString", function() {
-    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, BioLogica.FEMALE, "a:h,b:H"),
+    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "a:h,b:H", BioLogica.FEMALE),
         chromosomes =genetics.genotype.chromosomes;
 
     expect(chromosomes["1"].a.length).toBe(3)
@@ -172,7 +172,7 @@ describe("An species' genetics", function() {
 
 describe("The Genotype object", function() {
   it("correctly checks to see if it contains given alleles", function() {
-    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, BioLogica.MALE, "a:h,b:H,a:t,b:Tk,a:W,b:w,a:rh"),
+    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "a:h,b:H,a:t,b:Tk,a:W,b:w,a:rh", BioLogica.MALE),
         genotype =genetics.genotype;
 
     expect(genotype.containsAlleles(["h"])).toBe(true)

@@ -1,6 +1,6 @@
 class BioLogica.Genetics
 
-  constructor: (@species, @sex, @alleles) ->
+  constructor: (@species, @alleles, @sex) ->
     # create chromosome if a specification is given
     genotypeHash = if (@alleles)
       if (typeof @alleles == "string")
@@ -13,7 +13,7 @@ class BioLogica.Genetics
     # after initial chromosomes are created, fill in any missing genes with random alleles
     @topUpChromosomes(genotypeHash)
 
-    @genotype = new BioLogica.Genotype(@sex, genotypeHash)
+    @genotype = new BioLogica.Genotype(genotypeHash, @sex)
 
   ###
     Converts an alleleString to a genotype hash

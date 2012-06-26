@@ -15,7 +15,7 @@
 
 class BioLogica.Genotype
 
-  constructor: (sex, genotypeHash) ->
+  constructor: (genotypeHash, sex) ->
     # if male, remove the contents XY.b chromosome. NB: this may not be best strategy
     genotypeHash.XY?.b = [] if sex is BioLogica.MALE
 

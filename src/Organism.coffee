@@ -1,7 +1,7 @@
 class BioLogica.Organism
 
-  constructor: (@species, @sex, @alleles) ->
-    @genetics = new BioLogica.Genetics(@species, @sex, @alleles)
+  constructor: (@species, @alleles, @sex) ->
+    @genetics = new BioLogica.Genetics(@species, @alleles, @sex)
     @phenotype = new BioLogica.Phenotype(@genetics)
 
   getGenotype: ->

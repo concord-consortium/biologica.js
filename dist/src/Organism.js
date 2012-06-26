@@ -3,11 +3,11 @@
 
   BioLogica.Organism = (function() {
 
-    function Organism(species, sex, alleles) {
+    function Organism(species, alleles, sex) {
       this.species = species;
-      this.sex = sex;
       this.alleles = alleles;
-      this.genetics = new BioLogica.Genetics(this.species, this.sex, this.alleles);
+      this.sex = sex;
+      this.genetics = new BioLogica.Genetics(this.species, this.alleles, this.sex);
       this.phenotype = new BioLogica.Phenotype(this.genetics);
     }
 

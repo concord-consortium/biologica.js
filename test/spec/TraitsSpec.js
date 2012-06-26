@@ -81,7 +81,7 @@ describe("The characteristic", function() {
 
 describe("The traits", function() {
   it ("of an under-specified organism should be fully specified", function() {
-    var org = new BioLogica.Organism(BioLogica.Species.Drake, female, ""),
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, "", female),
         traits = ["wings", "tail", "horns", "forelimbs", "hindlimbs", "armor", "nose spike", "color", "liveliness"],
         allTraitsSpecified = true;
 
@@ -95,8 +95,9 @@ describe("The traits", function() {
   });
 
   it ("of an fully-specified organism should be exactly as defined", function() {
-    var org = new BioLogica.Organism(BioLogica.Species.Drake, female,
-                              "a:t,b:Tk,a:m,b:M,a:w,b:w,a:H,b:H,a:C,b:c,a:Fl,b:fl,a:hl,b:hl,a:a,b:A2,a:B,b:B,a:dl,b:d,a:rh,b:Rh");
+    var org = new BioLogica.Organism(BioLogica.Species.Drake,
+                              "a:t,b:Tk,a:m,b:M,a:w,b:w,a:H,b:H,a:C,b:c,a:Fl,b:fl,a:hl,b:hl,a:a,b:A2,a:B,b:B,a:dl,b:d,a:rh,b:Rh",
+                              female);
     expect(org).toHaveCharacteristic("tail", "Kinked tail");
     expect(org).toHaveCharacteristic("color", "Argent");
     expect(org).toHaveCharacteristic("wings", "No wings");
@@ -106,8 +107,9 @@ describe("The traits", function() {
     expect(org).toHaveCharacteristic("armor", "One armor");
     expect(org).toHaveCharacteristic("nose spike", "Nose spike");
 
-    var org = new BioLogica.Organism(BioLogica.Species.Drake, male,
-                              "a:t,b:t,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:fl,a:Hl,b:hl,a:A2,b:A2,a:B,a:d,a:rh");
+    var org = new BioLogica.Organism(BioLogica.Species.Drake,
+                              "a:t,b:t,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:fl,a:Hl,b:hl,a:A2,b:A2,a:B,a:d,a:rh",
+                              male);
     expect(org).toHaveCharacteristic("tail", "Short tail");
     expect(org).toHaveCharacteristic("color", "Dust");
     expect(org).toHaveCharacteristic("wings", "Wings");
