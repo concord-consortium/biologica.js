@@ -14,7 +14,6 @@ class BioLogica.Genetics
     @topUpChromosomes(genotypeHash)
 
     @genotype = new BioLogica.Genotype(@sex, genotypeHash)
-    @characteristics = @getCharacteristics(@genotype)
 
   ###
     Converts an alleleString to a genotype hash
@@ -101,19 +100,6 @@ class BioLogica.Genetics
           return true
       false
 
-  ###
-    Given a genotype object, generate the hash of characteristics
-  ###
-  getCharacteristics: (genotype) ->
-    characteristics = {}
-    for own trait, possibleCharacteristics of @species.traitRules
-      for own possibleCharacteristic, possibleAlleles of possibleCharacteristics
-        for alleles in possibleAlleles
-          if genotype.containsAlleles(alleles)
-            characteristics[trait] = possibleCharacteristic
-            break
-        break if characteristics[trait]
-    characteristics
 
 ### Class methods (non-instance) ###
 

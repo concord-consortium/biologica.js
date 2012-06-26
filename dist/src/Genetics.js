@@ -13,7 +13,6 @@
       genotypeHash = this.alleles ? typeof this.alleles === "string" ? this.convertAlleleStringToGenotypeHash(this.alleles) : this.alleles : {};
       this.topUpChromosomes(genotypeHash);
       this.genotype = new BioLogica.Genotype(this.sex, genotypeHash);
-      this.characteristics = this.getCharacteristics(this.genotype);
     }
 
     /*
@@ -187,36 +186,6 @@
         }
         return false;
       });
-    };
-
-    /*
-        Given a genotype object, generate the hash of characteristics
-    */
-
-
-    Genetics.prototype.getCharacteristics = function(genotype) {
-      var alleles, characteristics, possibleAlleles, possibleCharacteristic, possibleCharacteristics, trait, _i, _len, _ref;
-      characteristics = {};
-      _ref = this.species.traitRules;
-      for (trait in _ref) {
-        if (!__hasProp.call(_ref, trait)) continue;
-        possibleCharacteristics = _ref[trait];
-        for (possibleCharacteristic in possibleCharacteristics) {
-          if (!__hasProp.call(possibleCharacteristics, possibleCharacteristic)) continue;
-          possibleAlleles = possibleCharacteristics[possibleCharacteristic];
-          for (_i = 0, _len = possibleAlleles.length; _i < _len; _i++) {
-            alleles = possibleAlleles[_i];
-            if (genotype.containsAlleles(alleles)) {
-              characteristics[trait] = possibleCharacteristic;
-              break;
-            }
-          }
-          if (characteristics[trait]) {
-            break;
-          }
-        }
-      }
-      return characteristics;
     };
 
     return Genetics;

@@ -8,6 +8,7 @@
       this.sex = sex;
       this.alleles = alleles;
       this.genetics = new BioLogica.Genetics(this.species, this.sex, this.alleles);
+      this.phenotype = new BioLogica.Phenotype(this.genetics);
     }
 
     Organism.prototype.getGenotype = function() {
@@ -22,7 +23,7 @@
 
 
     Organism.prototype.getCharacteristic = function(trait) {
-      return this.genetics.characteristics[trait];
+      return this.phenotype.characteristics[trait];
     };
 
     Organism.prototype.performMeiosis = function(crossover) {};

@@ -2,6 +2,7 @@ class BioLogica.Organism
 
   constructor: (@species, @sex, @alleles) ->
     @genetics = new BioLogica.Genetics(@species, @sex, @alleles)
+    @phenotype = new BioLogica.Phenotype(@genetics)
 
   getGenotype: ->
     @genetics.genotype
@@ -12,7 +13,7 @@ class BioLogica.Organism
     getCharacteristic("horns") may return "no horns".
   ###
   getCharacteristic: (trait) ->
-    return @genetics.characteristics[trait]
+    return @phenotype.characteristics[trait]
 
   performMeiosis: (crossover) ->
 
