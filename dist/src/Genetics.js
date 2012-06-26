@@ -188,6 +188,43 @@
       });
     };
 
+    /*
+        Returns four haploid cells, without crossover for now
+    */
+
+
+    Genetics.prototype.performMeiosis = function() {
+      var c, cell, cells, chromatid, chromosome, i, s, sisterChromatids, _i, _len, _ref;
+      cells = [{}, {}, {}, {}];
+      _ref = this.genotype.chromosomes;
+      for (c in _ref) {
+        if (!__hasProp.call(_ref, c)) continue;
+        chromosome = _ref[c];
+        sisterChromatids = [];
+        for (s in chromosome) {
+          if (!__hasProp.call(chromosome, s)) continue;
+          chromatid = chromosome[s];
+          sisterChromatids.push(chromatid.slice(0));
+          sisterChromatids.push(chromatid.slice(0));
+        }
+        sisterChromatids.shuffle();
+        for (i = _i = 0, _len = cells.length; _i < _len; i = ++_i) {
+          cell = cells[i];
+          cell[c] = sisterChromatids[i];
+        }
+      }
+      return cells;
+    };
+
+    Genetics.prototype.createGametes = function(n) {
+      var gametes, i, _i, _ref;
+      gametes = [];
+      for (i = _i = 0, _ref = Math.floor(n / 4); 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+        gametes = gametes.concat(this.performMeiosis());
+      }
+      return gametes.concat(this.performMeiosis().slice(0, n % 4));
+    };
+
     return Genetics;
 
   })();

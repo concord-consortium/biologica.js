@@ -100,6 +100,27 @@ class BioLogica.Genetics
           return true
       false
 
+  ###
+    Returns four haploid cells, without crossover for now
+  ###
+  performMeiosis: ->
+    cells = [{}, {}, {}, {}]
+
+    for own c, chromosome of @genotype.chromosomes
+      sisterChromatids = []
+      for own s, chromatid of chromosome
+        sisterChromatids.push chromatid[..]
+        sisterChromatids.push chromatid[..]
+      sisterChromatids.shuffle()
+      for cell, i in cells
+        cell[c] = sisterChromatids[i]
+    cells
+
+  createGametes: (n) ->
+    gametes = []
+    gametes = gametes.concat @performMeiosis() for i in [0...Math.floor(n/4)]
+    gametes.concat @performMeiosis()[0...(n%4)]
+
 
 ### Class methods (non-instance) ###
 
