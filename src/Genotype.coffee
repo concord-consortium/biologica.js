@@ -22,7 +22,7 @@ class BioLogica.Genotype
     for own chromosome, sides of genotypeHash
       @chromosomes[chromosome] = {}
       for own side, alleles of sides
-        @chromosomes[chromosome][side] = alleles[..]
+        @chromosomes[chromosome][side] = new BioLogica.Chromosome(side, alleles[..])
         @allAlleles = @allAlleles.concat alleles[..]
 
   containsAlleles: (alleles) ->

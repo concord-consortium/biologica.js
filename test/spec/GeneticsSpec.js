@@ -9,30 +9,30 @@ describe("An organism's genetics", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:H,a:t,b:Tk,b:dl,a:W,b:w,a:dl,b:D", BioLogica.FEMALE),
         chromosomes = org.getGenotype().chromosomes;
 
-    expect(chromosomes["1"].a).toContain("t");
-    expect(chromosomes["1"].a).toContain("W");
-    expect(chromosomes["1"].b).toContain("Tk");
-    expect(chromosomes["1"].b).toContain("w");
+    expect(chromosomes["1"].a.alleles).toContain("t");
+    expect(chromosomes["1"].a.alleles).toContain("W");
+    expect(chromosomes["1"].b.alleles).toContain("Tk");
+    expect(chromosomes["1"].b.alleles).toContain("w");
 
-    expect(chromosomes["2"].a).toContain("h");
-    expect(chromosomes["2"].b).toContain("H");
+    expect(chromosomes["2"].a.alleles).toContain("h");
+    expect(chromosomes["2"].b.alleles).toContain("H");
 
-    expect(chromosomes["XY"].x1).toContain("dl");
-    expect(chromosomes["XY"].x2).toContain("D");
+    expect(chromosomes["XY"].x1.alleles).toContain("dl");
+    expect(chromosomes["XY"].x2.alleles).toContain("D");
   });
 
   it("creates male or female chromosomes when organisms are created with alleleStrings", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:dl,b:D", BioLogica.FEMALE),
         chromosomes = org.getGenotype().chromosomes;
 
-    expect(chromosomes["XY"].x1).toContain("dl");
-    expect(chromosomes["XY"].x2).toContain("D");
+    expect(chromosomes["XY"].x1.alleles).toContain("dl");
+    expect(chromosomes["XY"].x2.alleles).toContain("D");
 
     org = new BioLogica.Organism(BioLogica.Species.Drake, "a:D", BioLogica.MALE),
         chromosomes = org.getGenotype().chromosomes;
 
-    expect(chromosomes["XY"].x).toContain("D");
-    expect(chromosomes["XY"].y).toBeEmpty();
+    expect(chromosomes["XY"].x.alleles).toContain("D");
+    expect(chromosomes["XY"].y.alleles).toBeEmpty();
   });
 
   it("creates genotype when an organism is created with a genotype specification", function() {
@@ -52,33 +52,33 @@ describe("An organism's genetics", function() {
                 }, BioLogica.FEMALE),
         chromosomes = org.getGenotype().chromosomes;
 
-    expect(chromosomes["1"].a).toContain("t");
-    expect(chromosomes["1"].a).toContain("W");
-    expect(chromosomes["1"].b).toContain("Tk");
-    expect(chromosomes["1"].b).toContain("w");
+    expect(chromosomes["1"].a.alleles).toContain("t");
+    expect(chromosomes["1"].a.alleles).toContain("W");
+    expect(chromosomes["1"].b.alleles).toContain("Tk");
+    expect(chromosomes["1"].b.alleles).toContain("w");
 
-    expect(chromosomes["2"].a).toContain("h");
-    expect(chromosomes["2"].b).toContain("H");
+    expect(chromosomes["2"].a.alleles).toContain("h");
+    expect(chromosomes["2"].b.alleles).toContain("H");
 
-    expect(chromosomes["XY"].a).toContain("dl");
+    expect(chromosomes["XY"].a.alleles).toContain("dl");
   });
 
   it("creates complete genotype when an organism is created with an under-specified alleleString", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:H", BioLogica.FEMALE),
         chromosomes = org.getGenotype().chromosomes;
 
-    expect(chromosomes["1"].a.length).toBe(3);
-    expect(chromosomes["1"].b.length).toBe(3);
-    expect(chromosomes["2"].a.length).toBe(5);
-    expect(chromosomes["2"].b.length).toBe(5);
-    expect(chromosomes["XY"].x1.length).toBe(3);
-    expect(chromosomes["XY"].x2.length).toBe(3);
+    expect(chromosomes["1"].a.alleles.length).toBe(3);
+    expect(chromosomes["1"].b.alleles.length).toBe(3);
+    expect(chromosomes["2"].a.alleles.length).toBe(5);
+    expect(chromosomes["2"].b.alleles.length).toBe(5);
+    expect(chromosomes["XY"].x1.alleles.length).toBe(3);
+    expect(chromosomes["XY"].x2.alleles.length).toBe(3);
 
     var chromo1A = chromosomes["1"].a;
-    expect(chromo1A).toContainAnyOneOf(["t", "T", "Tk"]);
-    expect(chromo1A).toContainAnyOneOf(["m", "M"]);
-    expect(chromo1A).toContainAnyOneOf(["w", "W"]);
-    expect(chromo1A).not.toContainAnyOneOf(["h", "H"]);
+    expect(chromo1A.alleles).toContainAnyOneOf(["t", "T", "Tk"]);
+    expect(chromo1A.alleles).toContainAnyOneOf(["m", "M"]);
+    expect(chromo1A.alleles).toContainAnyOneOf(["w", "W"]);
+    expect(chromo1A.alleles).not.toContainAnyOneOf(["h", "H"]);
   });
 });
 
@@ -169,18 +169,18 @@ describe("An species' genetics", function() {
     var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "a:h,b:H", BioLogica.FEMALE),
         chromosomes =genetics.genotype.chromosomes;
 
-    expect(chromosomes["1"].a.length).toBe(3)
-    expect(chromosomes["1"].b.length).toBe(3)
-    expect(chromosomes["2"].a.length).toBe(5)
-    expect(chromosomes["2"].b.length).toBe(5)
-    expect(chromosomes["XY"].x1.length).toBe(3)
-    expect(chromosomes["XY"].x2.length).toBe(3)
+    expect(chromosomes["1"].a.alleles.length).toBe(3)
+    expect(chromosomes["1"].b.alleles.length).toBe(3)
+    expect(chromosomes["2"].a.alleles.length).toBe(5)
+    expect(chromosomes["2"].b.alleles.length).toBe(5)
+    expect(chromosomes["XY"].x1.alleles.length).toBe(3)
+    expect(chromosomes["XY"].x2.alleles.length).toBe(3)
 
     var chromo1A = chromosomes["1"].a;
-    expect(chromo1A).toContainAnyOneOf(["t", "T", "Tk"]);
-    expect(chromo1A).toContainAnyOneOf(["m", "M"]);
-    expect(chromo1A).toContainAnyOneOf(["w", "W"]);
-    expect(chromo1A).not.toContainAnyOneOf(["h", "H"]);
+    expect(chromo1A.alleles).toContainAnyOneOf(["t", "T", "Tk"]);
+    expect(chromo1A.alleles).toContainAnyOneOf(["m", "M"]);
+    expect(chromo1A.alleles).toContainAnyOneOf(["w", "W"]);
+    expect(chromo1A.alleles).not.toContainAnyOneOf(["h", "H"]);
   });
 
 });
