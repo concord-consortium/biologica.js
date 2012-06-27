@@ -204,26 +204,37 @@
 
 
     Genetics.prototype.performMeiosis = function() {
-      var c, cell, cells, chromatid, chromosome, i, s, sisterChromatids, _i, _len, _ref;
+      var cell, cells, chromatid, chromoName, chromosome, i, newName, side, sisterChromatids, _i, _len, _ref;
       cells = [{}, {}, {}, {}];
       _ref = this.genotype.chromosomes;
-      for (c in _ref) {
-        if (!__hasProp.call(_ref, c)) continue;
-        chromosome = _ref[c];
+      for (chromoName in _ref) {
+        if (!__hasProp.call(_ref, chromoName)) continue;
+        chromosome = _ref[chromoName];
         sisterChromatids = [];
-        for (s in chromosome) {
-          if (!__hasProp.call(chromosome, s)) continue;
-          chromatid = chromosome[s];
-          sisterChromatids.push(chromatid.slice(0));
-          sisterChromatids.push(chromatid.slice(0));
+        for (side in chromosome) {
+          if (!__hasProp.call(chromosome, side)) continue;
+          chromatid = chromosome[side];
+          newName = this.getHaploidChromatidName(chromatid);
+          sisterChromatids.push(chromatid.clone(newName));
+          sisterChromatids.push(chromatid.clone(newName));
         }
         sisterChromatids.shuffle();
         for (i = _i = 0, _len = cells.length; _i < _len; i = ++_i) {
           cell = cells[i];
-          cell[c] = sisterChromatids[i];
+          cell[chromoName] = sisterChromatids[i];
         }
       }
       return cells;
+    };
+
+    Genetics.prototype.getHaploidChromatidName = function(chromatid) {
+      if (chromatid.name === "b") {
+        return "a";
+      } else if (chromatid.name === "x1" || chromatid.name === "x2") {
+        return "x";
+      } else {
+        return chromatid.name;
+      }
     };
 
     Genetics.prototype.createGametes = function(n) {

@@ -8,6 +8,10 @@
       this.alleles = alleles;
     }
 
+    Chromosome.prototype.clone = function(newName) {
+      return new BioLogica.Chromosome(newName || this.name, this.alleles.slice(0));
+    };
+
     return Chromosome;
 
   })();

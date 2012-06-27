@@ -96,6 +96,57 @@ describe("An organism's genetics", function() {
     expect(chromosomes["XY"].x.name).toBe("x");
     expect(chromosomes["XY"].y.name).toBe("y");
   });
+
+  describe("can perform meiosis", function(){
+    it("to get four cells", function() {
+      var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE),
+          cells = org.genetics.performMeiosis();
+
+      expect(cells.length).toBe(4);
+    });
+
+    it("and have each cell be haploid", function() {
+      var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE),
+          cells = org.genetics.performMeiosis();
+
+      for (var i=0; i<4; i++) {
+        cell = cells[i];
+        expect(cell["1"]).toExist();
+        expect(cell["1"].name).toBe("a");
+        expect(cell["1"].alleles).toExist();
+        expect(cell["1"].alleles.length).toBe(3);
+        expect(cell["2"]).toExist();
+        expect(cell["XY"]).toExist();
+        expect(cell["XY"].name).toBe('x');
+      }
+    });
+
+    it("and have half the haplod cells of a male be Y", function() {
+      var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.MALE),
+          cells = org.genetics.performMeiosis(),
+          numX = numY = 0;
+
+      for (var i=0; i<4; i++) {
+        cell = cells[i];
+        if (cell["XY"].name === "x") {
+          numX++;
+        } else if (cell["XY"].name === "y") {
+          numY++;
+        }
+      }
+
+      expect(numX).toBe(2);
+      expect(numY).toBe(2);
+    });
+
+    it("and can create any number of gametes", function() {
+      var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE);
+
+      expect(org.genetics.createGametes(1).length).toBe(1);
+      expect(org.genetics.createGametes(4).length).toBe(4);
+      expect(org.genetics.createGametes(19).length).toBe(19);
+    });
+  });
 });
 
 describe("An species' genetics", function() {

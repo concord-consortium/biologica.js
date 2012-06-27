@@ -110,15 +110,23 @@ class BioLogica.Genetics
   performMeiosis: ->
     cells = [{}, {}, {}, {}]
 
-    for own c, chromosome of @genotype.chromosomes
+    for own chromoName, chromosome of @genotype.chromosomes
       sisterChromatids = []
-      for own s, chromatid of chromosome
-        sisterChromatids.push chromatid[..]
-        sisterChromatids.push chromatid[..]
+      for own side, chromatid of chromosome
+        newName = @getHaploidChromatidName chromatid
+        sisterChromatids.push chromatid.clone(newName)
+        sisterChromatids.push chromatid.clone(newName)
       sisterChromatids.shuffle()
       for cell, i in cells
-        cell[c] = sisterChromatids[i]
+        cell[chromoName] = sisterChromatids[i]
     cells
+
+  getHaploidChromatidName: (chromatid) ->
+    if chromatid.name is "b"
+      "a"
+    else if chromatid.name is "x1" or chromatid.name is "x2"
+      "x"
+    else chromatid.name
 
   createGametes: (n) ->
     gametes = []
