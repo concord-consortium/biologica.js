@@ -142,7 +142,7 @@ describe("An organism's genetics", function() {
     it("and can create any number of gametes", function() {
       var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE);
 
-      expect(org.genetics.createGametes(1).length).toBe(1);
+      expect(org.genetics.createGametes(1)).toExist();
       expect(org.genetics.createGametes(4).length).toBe(4);
       expect(org.genetics.createGametes(19).length).toBe(19);
     });
@@ -278,5 +278,39 @@ describe("The Genetics library", function() {
     expect(alleles.b).toContain("H");
     expect(alleles.b).toContain("t");
     expect(alleles.b).toContain("D");
+  });
+});
+
+describe("BioLogica", function() {
+  it("can breed together two organisms", function() {
+    var mother = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE),
+        father = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.MALE),
+        child = BioLogica.breed(mother, father);
+
+    expect(child).toExist();
+    expect(child.species).toBe(BioLogica.Species.Drake);
+  });
+
+  it("can breed together two organisms and child should have all its chromosomes", function() {
+    var mother = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE),
+        father = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.MALE),
+        child = BioLogica.breed(mother, father);
+
+    expect(child.genetics).toExist();
+    expect(child.sex).toBeAnyOneOf([BioLogica.FEMALE, BioLogica.MALE]);
+    expect(child.genetics.genotype.chromosomes["1"]).toExist();
+    expect(child.genetics.genotype.chromosomes["1"].a).toExist();
+    expect(child.genetics.genotype.chromosomes["1"].b).toExist();
+    expect(child.genetics.genotype.chromosomes["2"]).toExist();
+    expect(child.genetics.genotype.chromosomes["1"].a).toExist();
+    expect(child.genetics.genotype.chromosomes["1"].b).toExist();
+    expect(child.genetics.genotype.chromosomes["XY"]).toExist();
+    if (child.sex === BioLogica.FEMALE) {
+      expect(child.genetics.genotype.chromosomes["XY"].x1).toExist();
+      expect(child.genetics.genotype.chromosomes["XY"].x2).toExist();
+    } else {
+      expect(child.genetics.genotype.chromosomes["XY"].x).toExist();
+      expect(child.genetics.genotype.chromosomes["XY"].y).toExist();
+    }
   });
 });
