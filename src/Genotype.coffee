@@ -8,17 +8,14 @@
             a: ["Tk", "M", "w"]
             b: ["t", "m", "W"]
          }
-      2: { ... }
-      XY: { ... }
+      2: { a:..., b:... }
+      XY: { x1:..., x2:... }
     }
 ###
 
 class BioLogica.Genotype
 
-  constructor: (genotypeHash, sex) ->
-    # if male, remove the contents XY.b chromosome. NB: this may not be best strategy
-    genotypeHash.XY?.b = [] if sex is BioLogica.MALE
-
+  constructor: (genotypeHash) ->
     # copy genotypeHash into @chromosomes
     @chromosomes = {}
     @allAlleles = []

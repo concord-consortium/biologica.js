@@ -10,8 +10,8 @@
             a: ["Tk", "M", "w"]
             b: ["t", "m", "W"]
          }
-      2: { ... }
-      XY: { ... }
+      2: { a:..., b:... }
+      XY: { x1:..., x2:... }
     }
 */
 
@@ -21,13 +21,8 @@
 
   BioLogica.Genotype = (function() {
 
-    function Genotype(genotypeHash, sex) {
-      var alleles, chromosome, side, sides, _ref;
-      if (sex === BioLogica.MALE) {
-        if ((_ref = genotypeHash.XY) != null) {
-          _ref.b = [];
-        }
-      }
+    function Genotype(genotypeHash) {
+      var alleles, chromosome, side, sides;
       this.chromosomes = {};
       this.allAlleles = [];
       for (chromosome in genotypeHash) {

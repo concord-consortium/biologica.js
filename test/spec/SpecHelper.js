@@ -4,6 +4,10 @@ beforeEach(function() {
       var obj = this.actual;
       return typeof obj !== "undefined" && obj !== null;
     },
+    toBeEmpty: function() {
+      var arr = this.actual;
+      return arr.length === 0;
+    },
     toBeBetween: function(min, max) {
       var num = this.actual;
       return num >= min && num <= max;

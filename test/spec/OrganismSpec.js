@@ -1,5 +1,5 @@
 describe("An organism", function() {
-  it("can be created with a species, sex and alleles", function() {
+  it("can be created with a species, alleles and sex", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:h", BioLogica.FEMALE);
 
     expect(org.species.name).toBe("Drake");
@@ -7,13 +7,41 @@ describe("An organism", function() {
     expect(org.alleles).toBe("a:h,b:h");
   });
 
-  // it("has chromosomes as defined by the species", function() {
-  //   var org = new BioLogica.Organism(BioLogica.Species.Drake, BioLogica.FEMALE, "a:h,b:h");
+  it("can be created with a species and chromosome hash, and sex will be determined", function() {
+    var org = new BioLogica.Organism(BioLogica.Species.Drake,
+      {
+        "1": {
+          "a": ["t", "W"],
+          "b": ["Tk", "w"]
+        },
+        "2": {
+          "a": ["h"],
+          "b": ["H"]
+        },
+        "XY": {
+          "x1": ["D"],
+          "x2": ["dl"]
+        }
+      });
 
-  //   expect(org.chromosomes[1]).toExist();
-  //   expect(org.chromosomes[2]).toExist();
-  //   expect(org.chromosomes.X).toExist();
-  //   expect(org.chromosomes.Y).toExist();
-  //   expect(org.chromosomes.Z).not.toExist();
-  // });
+    expect(org.sex).toBe(BioLogica.FEMALE);
+
+    org = new BioLogica.Organism(BioLogica.Species.Drake,
+      {
+        "1": {
+          "a": ["t", "W"],
+          "b": ["Tk", "w"]
+        },
+        "2": {
+          "a": ["h"],
+          "b": ["H"]
+        },
+        "XY": {
+          "x": ["D"],
+          "y": []
+        }
+      });
+
+    expect(org.sex).toBe(BioLogica.MALE);
+  });
 });

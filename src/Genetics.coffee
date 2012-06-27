@@ -1,50 +1,54 @@
 class BioLogica.Genetics
 
-  constructor: (@species, @alleles, @sex) ->
+  constructor: (@species, @alleles, sex) ->
     # create chromosome if a specification is given
-    genotypeHash = if (@alleles)
-      if (typeof @alleles == "string")
-        @convertAlleleStringToGenotypeHash(@alleles)
+    genotypeHash = if (typeof @alleles == "string")
+        @convertAlleleStringToGenotypeHash(@alleles, sex)
       else
         @alleles
-    else
-      {}
 
     # after initial chromosomes are created, fill in any missing genes with random alleles
     @topUpChromosomes(genotypeHash)
 
-    @genotype = new BioLogica.Genotype(genotypeHash, @sex)
+    @genotype = new BioLogica.Genotype(genotypeHash)
 
   ###
     Converts an alleleString to a genotype hash
-    e.g. convertAlleleStringToChromosomes("a:t,b:t,a:h,b:H,a:Dl") =>
-      {"1": {a: ["t"], b: ["t"]}, "2": {a: ["h"], b: ["H"]}, "XY": {a: ["Dl"]}}
+    e.g. convertAlleleStringToChromosomes("a:t,b:t,a:h,b:H,a:Dl", female) =>
+      {"1": {a: ["t"], b: ["t"]}, "2": {a: ["h"], b: ["H"]}, "XY": {x1: ["Dl"]}}
   ###
-  convertAlleleStringToGenotypeHash: (alleleString) ->
+  convertAlleleStringToGenotypeHash: (alleleString, sex) ->
     split = BioLogica.Genetics.parseAlleleString alleleString
     genotypeHash = {}
-    genotypeHash[chromoName] = {a: [], b: []} for chromoName in @species.chromosomeNames
+    for chromoName in @species.chromosomeNames
+      genotypeHash[chromoName] = {}
+      sides = @getSides(chromoName, sex)
+      genotypeHash[chromoName][sides[0]] = []
+      genotypeHash[chromoName][sides[1]] = []
     for own side, alleles of split
       continue unless alleles
       for allele in alleles
         chromoName = @findChromosome allele
-        genotypeHash[chromoName][side].push allele
+        sides = @getSides(chromoName, sex)
+        genotypeHash[chromoName][if side == "a" then sides[0] else sides[1]].push allele
     genotypeHash
 
   ###
-    "tops-up" the chromosomes: fills in any missing genes with random alleles
+    "tops-up" the chromosomes: fills in any missing genes with random alleles.
+    At the moment this assumes that all chromosomes have been specified, even if they
+    don't all have all the possible genes
   ###
   topUpChromosomes: (genotypeHash) ->
-    for own chromosome, genes of @species.chromosomeGeneMap
-      genotypeHash[chromosome] ?= {}
-      genotypeHash[chromosome].a ?= []
-      genotypeHash[chromosome].b ?= []
-
+    for own chromoName, chromosome of genotypeHash
+      genes = @species.chromosomeGeneMap[chromoName]
       for gene in genes
-        unless @chromosomeContainsGene genotypeHash[chromosome].a, gene
-          genotypeHash[chromosome].a.push @getRandomAllele(gene)
-        unless @chromosomeContainsGene genotypeHash[chromosome].b, gene
-          genotypeHash[chromosome].b.push @getRandomAllele(gene)
+        for own side of chromosome
+          unless @chromosomeContainsGene(genotypeHash[chromoName][side], gene) or side is "y"
+            genotypeHash[chromoName][side].push @getRandomAllele(gene)
+
+  getSides: (chromoName, sex) ->
+    if chromoName isnt "XY" then ["a", "b"] else
+      if sex == BioLogica.FEMALE then ["x1", "x2"] else ["x","y"]
 
   ###
     Returns true if the allele passed is a member of the gene, where the

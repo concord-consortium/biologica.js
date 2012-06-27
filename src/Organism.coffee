@@ -2,6 +2,7 @@ class BioLogica.Organism
 
   constructor: (@species, @alleles, @sex) ->
     @genetics = new BioLogica.Genetics(@species, @alleles, @sex)
+    @sex ?= if @genetics.genotype.chromosomes.XY?.y? then BioLogica.MALE else BioLogica.FEMALE
     @phenotype = new BioLogica.Phenotype(@genetics)
 
   getGenotype: ->

@@ -4,10 +4,14 @@
   BioLogica.Organism = (function() {
 
     function Organism(species, alleles, sex) {
+      var _ref, _ref1;
       this.species = species;
       this.alleles = alleles;
       this.sex = sex;
       this.genetics = new BioLogica.Genetics(this.species, this.alleles, this.sex);
+      if ((_ref = this.sex) == null) {
+        this.sex = ((_ref1 = this.genetics.genotype.chromosomes.XY) != null ? _ref1.y : void 0) != null ? BioLogica.MALE : BioLogica.FEMALE;
+      }
       this.phenotype = new BioLogica.Phenotype(this.genetics);
     }
 

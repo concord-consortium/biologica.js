@@ -9,30 +9,29 @@
       var genotypeHash;
       this.species = species;
       this.alleles = alleles;
-      this.sex = sex;
-      genotypeHash = this.alleles ? typeof this.alleles === "string" ? this.convertAlleleStringToGenotypeHash(this.alleles) : this.alleles : {};
+      genotypeHash = typeof this.alleles === "string" ? this.convertAlleleStringToGenotypeHash(this.alleles, sex) : this.alleles;
       this.topUpChromosomes(genotypeHash);
-      this.genotype = new BioLogica.Genotype(genotypeHash, this.sex);
+      this.genotype = new BioLogica.Genotype(genotypeHash);
     }
 
     /*
         Converts an alleleString to a genotype hash
-        e.g. convertAlleleStringToChromosomes("a:t,b:t,a:h,b:H,a:Dl") =>
-          {"1": {a: ["t"], b: ["t"]}, "2": {a: ["h"], b: ["H"]}, "XY": {a: ["Dl"]}}
+        e.g. convertAlleleStringToChromosomes("a:t,b:t,a:h,b:H,a:Dl", female) =>
+          {"1": {a: ["t"], b: ["t"]}, "2": {a: ["h"], b: ["H"]}, "XY": {x1: ["Dl"]}}
     */
 
 
-    Genetics.prototype.convertAlleleStringToGenotypeHash = function(alleleString) {
-      var allele, alleles, chromoName, genotypeHash, side, split, _i, _j, _len, _len1, _ref;
+    Genetics.prototype.convertAlleleStringToGenotypeHash = function(alleleString, sex) {
+      var allele, alleles, chromoName, genotypeHash, side, sides, split, _i, _j, _len, _len1, _ref;
       split = BioLogica.Genetics.parseAlleleString(alleleString);
       genotypeHash = {};
       _ref = this.species.chromosomeNames;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         chromoName = _ref[_i];
-        genotypeHash[chromoName] = {
-          a: [],
-          b: []
-        };
+        genotypeHash[chromoName] = {};
+        sides = this.getSides(chromoName, sex);
+        genotypeHash[chromoName][sides[0]] = [];
+        genotypeHash[chromoName][sides[1]] = [];
       }
       for (side in split) {
         if (!__hasProp.call(split, side)) continue;
@@ -43,51 +42,62 @@
         for (_j = 0, _len1 = alleles.length; _j < _len1; _j++) {
           allele = alleles[_j];
           chromoName = this.findChromosome(allele);
-          genotypeHash[chromoName][side].push(allele);
+          sides = this.getSides(chromoName, sex);
+          genotypeHash[chromoName][side === "a" ? sides[0] : sides[1]].push(allele);
         }
       }
       return genotypeHash;
     };
 
     /*
-        "tops-up" the chromosomes: fills in any missing genes with random alleles
+        "tops-up" the chromosomes: fills in any missing genes with random alleles.
+        At the moment this assumes that all chromosomes have been specified, even if they
+        don't all have all the possible genes
     */
 
 
     Genetics.prototype.topUpChromosomes = function(genotypeHash) {
-      var chromosome, gene, genes, _base, _base1, _ref, _ref1, _ref2, _ref3, _results;
-      _ref = this.species.chromosomeGeneMap;
+      var chromoName, chromosome, gene, genes, side, _results;
       _results = [];
-      for (chromosome in _ref) {
-        if (!__hasProp.call(_ref, chromosome)) continue;
-        genes = _ref[chromosome];
-        if ((_ref1 = genotypeHash[chromosome]) == null) {
-          genotypeHash[chromosome] = {};
-        }
-        if ((_ref2 = (_base = genotypeHash[chromosome]).a) == null) {
-          _base.a = [];
-        }
-        if ((_ref3 = (_base1 = genotypeHash[chromosome]).b) == null) {
-          _base1.b = [];
-        }
+      for (chromoName in genotypeHash) {
+        if (!__hasProp.call(genotypeHash, chromoName)) continue;
+        chromosome = genotypeHash[chromoName];
+        genes = this.species.chromosomeGeneMap[chromoName];
         _results.push((function() {
           var _i, _len, _results1;
           _results1 = [];
           for (_i = 0, _len = genes.length; _i < _len; _i++) {
             gene = genes[_i];
-            if (!this.chromosomeContainsGene(genotypeHash[chromosome].a, gene)) {
-              genotypeHash[chromosome].a.push(this.getRandomAllele(gene));
-            }
-            if (!this.chromosomeContainsGene(genotypeHash[chromosome].b, gene)) {
-              _results1.push(genotypeHash[chromosome].b.push(this.getRandomAllele(gene)));
-            } else {
-              _results1.push(void 0);
-            }
+            _results1.push((function() {
+              var _results2;
+              _results2 = [];
+              for (side in chromosome) {
+                if (!__hasProp.call(chromosome, side)) continue;
+                if (!(this.chromosomeContainsGene(genotypeHash[chromoName][side], gene) || side === "y")) {
+                  _results2.push(genotypeHash[chromoName][side].push(this.getRandomAllele(gene)));
+                } else {
+                  _results2.push(void 0);
+                }
+              }
+              return _results2;
+            }).call(this));
           }
           return _results1;
         }).call(this));
       }
       return _results;
+    };
+
+    Genetics.prototype.getSides = function(chromoName, sex) {
+      if (chromoName !== "XY") {
+        return ["a", "b"];
+      } else {
+        if (sex === BioLogica.FEMALE) {
+          return ["x1", "x2"];
+        } else {
+          return ["x", "y"];
+        }
+      }
     };
 
     /*
