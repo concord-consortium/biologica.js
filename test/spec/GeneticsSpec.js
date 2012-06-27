@@ -80,6 +80,22 @@ describe("An organism's genetics", function() {
     expect(chromo1A.alleles).toContainAnyOneOf(["w", "W"]);
     expect(chromo1A.alleles).not.toContainAnyOneOf(["h", "H"]);
   });
+
+  it("contains chromosomes that are correctly named", function() {
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE),
+        chromosomes = org.getGenotype().chromosomes;
+
+    expect(chromosomes["1"].a.name).toBe("a");
+    expect(chromosomes["1"].b.name).toBe("b");
+    expect(chromosomes["XY"].x1.name).toBe("x1");
+    expect(chromosomes["XY"].x2.name).toBe("x2");
+
+    org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.MALE),
+    chromosomes = org.getGenotype().chromosomes;
+
+    expect(chromosomes["XY"].x.name).toBe("x");
+    expect(chromosomes["XY"].y.name).toBe("y");
+  });
 });
 
 describe("An species' genetics", function() {
