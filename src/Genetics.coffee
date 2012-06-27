@@ -131,7 +131,8 @@ class BioLogica.Genetics
   createGametes: (n) ->
     gametes = []
     gametes = gametes.concat @performMeiosis() for i in [0...Math.floor(n/4)]
-    gametes.concat @performMeiosis()[0...(n%4)]
+    gametes = gametes.concat @performMeiosis()[0...(n%4)]
+    return if gametes.length is 1 then gametes[0] else gametes
 
 
 ### Class methods (non-instance) ###

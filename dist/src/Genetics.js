@@ -243,7 +243,12 @@
       for (i = _i = 0, _ref = Math.floor(n / 4); 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
         gametes = gametes.concat(this.performMeiosis());
       }
-      return gametes.concat(this.performMeiosis().slice(0, n % 4));
+      gametes = gametes.concat(this.performMeiosis().slice(0, n % 4));
+      if (gametes.length === 1) {
+        return gametes[0];
+      } else {
+        return gametes;
+      }
     };
 
     return Genetics;
