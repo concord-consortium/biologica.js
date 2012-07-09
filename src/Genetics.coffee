@@ -110,14 +110,16 @@ class BioLogica.Genetics
   performMeiosis: (performCrossover) ->
     cells = [{}, {}, {}, {}]
 
-    for own chromoName, chromosome of @genotype.chromosomes
+    for own chromoName, chromosomes of @genotype.chromosomes
       sisterChromatids = {}
       sisterChromatidIds = ["b2", "b1", "a2", "a1"]
-      for own side, chromatid of chromosome
-        newSide = @getHaploidChromatidSide chromatid
-        sisterChromatids[sisterChromatidIds.pop()] = chromatid.clone(newSide)
-        sisterChromatids[sisterChromatidIds.pop()] = chromatid.clone(newSide)
-      @crossover sisterChromatids if performCrossover
+      containsYchromosome = false
+      for own side, chromosome of chromosomes
+        newSide = @getHaploidChromatidSide chromosome
+        sisterChromatids[sisterChromatidIds.pop()] = chromosome.clone(newSide)
+        sisterChromatids[sisterChromatidIds.pop()] = chromosome.clone(newSide)
+        containsYchromosome = true if side is "y"
+      @crossover sisterChromatids if performCrossover and !containsYchromosome
       sisterChromatidIds = ["b2", "b1", "a2", "a1"].shuffle()
       for cell, i in cells
         cell[chromoName] = sisterChromatids[sisterChromatidIds[i]]

@@ -204,22 +204,26 @@
 
 
     Genetics.prototype.performMeiosis = function(performCrossover) {
-      var cell, cells, chromatid, chromoName, chromosome, i, newSide, side, sisterChromatidIds, sisterChromatids, _i, _len, _ref;
+      var cell, cells, chromoName, chromosome, chromosomes, containsYchromosome, i, newSide, side, sisterChromatidIds, sisterChromatids, _i, _len, _ref;
       cells = [{}, {}, {}, {}];
       _ref = this.genotype.chromosomes;
       for (chromoName in _ref) {
         if (!__hasProp.call(_ref, chromoName)) continue;
-        chromosome = _ref[chromoName];
+        chromosomes = _ref[chromoName];
         sisterChromatids = {};
         sisterChromatidIds = ["b2", "b1", "a2", "a1"];
-        for (side in chromosome) {
-          if (!__hasProp.call(chromosome, side)) continue;
-          chromatid = chromosome[side];
-          newSide = this.getHaploidChromatidSide(chromatid);
-          sisterChromatids[sisterChromatidIds.pop()] = chromatid.clone(newSide);
-          sisterChromatids[sisterChromatidIds.pop()] = chromatid.clone(newSide);
+        containsYchromosome = false;
+        for (side in chromosomes) {
+          if (!__hasProp.call(chromosomes, side)) continue;
+          chromosome = chromosomes[side];
+          newSide = this.getHaploidChromatidSide(chromosome);
+          sisterChromatids[sisterChromatidIds.pop()] = chromosome.clone(newSide);
+          sisterChromatids[sisterChromatidIds.pop()] = chromosome.clone(newSide);
+          if (side === "y") {
+            containsYchromosome = true;
+          }
         }
-        if (performCrossover) {
+        if (performCrossover && !containsYchromosome) {
           this.crossover(sisterChromatids);
         }
         sisterChromatidIds = ["b2", "b1", "a2", "a1"].shuffle();
