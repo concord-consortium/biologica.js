@@ -41,7 +41,7 @@ describe("When we breed", function() {
     expect(child).toHaveCharacteristic("forelimbs", "Forelimbs");
   });
 
-  it("a heterozygous parent with homozygous rec parent, we expect a 50% of offspring to have the dominant trait", function() {
+  it("a heterozygous parent with homozygous rec parent, we expect 50% of offspring to have the dominant trait", function() {
     var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:w,b:w", BioLogica.FEMALE),
         father = new BioLogica.Organism(BioLogica.Species.Drake, "a:W,b:w", BioLogica.MALE),
         child,
@@ -61,7 +61,27 @@ describe("When we breed", function() {
     expect(wings/times).toBeBetween(0.46,0.54);
   });
 
-  it("a THth parent with recessive parent, we tails and horns to be independent in offspring", function() {
+  it("two heterozygous parents, we expect 75% of offspring to have the dominant trait", function() {
+    var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:W,b:w", BioLogica.FEMALE),
+        father = new BioLogica.Organism(BioLogica.Species.Drake, "a:W,b:w", BioLogica.MALE),
+        child,
+        wings = noWings = 0;
+        times = 1000, _times = times;
+
+    while (_times--) {
+      child = BioLogica.breed(mother, father);
+      hasWings = child.getCharacteristic("wings") == "Wings";
+      if (hasWings) {
+        wings++;
+      } else {
+        noWings++;
+      }
+    }
+
+    expect(wings/times).toBeBetween(0.71,0.79);
+  });
+
+  it("a THth parent with recessive parent, we expect tails and horns to be independent in offspring", function() {
     var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:H,b:h", BioLogica.FEMALE),
         father = new BioLogica.Organism(BioLogica.Species.Drake, "a:t,b:t,a:h,b:h", BioLogica.MALE),
         child,
