@@ -173,7 +173,7 @@ describe("An organism's genetics", function() {
 
     describe("and when not performing crossover", function() {
 
-      it("will create offspring with perfectly linked genes", function() {
+      it("will create gametes with perfectly linked genes", function() {
         var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:M,b:m", BioLogica.FEMALE),
             numGametes = 4, _numGametes,
             TM = tm = 0,
