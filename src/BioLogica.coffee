@@ -1,8 +1,9 @@
 window.BioLogica ?= {}
 
-BioLogica.breed = (mother, father) ->
-  gamete1 = mother.genetics.createGametes 1
-  gamete2 = father.genetics.createGametes 1
+BioLogica.breed = (mother, father, crossover) ->
+  crossover ?= true     # default
+  gamete1 = mother.genetics.createGametes 1, crossover
+  gamete2 = father.genetics.createGametes 1, crossover
 
   for i, chromosome of gamete2
     chromosome.side = "b" if chromosome.side is "a"

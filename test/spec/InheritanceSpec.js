@@ -41,7 +41,7 @@ describe("When we breed", function() {
     expect(child).toHaveCharacteristic("forelimbs", "Forelimbs");
   });
 
-  it("a hetwerozygous parent with homozygous rec parent, we expect a 50% of offspring to have the dominant trait", function() {
+  it("a heterozygous parent with homozygous rec parent, we expect a 50% of offspring to have the dominant trait", function() {
     var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:w,b:w", BioLogica.FEMALE),
         father = new BioLogica.Organism(BioLogica.Species.Drake, "a:W,b:w", BioLogica.MALE),
         child,
@@ -58,6 +58,58 @@ describe("When we breed", function() {
       }
     }
 
-    expect(wings/times).toBeBetween(0.47,0.53);
+    expect(wings/times).toBeBetween(0.46,0.54);
+  });
+
+  describe("without crossover", function() {
+    it("a heterozygous TWtw parent and a rec parent, any offspring with long tail should have wings and visa-versa", function() {
+      var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:W,b:w", BioLogica.FEMALE),
+          father = new BioLogica.Organism(BioLogica.Species.Drake, "a:t,b:t,a:w,b:w", BioLogica.MALE),
+          child,
+          TW = tw = neither = 0,
+          times = 1000, _times = times;
+
+      while (_times--) {
+        child = BioLogica.breed(mother, father, false);
+        hasWings = child.getCharacteristic("wings") == "Wings";
+        hasLongTail = child.getCharacteristic("tail") == "Long tail";
+        if (hasWings && hasLongTail) {
+          TW++;
+        } else if (!hasWings && !hasLongTail){
+          tw++;
+        } else {
+          neither++;
+        }
+      }
+
+      expect(neither).toBe(0);
+      expect(TW + tw).toBe(times);
+      expect(TW/times).toBeBetween(0.46,0.54);
+    })
+  });
+
+  describe("with crossover", function() {
+    it("a heterozygous TWtw parent and a rec parent, 36% of offspring with long tail should have no wings or visa-versa", function() {
+      var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:W,b:w", BioLogica.FEMALE),
+          father = new BioLogica.Organism(BioLogica.Species.Drake, "a:t,b:t,a:w,b:w", BioLogica.MALE),
+          child,
+          TW = tw = neither = 0,
+          times = 1000, _times = times;
+
+      while (_times--) {
+        child = BioLogica.breed(mother, father);
+        hasWings = child.getCharacteristic("wings") == "Wings";
+        hasLongTail = child.getCharacteristic("tail") == "Long tail";
+        if (hasWings && hasLongTail) {
+          TW++;
+        } else if (!hasWings && !hasLongTail){
+          tw++;
+        } else {
+          neither++;
+        }
+      }
+
+      expect(neither/times).toBeBetween(0.33,0.39);
+    })
   });
 });
