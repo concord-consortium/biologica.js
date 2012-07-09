@@ -161,6 +161,63 @@
         "Alive": [["D"], ["d"]],
         "Dead": [["dl", "dl"], ["dl"], []]
       }
+    },
+    /*
+        Gets the image name based on the organism's characteristics.
+        Requires the BioLogica.js library, and for org to be a BioLogica.js organism
+    */
+
+    getImageName: function(org) {
+      var filename, limbs, trait;
+      trait = function(trait) {
+        return org.getCharacteristic(trait);
+      };
+      if (trait("liveliness") === "Dead") {
+        return "dead-drake.png";
+      }
+      filename = "";
+      filename += trait("color").toLowerCase().substring(0, 2) + "_";
+      filename += org.sex === BioLogica.FEMALE ? "f_" : "m_";
+      filename += trait("wings") === "Wings" ? "wing_" : "noWing_";
+      limbs = "";
+      if (trait("forelimbs") === "Forelimbs") {
+        if (trait("hindlimbs") === "Hindlimbs") {
+          limbs = "allLimb_";
+        } else {
+          limbs = "fore_";
+        }
+      } else if (trait("hindlimbs") === "Hindlimbs") {
+        limbs = "hind_";
+      } else {
+        limbs = "noLimb_";
+      }
+      filename += limbs;
+      filename += (function() {
+        switch (trait("armor")) {
+          case "Five armor":
+            return "a5_";
+          case "Three armor":
+            return "a3_";
+          case "One armor":
+            return "a1_";
+          default:
+            return "a0_";
+        }
+      })();
+      filename += (function() {
+        switch (trait("tail")) {
+          case "Long tail":
+            return "flair_";
+          case "Kinked tail":
+            return "kink_";
+          default:
+            return "short_";
+        }
+      })();
+      filename += trait("horns") === "Horns" ? "horn_" : "noHorn_";
+      filename += trait("nose spike") === "Nose spike" ? "rostral_" : "noRostral_";
+      filename += "healthy";
+      return filename += ".png";
     }
   };
 

@@ -16,7 +16,8 @@ class BioLogica.Organism
   getCharacteristic: (trait) ->
     return @phenotype.characteristics[trait]
 
-  performMeiosis: (crossover) ->
+  getImageName: ->
+    @species.getImageName(this)
 
   toString: ->
     sex = if @sex == BioLogica.FEMALE then "female" else "male"

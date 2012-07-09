@@ -153,3 +153,55 @@ BioLogica.Species.Drake =
     "liveliness":
       "Alive":    [["D"],["d"]]
       "Dead":     [["dl", "dl"], ["dl"], []]
+
+  ###
+    Gets the image name based on the organism's characteristics.
+    Requires the BioLogica.js library, and for org to be a BioLogica.js organism
+  ###
+  getImageName: (org) ->
+
+    trait = (trait) ->
+      return org.getCharacteristic trait
+
+    return "dead-drake.png" if trait("liveliness") is "Dead"
+
+
+    # [color]_[sex]_[wing]_[limbs]_[armor]_[tail]_[horn]_[rostralHorn]_[health].png
+    filename = ""
+
+    filename += trait("color").toLowerCase().substring(0,2) + "_"
+
+    filename += if org.sex is BioLogica.FEMALE then "f_" else "m_"
+
+    filename += if trait("wings") is "Wings" then "wing_" else "noWing_"
+
+    limbs = ""
+    if trait("forelimbs") is "Forelimbs"
+      if trait("hindlimbs") is "Hindlimbs"
+        limbs = "allLimb_"
+      else
+        limbs = "fore_"
+    else if trait("hindlimbs") is "Hindlimbs"
+      limbs = "hind_"
+    else
+      limbs = "noLimb_"
+    filename += limbs
+
+    filename += switch trait("armor")
+      when "Five armor" then "a5_"
+      when "Three armor" then "a3_"
+      when "One armor" then "a1_"
+      else "a0_"
+
+    filename += switch trait("tail")
+      when "Long tail" then "flair_"
+      when "Kinked tail" then "kink_"
+      else "short_"
+
+    filename += if trait("horns") is "Horns" then "horn_" else "noHorn_"
+
+    filename += if trait("nose spike") is "Nose spike" then "rostral_" else "noRostral_"
+
+    filename += "healthy"
+
+    filename += ".png"

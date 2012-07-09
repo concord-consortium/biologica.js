@@ -30,7 +30,9 @@
       return this.phenotype.characteristics[trait];
     };
 
-    Organism.prototype.performMeiosis = function(crossover) {};
+    Organism.prototype.getImageName = function() {
+      return this.species.getImageName(this);
+    };
 
     Organism.prototype.toString = function() {
       var alleles, sex;

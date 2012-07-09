@@ -118,6 +118,36 @@ describe("The traits", function() {
     expect(org).toHaveCharacteristic("hindlimbs", "Hindlimbs");
     expect(org).toHaveCharacteristic("armor", "Three armor");
     expect(org).toHaveCharacteristic("nose spike", "No nose spike");
+  });
+});
 
+describe("The image name of an appropriate org", function() {
+  it ("should be ar_f_noWing_fore_a1_kink_noHorn_rostral_healthy.png", function() {
+    var org = new BioLogica.Organism(BioLogica.Species.Drake,
+                "a:t,b:Tk,a:m,b:M,a:w,b:w,a:H,b:H,a:C,b:c,a:Fl,b:fl,a:hl,b:hl,a:a,b:A2,a:B,b:B,a:dl,b:d,a:rh,b:Rh",
+                female);
+    expect(org.getImageName()).toBe("ar_f_noWing_fore_a1_kink_noHorn_rostral_healthy.png")
+  });
+
+  it ("should be du_m_wing_hind_a3_short_horn_noRostral_healthy.png", function() {
+    var org = new BioLogica.Organism(BioLogica.Species.Drake,
+                "a:t,b:t,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:fl,a:Hl,b:hl,a:A2,b:A2,a:B,a:d,a:rh",
+                male);
+    expect(org.getImageName()).toBe("du_m_wing_hind_a3_short_horn_noRostral_healthy.png")
+  });
+
+  it ("should be sa_f_wing_allLimb_a0_flair_horn_noRostral_healthy.png", function() {
+    var org = new BioLogica.Organism(BioLogica.Species.Drake,
+                "a:t,b:T,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:dl,a:rh,b:rh",
+                female);
+    expect(org.getImageName()).toBe("sa_f_wing_allLimb_a0_flair_horn_noRostral_healthy.png")
+  });
+
+  it ("should be dead-drake.png", function() {
+    var org = new BioLogica.Organism(BioLogica.Species.Drake,
+                "a:dl,b:dl",
+                female);
+    window.org = org
+    expect(org.getImageName()).toBe("dead-drake.png")
   });
 })
