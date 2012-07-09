@@ -37,7 +37,7 @@ class BioLogica.Organism
 
     return  "Organism: {sex: #{sex}, authored alleles: #{@alleles}, alleles: #{alleles}"
 
-BioLogica.Organism.createOrganismFromGametes = (species, motherGamete, fatherGamete) ->
+BioLogica.Organism.createFromGametes = (species, motherGamete, fatherGamete) ->
   for i, chromosome of fatherGamete
     chromosome.side = "b" if chromosome.side is "a"
 

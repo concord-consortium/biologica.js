@@ -70,7 +70,7 @@
 
   })();
 
-  BioLogica.Organism.createOrganismFromGametes = function(species, motherGamete, fatherGamete) {
+  BioLogica.Organism.createFromGametes = function(species, motherGamete, fatherGamete) {
     var chromatidA, chromatidB, chromoName, chromosome, genotypeHash, i;
     for (i in fatherGamete) {
       chromosome = fatherGamete[i];

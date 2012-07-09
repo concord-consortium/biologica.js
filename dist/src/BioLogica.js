@@ -15,7 +15,7 @@
     var gamete1, gamete2;
     gamete1 = mother.createGametes(1, crossover);
     gamete2 = father.createGametes(1, crossover);
-    return BioLogica.Organism.createOrganismFromGametes(mother.species, gamete1, gamete2);
+    return BioLogica.Organism.createFromGametes(mother.species, gamete1, gamete2);
   };
 
 }).call(this);

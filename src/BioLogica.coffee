@@ -7,4 +7,4 @@ BioLogica.breed = (mother, father, crossover) ->
   gamete1 = mother.createGametes 1, crossover
   gamete2 = father.createGametes 1, crossover
 
-  BioLogica.Organism.createOrganismFromGametes(mother.species, gamete1, gamete2)
+  BioLogica.Organism.createFromGametes(mother.species, gamete1, gamete2)
