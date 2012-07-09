@@ -15,14 +15,13 @@ Array::removeObj = (obj) ->
     false
 
 Array::shuffle = ->
-  i = @length;
-  return false if i is 0 ;
-  while (--i)
-   j       = Math.floor( Math.random() * (i + 1) )
-   tempi   = this[i];
-   tempj   = this[j];
-   this[i] = tempj;
-   this[j] = tempi;
+  top = @length;
+  if top
+    while (--top)
+      current = Math.floor(Math.random() * (top + 1));
+      tmp = this[current];
+      this[current] = this[top];
+      this[top] = tmp;
   return this;
 
 window.ExtMath = {}

@@ -20,17 +20,15 @@
   };
 
   Array.prototype.shuffle = function() {
-    var i, j, tempi, tempj;
-    i = this.length;
-    if (i === 0) {
-      return false;
-    }
-    while (--i) {
-      j = Math.floor(Math.random() * (i + 1));
-      tempi = this[i];
-      tempj = this[j];
-      this[i] = tempj;
-      this[j] = tempi;
+    var current, tmp, top;
+    top = this.length;
+    if (top) {
+      while (--top) {
+        current = Math.floor(Math.random() * (top + 1));
+        tmp = this[current];
+        this[current] = this[top];
+        this[top] = tmp;
+      }
     }
     return this;
   };
