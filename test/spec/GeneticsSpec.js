@@ -146,6 +146,31 @@ describe("An organism's genetics", function() {
       expect(org.genetics.createGametes(4).length).toBe(4);
       expect(org.genetics.createGametes(19).length).toBe(19);
     });
+
+    it("will independently assort chromosomes to gametes", function() {
+      var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:H,b:h", BioLogica.FEMALE),
+          numGametes = 4, _numGametes,
+          sameSide = oppSide = 0,
+          times = 1000, _times = times;
+
+      while (_times--) {
+        var gametes = org.genetics.createGametes(numGametes, false);
+        _numGametes = numGametes;
+        while (_numGametes--) {
+          gamete = gametes[_numGametes];
+          chr1Alleles = gamete[1].alleles;
+          chr2Alleles = gamete[2].alleles;
+          if (~chr1Alleles.indexOf("T") && ~chr2Alleles.indexOf("H") ||
+            ~chr1Alleles.indexOf("t") && ~chr2Alleles.indexOf("h")) {
+            sameSide++;
+          } else {
+            oppSide++;
+          }
+        }
+      }
+      expect(sameSide/(times*numGametes)).toBeBetween(0.475,0.525);
+    });
+    });
   });
 });
 

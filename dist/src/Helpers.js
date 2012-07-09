@@ -20,9 +20,29 @@
   };
 
   Array.prototype.shuffle = function() {
-    return this.sort(function() {
-      return 0.5 - Math.random();
-    });
+    var i, j, tempi, tempj;
+    i = this.length;
+    if (i === 0) {
+      return false;
+    }
+    while (--i) {
+      j = Math.floor(Math.random() * (i + 1));
+      tempi = this[i];
+      tempj = this[j];
+      this[i] = tempj;
+      this[j] = tempi;
+    }
+    return this;
+  };
+
+  window.ExtMath = {};
+
+  ExtMath.randomInt = function(max) {
+    return Math.floor(Math.random() * max);
+  };
+
+  ExtMath.flip = function() {
+    return ExtMath.randomInt(2);
   };
 
 }).call(this);
