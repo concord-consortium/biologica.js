@@ -32,7 +32,7 @@ describe("An organism's genetics", function() {
         chromosomes = org.getGenotype().chromosomes;
 
     expect(chromosomes["XY"].x.alleles).toContain("D");
-    expect(chromosomes["XY"].y.alleles).toBeEmpty();
+    expect(chromosomes["XY"].y.alleles.length).toBe(0);
   });
 
   it("creates genotype when an organism is created with a genotype specification", function() {
@@ -85,52 +85,52 @@ describe("An organism's genetics", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE),
         chromosomes = org.getGenotype().chromosomes;
 
-    expect(chromosomes["1"].a.name).toBe("a");
-    expect(chromosomes["1"].b.name).toBe("b");
-    expect(chromosomes["XY"].x1.name).toBe("x1");
-    expect(chromosomes["XY"].x2.name).toBe("x2");
+    expect(chromosomes["1"].a.side).toBe("a");
+    expect(chromosomes["1"].b.side).toBe("b");
+    expect(chromosomes["XY"].x1.side).toBe("x1");
+    expect(chromosomes["XY"].x2.side).toBe("x2");
 
     org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.MALE),
     chromosomes = org.getGenotype().chromosomes;
 
-    expect(chromosomes["XY"].x.name).toBe("x");
-    expect(chromosomes["XY"].y.name).toBe("y");
+    expect(chromosomes["XY"].x.side).toBe("x");
+    expect(chromosomes["XY"].y.side).toBe("y");
   });
 
-  describe("can perform meiosis", function(){
-    it("to get four cells", function() {
+  describe("when performing meiosis", function(){
+    it("will get four cells", function() {
       var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE),
           cells = org.genetics.performMeiosis();
 
       expect(cells.length).toBe(4);
     });
 
-    it("and have each cell be haploid", function() {
+    it("will have each cell be haploid", function() {
       var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE),
           cells = org.genetics.performMeiosis();
 
       for (var i=0; i<4; i++) {
         cell = cells[i];
         expect(cell["1"]).toExist();
-        expect(cell["1"].name).toBe("a");
+        expect(cell["1"].side).toBe("a");
         expect(cell["1"].alleles).toExist();
         expect(cell["1"].alleles.length).toBe(3);
         expect(cell["2"]).toExist();
         expect(cell["XY"]).toExist();
-        expect(cell["XY"].name).toBe('x');
+        expect(cell["XY"].side).toBe('x');
       }
     });
 
-    it("and have half the haplod cells of a male be Y", function() {
+    it("will have half the haplod cells of a male be Y", function() {
       var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.MALE),
           cells = org.genetics.performMeiosis(),
           numX = numY = 0;
 
       for (var i=0; i<4; i++) {
         cell = cells[i];
-        if (cell["XY"].name === "x") {
+        if (cell["XY"].side === "x") {
           numX++;
-        } else if (cell["XY"].name === "y") {
+        } else if (cell["XY"].side === "y") {
           numY++;
         }
       }
@@ -139,7 +139,7 @@ describe("An organism's genetics", function() {
       expect(numY).toBe(2);
     });
 
-    it("and can create any number of gametes", function() {
+    it("will can create any number of gametes", function() {
       var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE);
 
       expect(org.genetics.createGametes(1)).toExist();
@@ -170,6 +170,169 @@ describe("An organism's genetics", function() {
       }
       expect(sameSide/(times*numGametes)).toBeBetween(0.475,0.525);
     });
+
+    describe("and when not performing crossover", function() {
+
+      it("will create offspring with perfectly linked genes", function() {
+        var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:M,b:m", BioLogica.FEMALE),
+            numGametes = 4, _numGametes,
+            TM = tm = 0,
+            times = 1000, _times = times;
+
+        while (_times--) {
+          var gametes = org.genetics.createGametes(numGametes, false);
+          _numGametes = numGametes;
+          while (_numGametes--) {
+            gamete = gametes[_numGametes];
+            chr1Alleles = gamete[1].alleles;
+            if (~chr1Alleles.indexOf("T") && ~chr1Alleles.indexOf("M")) {
+              TM++;
+            } else if (~chr1Alleles.indexOf("t") && ~chr1Alleles.indexOf("m")) {
+              tm++;
+            }
+          }
+        }
+        expect(TM + tm).toBe(times*numGametes);
+        expect(TM/(times*numGametes)).toBeBetween(0.475,0.525);
+      })
+    });
+
+    describe("and when performing crossover", function() {
+
+      it("will select between no more than 3 crossover points", function() {
+        var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE),
+            chr1 = org.getGenotype().chromosomes[1]["a"],
+            times = 100;
+        while (times--) {
+          numPoints = org.genetics.createCrossoverPoints(chr1).length
+          expect(numPoints).toBeLessThan(4);
+        }
+      });
+
+      it("will select between 0-3 crosses with the right frequency of each", function() {
+        var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE),
+            chr1 = org.getGenotype().chromosomes[1]["a"],
+            numCrossovers = [0,0,0,0],
+            times = 5000, _times = times;
+
+        while (_times--) {
+          numPoints = org.genetics.createCrossoverPoints(chr1).length
+          numCrossovers[numPoints]++;
+        }
+
+        _times = times;
+
+        // we should have somewhere around 11% no crosses, 27% one cross, 30% two
+        // crosses, and 32% for 3 (it includes all the ones that would have had more than 3)
+        expect(numCrossovers[0]/_times).toBeBetween(0.08, 0.14);
+        expect(numCrossovers[1]/_times).toBeBetween(0.24, 0.31);
+        expect(numCrossovers[2]/_times).toBeBetween(0.26, 0.34);
+        expect(numCrossovers[3]/_times).toBeBetween(0.28, 0.36);
+      });
+
+      it("the average crossover position will be at 50cM", function() {
+        var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE),
+            chr1 = org.getGenotype().chromosomes[1]["a"],
+            crossoverLocations = [],
+            sum = 0, avr = 0,
+            times = 5000, _times = times;
+
+        while (_times--) {
+          crossoverLocations = crossoverLocations.concat(org.genetics.createCrossoverPoints(chr1));
+        }
+        _times = times;
+        while (_times--) {
+          sum += crossoverLocations[_times];
+        }
+        avr = sum/times;
+        // expect 50,000,000
+        expect(avr).toBeBetween(49000000, 51000000);
+      });
+
+      it("can cross two chromatids at a given point", function() {
+        var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:M,b:m,a:W,b:w", BioLogica.FEMALE),
+            chr1 = org.getGenotype().chromosomes[1]["a"],   // TMW
+            chr2 = org.getGenotype().chromosomes[1]["b"];   // tmw
+
+        newChromatids = org.genetics.crossChromatids(chr1, chr2, 0);
+        expect(newChromatids[0].alleles).toContainAllOf(["T", "M", "W"]);
+        expect(newChromatids[1].alleles).toContainAllOf(["t", "m", "w"]);
+
+        newChromatids = org.genetics.crossChromatids(chr1, chr2, 10000000);
+        expect(newChromatids[0].alleles).toContainAllOf(["T", "M", "W"]);
+        expect(newChromatids[1].alleles).toContainAllOf(["t", "m", "w"]);
+
+        newChromatids = org.genetics.crossChromatids(chr1, chr2, 10000001);
+        expect(newChromatids[0].alleles).toContainAllOf(["t", "M", "W"]);
+        expect(newChromatids[1].alleles).toContainAllOf(["T", "m", "w"]);
+
+        newChromatids = org.genetics.crossChromatids(chr1, chr2, 20000001);
+        expect(newChromatids[0].alleles).toContainAllOf(["t", "m", "W"]);
+        expect(newChromatids[1].alleles).toContainAllOf(["T", "M", "w"]);
+      });
+
+      it("should separate T and M in 9% of gametes", function() {
+        // T and M are 10cM apart. The probablility of one cross between them is 10%, and there is
+        // a small change of 2 or 3 crosses between them.
+        // From http://en.wikipedia.org/wiki/Centimorgan#Relation_to_the_probability_of_recombination,
+        // we expect p[recombination|distance of 10cM] to be (1 - e^(-20/100)) / 2 = 0.0906 = 9%
+        var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:M,b:m", BioLogica.FEMALE),
+            times = 1000, _times = times,
+            numGametes = 16, _numGametes = numGametes,
+            gametesChr1 = [],
+            notSplit = split = 0;
+
+        while (_times--) {
+          var gametes = org.genetics.createGametes(numGametes, true);
+          _numGametes = numGametes;
+          while (_numGametes--) {
+            gametesChr1.push(gametes[_numGametes][1]);
+          }
+        }
+        _times = times * numGametes;
+        while (_times--) {
+          var chr1Alleles = gametesChr1[_times].alleles;
+          if ((~chr1Alleles.indexOf("T") && ~chr1Alleles.indexOf("M")) ||
+            (~chr1Alleles.indexOf("t") && ~chr1Alleles.indexOf("m"))) {
+            notSplit++;
+          } else {
+            split++;
+          }
+        }
+        expect(split/(times * numGametes)).toBeBetween(0.085,0.95);
+      });
+
+      it("should separate T and W in 36% of gametes", function() {
+        // Normally we'd expect we expect
+        // p[recombination|distance of 60cM] to be (1 - e^(-60/100)) / 2 = 0.349 = 35%
+        // However, we cap the number of crossovers at 3, so this slightly increases the probability
+        // of getting an odd number of splits. Without fully doing the calculation, 36% separation
+        // seems about right
+        var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:W,b:w", BioLogica.FEMALE),
+            times = 1000, _times = times,
+            numGametes = 16, _numGametes = numGametes,
+            gametesChr1 = [],
+            notSplit = split = 0;
+
+        while (_times--) {
+          var gametes = org.genetics.createGametes(numGametes, true);
+          _numGametes = numGametes;
+          while (_numGametes--) {
+            gametesChr1.push(gametes[_numGametes][1]);
+          }
+        }
+        _times = times * numGametes;
+        while (_times--) {
+          var chr1Alleles = gametesChr1[_times].alleles;
+          if ((~chr1Alleles.indexOf("T") && ~chr1Alleles.indexOf("W")) ||
+            (~chr1Alleles.indexOf("t") && ~chr1Alleles.indexOf("w"))) {
+            notSplit++;
+          } else {
+            split++;
+          }
+        }
+        expect(split/(times * numGametes)).toBeBetween(0.34,0.38);
+      });
     });
   });
 });

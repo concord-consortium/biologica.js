@@ -11,7 +11,7 @@
       this.alleles = alleles;
       genotypeHash = typeof this.alleles === "string" ? this.convertAlleleStringToGenotypeHash(this.alleles, sex) : this.alleles;
       this.topUpChromosomes(genotypeHash);
-      this.genotype = new BioLogica.Genotype(genotypeHash);
+      this.genotype = new BioLogica.Genotype(this.species, genotypeHash);
     }
 
     /*
@@ -203,47 +203,108 @@
     */
 
 
-    Genetics.prototype.performMeiosis = function() {
-      var cell, cells, chromatid, chromoName, chromosome, i, newName, side, sisterChromatids, _i, _len, _ref;
+    Genetics.prototype.performMeiosis = function(performCrossover) {
+      var cell, cells, chromatid, chromoName, chromosome, i, newSide, side, sisterChromatidIds, sisterChromatids, _i, _len, _ref;
       cells = [{}, {}, {}, {}];
       _ref = this.genotype.chromosomes;
       for (chromoName in _ref) {
         if (!__hasProp.call(_ref, chromoName)) continue;
         chromosome = _ref[chromoName];
-        sisterChromatids = [];
+        sisterChromatids = {};
+        sisterChromatidIds = ["b2", "b1", "a2", "a1"];
         for (side in chromosome) {
           if (!__hasProp.call(chromosome, side)) continue;
           chromatid = chromosome[side];
-          newName = this.getHaploidChromatidName(chromatid);
-          sisterChromatids.push(chromatid.clone(newName));
-          sisterChromatids.push(chromatid.clone(newName));
+          newSide = this.getHaploidChromatidSide(chromatid);
+          sisterChromatids[sisterChromatidIds.pop()] = chromatid.clone(newSide);
+          sisterChromatids[sisterChromatidIds.pop()] = chromatid.clone(newSide);
         }
-        sisterChromatids.shuffle();
+        if (performCrossover) {
+          this.crossover(sisterChromatids);
+        }
+        sisterChromatidIds = ["b2", "b1", "a2", "a1"].shuffle();
         for (i = _i = 0, _len = cells.length; _i < _len; i = ++_i) {
           cell = cells[i];
-          cell[chromoName] = sisterChromatids[i];
+          cell[chromoName] = sisterChromatids[sisterChromatidIds[i]];
         }
       }
       return cells;
     };
 
-    Genetics.prototype.getHaploidChromatidName = function(chromatid) {
-      if (chromatid.name === "b") {
+    Genetics.prototype.getHaploidChromatidSide = function(chromatid) {
+      if (chromatid.side === "b") {
         return "a";
-      } else if (chromatid.name === "x1" || chromatid.name === "x2") {
+      } else if (chromatid.side === "x1" || chromatid.side === "x2") {
         return "x";
       } else {
-        return chromatid.name;
+        return chromatid.side;
       }
     };
 
-    Genetics.prototype.createGametes = function(n) {
+    Genetics.prototype.crossover = function(sisterChromatids) {
+      var crossoverPoints, endSide, newChromatids, point, startSide, _i, _len, _results;
+      crossoverPoints = this.createCrossoverPoints(sisterChromatids.a1);
+      _results = [];
+      for (_i = 0, _len = crossoverPoints.length; _i < _len; _i++) {
+        point = crossoverPoints[_i];
+        startSide = ["a1", "a2"][ExtMath.flip()];
+        endSide = ["b1", "b2"][ExtMath.flip()];
+        newChromatids = this.crossChromatids(sisterChromatids[startSide], sisterChromatids[endSide], point);
+        sisterChromatids[startSide] = newChromatids[0];
+        _results.push(sisterChromatids[endSide] = newChromatids[1]);
+      }
+      return _results;
+    };
+
+    Genetics.prototype.crossChromatids = function(chr1, chr2, point) {
+      return [BioLogica.Chromosome.createChromosome(chr2, chr1, point), BioLogica.Chromosome.createChromosome(chr1, chr2, point)];
+    };
+
+    /*
+        Create an array of locations (in base pairs) where the parent pair of chromosomes will cross
+    
+        First, randomly select the 10 cM segments that will experience crossover events. Give every 10 cM
+        segment of the chromosome an independent probability of 0.2 of experiencing a crossover. This will
+        result in having between 0 and num_10cM_segments crossover events. If the number of crossover events
+        is greater than three then randomly drop all but three of the crossover events.
+    
+        For each remaining event, determine the exact location of the crossover using a uniform random
+        distribution from the start to the end of the 10 cM segment.
+    */
+
+
+    Genetics.prototype.createCrossoverPoints = function(chromatid) {
+      var crossoverPoint, crossoverPoints, i, lengthOfDM, positionOnDM, totalDeciMorgans, _i, _len;
+      totalDeciMorgans = Math.floor(chromatid.lengthInCentimorgans / 10);
+      crossoverPoints = (function() {
+        var _i, _results;
+        _results = [];
+        for (i = _i = 0; 0 <= totalDeciMorgans ? _i < totalDeciMorgans : _i > totalDeciMorgans; i = 0 <= totalDeciMorgans ? ++_i : --_i) {
+          if (Math.random() < 0.2) {
+            _results.push(i);
+          }
+        }
+        return _results;
+      })();
+      while (crossoverPoints.length > 3) {
+        crossoverPoints.remove(ExtMath.randomInt(crossoverPoints.length));
+      }
+      lengthOfDM = chromatid.getlengthInBasePairs() / totalDeciMorgans;
+      for (i = _i = 0, _len = crossoverPoints.length; _i < _len; i = ++_i) {
+        crossoverPoint = crossoverPoints[i];
+        positionOnDM = ExtMath.randomInt(lengthOfDM);
+        crossoverPoints[i] = (crossoverPoint * lengthOfDM) + positionOnDM;
+      }
+      return crossoverPoints;
+    };
+
+    Genetics.prototype.createGametes = function(n, performCrossover) {
       var gametes, i, _i, _ref;
       gametes = [];
       for (i = _i = 0, _ref = Math.floor(n / 4); 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
-        gametes = gametes.concat(this.performMeiosis());
+        gametes = gametes.concat(this.performMeiosis(performCrossover));
       }
-      gametes = gametes.concat(this.performMeiosis().slice(0, n % 4));
+      gametes = gametes.concat(this.performMeiosis(performCrossover).slice(0, n % 4));
       if (gametes.length === 1) {
         return gametes[0];
       } else {

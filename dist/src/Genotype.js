@@ -21,7 +21,7 @@
 
   BioLogica.Genotype = (function() {
 
-    function Genotype(genotypeHash) {
+    function Genotype(species, genotypeHash) {
       var alleles, chromosome, side, sides;
       this.chromosomes = {};
       this.allAlleles = [];
@@ -32,7 +32,7 @@
         for (side in sides) {
           if (!__hasProp.call(sides, side)) continue;
           alleles = sides[side];
-          this.chromosomes[chromosome][side] = new BioLogica.Chromosome(side, alleles.slice(0));
+          this.chromosomes[chromosome][side] = new BioLogica.Chromosome(species, chromosome, side, alleles.slice(0));
           this.allAlleles = this.allAlleles.concat(alleles.slice(0));
         }
       }

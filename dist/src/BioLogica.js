@@ -13,13 +13,13 @@
     gamete2 = father.genetics.createGametes(1);
     for (i in gamete2) {
       chromosome = gamete2[i];
-      if (chromosome.name === "a") {
-        chromosome.name = "b";
+      if (chromosome.side === "a") {
+        chromosome.side = "b";
       }
     }
-    if (gamete2["XY"].name === "x") {
-      gamete1["XY"].name = "x1";
-      gamete2["XY"].name = "x2";
+    if (gamete2["XY"].side === "x") {
+      gamete1["XY"].side = "x1";
+      gamete2["XY"].side = "x2";
     }
     genotypeHash = {};
     for (chromoName in gamete1) {
@@ -27,8 +27,8 @@
       chromatidA = gamete1[chromoName];
       chromatidB = gamete2[chromoName];
       genotypeHash[chromoName] = {};
-      genotypeHash[chromoName][chromatidA.name] = chromatidA.alleles;
-      genotypeHash[chromoName][chromatidB.name] = chromatidB.alleles;
+      genotypeHash[chromoName][chromatidA.side] = chromatidA.alleles;
+      genotypeHash[chromoName][chromatidB.side] = chromatidB.alleles;
     }
     return new BioLogica.Organism(mother.species, genotypeHash);
   };

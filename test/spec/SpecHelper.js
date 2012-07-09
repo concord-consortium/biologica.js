@@ -25,6 +25,15 @@ beforeEach(function() {
       }
       return contains;
     },
+    toContainAllOf: function(arr) {
+      var actArr = this.actual;
+      var contains = true;
+      for (var i=0, ii=arr.length; i<ii; i++) {
+        if (!~actArr.indexOf(arr[i]))
+          contains = false;
+      }
+      return contains;
+    },
     toHaveCharacteristic: function(trait, characteristic) {
       if (this.actual.length) {
         var sex = this.actual[0],

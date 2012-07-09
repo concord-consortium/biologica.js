@@ -40,4 +40,24 @@ describe("When we breed", function() {
 
     expect(child).toHaveCharacteristic("forelimbs", "Forelimbs");
   });
+
+  it("a hetwerozygous parent with homozygous rec parent, we expect a 50% of offspring to have the dominant trait", function() {
+    var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:w,b:w", BioLogica.FEMALE),
+        father = new BioLogica.Organism(BioLogica.Species.Drake, "a:W,b:w", BioLogica.MALE),
+        child,
+        wings = noWings = 0;
+        times = 1000, _times = times;
+
+    while (_times--) {
+      child = BioLogica.breed(mother, father);
+      hasWings = child.getCharacteristic("wings") == "Wings";
+      if (hasWings) {
+        wings++;
+      } else {
+        noWings++;
+      }
+    }
+
+    expect(wings/times).toBeBetween(0.47,0.53);
+  });
 });

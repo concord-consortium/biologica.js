@@ -10,7 +10,7 @@ class BioLogica.Genetics
     # after initial chromosomes are created, fill in any missing genes with random alleles
     @topUpChromosomes(genotypeHash)
 
-    @genotype = new BioLogica.Genotype(genotypeHash)
+    @genotype = new BioLogica.Genotype(@species, genotypeHash)
 
   ###
     Converts an alleleString to a genotype hash
@@ -107,31 +107,71 @@ class BioLogica.Genetics
   ###
     Returns four haploid cells, without crossover for now
   ###
-  performMeiosis: ->
+  performMeiosis: (performCrossover) ->
     cells = [{}, {}, {}, {}]
 
     for own chromoName, chromosome of @genotype.chromosomes
-      sisterChromatids = []
+      sisterChromatids = {}
+      sisterChromatidIds = ["b2", "b1", "a2", "a1"]
       for own side, chromatid of chromosome
-        newName = @getHaploidChromatidName chromatid
-        sisterChromatids.push chromatid.clone(newName)
-        sisterChromatids.push chromatid.clone(newName)
-      sisterChromatids.shuffle()
+        newSide = @getHaploidChromatidSide chromatid
+        sisterChromatids[sisterChromatidIds.pop()] = chromatid.clone(newSide)
+        sisterChromatids[sisterChromatidIds.pop()] = chromatid.clone(newSide)
+      @crossover sisterChromatids if performCrossover
+      sisterChromatidIds = ["b2", "b1", "a2", "a1"].shuffle()
       for cell, i in cells
-        cell[chromoName] = sisterChromatids[i]
+        cell[chromoName] = sisterChromatids[sisterChromatidIds[i]]
     cells
 
-  getHaploidChromatidName: (chromatid) ->
-    if chromatid.name is "b"
+  getHaploidChromatidSide: (chromatid) ->
+    if chromatid.side is "b"
       "a"
-    else if chromatid.name is "x1" or chromatid.name is "x2"
+    else if chromatid.side is "x1" or chromatid.side is "x2"
       "x"
-    else chromatid.name
+    else chromatid.side
 
-  createGametes: (n) ->
+  crossover: (sisterChromatids) ->
+    crossoverPoints = @createCrossoverPoints sisterChromatids.a1
+    for point in crossoverPoints
+      # pick chromatids to cross
+      startSide = ["a1", "a2"][ExtMath.flip()]
+      endSide   = ["b1", "b2"][ExtMath.flip()]
+      newChromatids = @crossChromatids(sisterChromatids[startSide], sisterChromatids[endSide], point)
+      sisterChromatids[startSide] = newChromatids[0]
+      sisterChromatids[endSide]   = newChromatids[1]
+
+  crossChromatids: (chr1, chr2, point) ->
+    return [
+      BioLogica.Chromosome.createChromosome(chr2, chr1, point)
+      BioLogica.Chromosome.createChromosome(chr1, chr2, point)
+    ]
+
+  ###
+    Create an array of locations (in base pairs) where the parent pair of chromosomes will cross
+
+    First, randomly select the 10 cM segments that will experience crossover events. Give every 10 cM
+    segment of the chromosome an independent probability of 0.2 of experiencing a crossover. This will
+    result in having between 0 and num_10cM_segments crossover events. If the number of crossover events
+    is greater than three then randomly drop all but three of the crossover events.
+
+    For each remaining event, determine the exact location of the crossover using a uniform random
+    distribution from the start to the end of the 10 cM segment.
+  ###
+  createCrossoverPoints: (chromatid) ->
+    totalDeciMorgans = Math.floor chromatid.lengthInCentimorgans / 10;
+    crossoverPoints = (i for i in [0...totalDeciMorgans] when Math.random() < 0.2)
+    while crossoverPoints.length > 3
+      crossoverPoints.remove(ExtMath.randomInt crossoverPoints.length)
+    lengthOfDM = chromatid.getlengthInBasePairs() / totalDeciMorgans
+    for crossoverPoint, i in crossoverPoints
+      positionOnDM = ExtMath.randomInt lengthOfDM
+      crossoverPoints[i] = (crossoverPoint * lengthOfDM) + positionOnDM
+    crossoverPoints
+
+  createGametes: (n, performCrossover) ->
     gametes = []
-    gametes = gametes.concat @performMeiosis() for i in [0...Math.floor(n/4)]
-    gametes = gametes.concat @performMeiosis()[0...(n%4)]
+    gametes = gametes.concat @performMeiosis(performCrossover) for i in [0...Math.floor(n/4)]
+    gametes = gametes.concat @performMeiosis(performCrossover)[0...(n%4)]
     return if gametes.length is 1 then gametes[0] else gametes
 
 
