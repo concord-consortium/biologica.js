@@ -1,4 +1,4 @@
-window.BioLogica = {}
+window.BioLogica ?= {}
 
 BioLogica.breed = (mother, father) ->
   gamete1 = mother.genetics.createGametes 1

@@ -1,3 +1,5 @@
+window.BioLogica ?= {}
+
 BioLogica.Species = {}
 
 BioLogica.Species.Drake =
