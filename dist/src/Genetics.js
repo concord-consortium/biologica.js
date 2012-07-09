@@ -302,20 +302,6 @@
       return crossoverPoints;
     };
 
-    Genetics.prototype.createGametes = function(n, performCrossover) {
-      var gametes, i, _i, _ref;
-      gametes = [];
-      for (i = _i = 0, _ref = Math.floor(n / 4); 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
-        gametes = gametes.concat(this.performMeiosis(performCrossover));
-      }
-      gametes = gametes.concat(this.performMeiosis(performCrossover).slice(0, n % 4));
-      if (gametes.length === 1) {
-        return gametes[0];
-      } else {
-        return gametes;
-      }
-    };
-
     return Genetics;
 
   })();

@@ -1,9 +1,11 @@
 window.BioLogica ?= {}
 
+###
+  Breed two parents together. By default crossover will be used during meiosis
+###
 BioLogica.breed = (mother, father, crossover) ->
-  crossover ?= true     # default
-  gamete1 = mother.genetics.createGametes 1, crossover
-  gamete2 = father.genetics.createGametes 1, crossover
+  gamete1 = mother.createGametes 1, crossover
+  gamete2 = father.createGametes 1, crossover
 
   for i, chromosome of gamete2
     chromosome.side = "b" if chromosome.side is "a"

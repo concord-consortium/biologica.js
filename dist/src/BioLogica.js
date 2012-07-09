@@ -9,11 +9,8 @@
 
   BioLogica.breed = function(mother, father, crossover) {
     var chromatidA, chromatidB, chromoName, chromosome, gamete1, gamete2, genotypeHash, i;
-    if (crossover == null) {
-      crossover = true;
-    }
-    gamete1 = mother.genetics.createGametes(1, crossover);
-    gamete2 = father.genetics.createGametes(1, crossover);
+    gamete1 = mother.createGametes(1, crossover);
+    gamete2 = father.createGametes(1, crossover);
     for (i in gamete2) {
       chromosome = gamete2[i];
       if (chromosome.side === "a") {

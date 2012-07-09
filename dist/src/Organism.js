@@ -34,6 +34,30 @@
       return this.species.getImageName(this);
     };
 
+    /*
+        Creates n gametes, by default using crossover.
+        If only one gamete is requested, that gamete will be returned. Otherwise an
+        array of gametes will be returned
+    */
+
+
+    Organism.prototype.createGametes = function(n, performCrossover) {
+      var gametes, i, _i, _ref;
+      if (performCrossover == null) {
+        performCrossover = true;
+      }
+      gametes = [];
+      for (i = _i = 0, _ref = Math.floor(n / 4); 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+        gametes = gametes.concat(this.genetics.performMeiosis(performCrossover));
+      }
+      gametes = gametes.concat(this.genetics.performMeiosis(performCrossover).slice(0, n % 4));
+      if (gametes.length === 1) {
+        return gametes[0];
+      } else {
+        return gametes;
+      }
+    };
+
     Organism.prototype.toString = function() {
       var alleles, sex;
       sex = this.sex === BioLogica.FEMALE ? "female" : "male";

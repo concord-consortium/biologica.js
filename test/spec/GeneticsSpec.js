@@ -142,9 +142,9 @@ describe("An organism's genetics", function() {
     it("will can create any number of gametes", function() {
       var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE);
 
-      expect(org.genetics.createGametes(1)).toExist();
-      expect(org.genetics.createGametes(4).length).toBe(4);
-      expect(org.genetics.createGametes(19).length).toBe(19);
+      expect(org.createGametes(1)).toExist();
+      expect(org.createGametes(4).length).toBe(4);
+      expect(org.createGametes(19).length).toBe(19);
     });
 
     it("will independently assort chromosomes to gametes", function() {
@@ -154,7 +154,7 @@ describe("An organism's genetics", function() {
           times = 1000, _times = times;
 
       while (_times--) {
-        var gametes = org.genetics.createGametes(numGametes, false);
+        var gametes = org.createGametes(numGametes, false);
         _numGametes = numGametes;
         while (_numGametes--) {
           gamete = gametes[_numGametes];
@@ -180,7 +180,7 @@ describe("An organism's genetics", function() {
             times = 1000, _times = times;
 
         while (_times--) {
-          var gametes = org.genetics.createGametes(numGametes, false);
+          var gametes = org.createGametes(numGametes, false);
           _numGametes = numGametes;
           while (_numGametes--) {
             gamete = gametes[_numGametes];
@@ -283,7 +283,7 @@ describe("An organism's genetics", function() {
             notSplit = split = 0;
 
         while (_times--) {
-          var gametes = org.genetics.createGametes(numGametes, true);
+          var gametes = org.createGametes(numGametes, true);
           _numGametes = numGametes;
           while (_numGametes--) {
             gametesChr1.push(gametes[_numGametes][1]);
@@ -315,7 +315,7 @@ describe("An organism's genetics", function() {
             notSplit = split = 0;
 
         while (_times--) {
-          var gametes = org.genetics.createGametes(numGametes, true);
+          var gametes = org.createGametes(numGametes, true);
           _numGametes = numGametes;
           while (_numGametes--) {
             gametesChr1.push(gametes[_numGametes][1]);

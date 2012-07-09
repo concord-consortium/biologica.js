@@ -170,13 +170,6 @@ class BioLogica.Genetics
       crossoverPoints[i] = (crossoverPoint * lengthOfDM) + positionOnDM
     crossoverPoints
 
-  createGametes: (n, performCrossover) ->
-    gametes = []
-    gametes = gametes.concat @performMeiosis(performCrossover) for i in [0...Math.floor(n/4)]
-    gametes = gametes.concat @performMeiosis(performCrossover)[0...(n%4)]
-    return if gametes.length is 1 then gametes[0] else gametes
-
-
 ### Class methods (non-instance) ###
 
 ###
