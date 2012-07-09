@@ -36,3 +36,20 @@ class BioLogica.Organism
     alleles = @genetics.genotype.allAlleles
 
     return  "Organism: {sex: #{sex}, authored alleles: #{@alleles}, alleles: #{alleles}"
+
+BioLogica.Organism.createOrganismFromGametes = (species, motherGamete, fatherGamete) ->
+  for i, chromosome of fatherGamete
+    chromosome.side = "b" if chromosome.side is "a"
+
+  if fatherGamete["XY"].side is "x"
+    motherGamete["XY"].side = "x1"
+    fatherGamete["XY"].side = "x2"
+
+  genotypeHash = {}
+  for own chromoName, chromatidA of motherGamete
+    chromatidB = fatherGamete[chromoName]
+    genotypeHash[chromoName] = {}
+    genotypeHash[chromoName][chromatidA.side] = chromatidA.alleles
+    genotypeHash[chromoName][chromatidB.side] = chromatidB.alleles
+
+  return new BioLogica.Organism(species, genotypeHash)
