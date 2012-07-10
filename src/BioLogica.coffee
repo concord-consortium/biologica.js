@@ -1,5 +1,3 @@
-window.BioLogica ?= {}
-
 ###
   Breed two parents together. By default crossover will be used during meiosis
 ###
