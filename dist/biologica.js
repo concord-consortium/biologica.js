@@ -583,6 +583,16 @@
 
   })();
 
+  BioLogica.Organism.createOrganism = function(species, alleles, sex) {
+    if (alleles == null) {
+      alleles = "";
+    }
+    if (sex == null) {
+      sex = ExtMath.flip() ? BioLogica.FEMALE : BioLogica.MALE;
+    }
+    return new BioLogica.Organism(species, alleles, sex);
+  };
+
   BioLogica.Organism.createFromGametes = function(species, motherGamete, fatherGamete) {
     var chromatidA, chromatidB, chromoName, chromosome, genotypeHash, i;
     for (i in fatherGamete) {

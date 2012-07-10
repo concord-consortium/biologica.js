@@ -37,6 +37,11 @@ class BioLogica.Organism
 
     return  "Organism: {sex: #{sex}, authored alleles: #{@alleles}, alleles: #{alleles}"
 
+BioLogica.Organism.createOrganism = (species, alleles, sex) ->
+  alleles ?= ""
+  sex ?= if ExtMath.flip() then BioLogica.FEMALE else BioLogica.MALE
+  return new BioLogica.Organism(species, alleles, sex)
+
 BioLogica.Organism.createFromGametes = (species, motherGamete, fatherGamete) ->
   for i, chromosome of fatherGamete
     chromosome.side = "b" if chromosome.side is "a"

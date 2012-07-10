@@ -23,7 +23,7 @@ To compile and minify in one step
 This will place both biologica.js and biologica.min.js in the dist folder.
 
 You can also use 'cake compile-without-species' or 'cake build-without-species' to create a version of
-thje library that does not contain any species files.
+the library that does not contain any species files.
 
 ## License
 

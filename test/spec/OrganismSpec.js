@@ -44,4 +44,12 @@ describe("An organism", function() {
 
     expect(org.sex).toBe(BioLogica.MALE);
   });
+
+  it("can be created with just a species", function() {
+    var org = BioLogica.Organism.createOrganism(BioLogica.Species.Drake);
+
+    expect(org.species.name).toBe("Drake");
+    expect(org.sex).toBeAnyOneOf([BioLogica.FEMALE, BioLogica.MALE]);
+    expect(org.alleles).toBe("");
+  });
 });
