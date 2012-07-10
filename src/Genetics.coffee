@@ -179,5 +179,5 @@ class BioLogica.Genetics
     { a: ["h", "t", "Dl"], b: ["H", "t", "D"] }
 ###
 BioLogica.Genetics.parseAlleleString = (alleleString) ->
-  a: alleleString.match(/a:([^,])*/g)?.map (short) -> short.match(/[^:]+$/)[0]
-  b: alleleString.match(/b:([^,])*/g)?.map (short) -> short.match(/[^:]+$/)[0]
+  a: alleleString.match(/a:([^,])*/g)?.map (str) -> str.match(/[^:]+$/)[0]
+  b: alleleString.match(/b:([^,])*/g)?.map (str) -> str.match(/[^:]+$/)[0]
