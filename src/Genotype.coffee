@@ -22,6 +22,7 @@ class BioLogica.Genotype
     for own chromosome, sides of genotypeHash
       @chromosomes[chromosome] = {}
       for own side, alleles of sides
+        if side is "y" then alleles = []
         @chromosomes[chromosome][side] = new BioLogica.Chromosome(species, chromosome, side, alleles[..])
         @allAlleles = @allAlleles.concat alleles[..]
 
@@ -29,3 +30,24 @@ class BioLogica.Genotype
     allAllelesCopy = @allAlleles[..]
     (return false unless allAllelesCopy.removeObj(allele)) for allele in alleles
     true
+
+  replaceAllele: (chromosome, allele, newAllele) ->
+    chromosome.alleles.replaceFirst allele, newAllele
+    @allAlleles.replaceFirst allele, newAllele        # this is safe because allAlleles is order-agnostic
+
+  # returns a: b: style string of genotype
+  getAlleleString: ->
+    alleleString = ""
+    for own c, chromosomes of @chromosomes
+      for own side, chromosome of chromosomes
+        alleles = chromosome.alleles
+        otherSide = if side is "x" then "y" else if side is "x1" then "x2" else "b"
+        if (side is "x" or side is "x1") then side = "a"
+        if side isnt "a" then continue
+        for allele, i in alleles
+          alleleString += "#{side}:#{allele},"
+          if chromosomes[otherSide]
+            alleleString += "b:#{chromosomes[otherSide]?.alleles[i]},"
+
+
+    alleleString.substring(0,alleleString.length-1)

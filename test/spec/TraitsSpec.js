@@ -121,6 +121,24 @@ describe("The traits", function() {
   });
 });
 
+describe("Given we may not want dead drakes", function() {
+  it ("if we have a dead drake we can make it alive again", function() {
+    var org = BioLogica.Organism.createOrganism(BioLogica.Species.Drake, "a:dl,b:dl");
+
+    expect(org.getCharacteristic("liveliness")).toBe("Dead");
+
+    org.species.makeAlive(org);
+
+    expect(org.getCharacteristic("liveliness")).toBe("Alive");
+  });
+
+  it ("we can request an alive drake", function() {
+    var org = BioLogica.Organism.createLiveOrganism(BioLogica.Species.Drake, "a:dl,b:dl");
+
+    expect(org.getCharacteristic("liveliness")).toBe("Alive");
+  });
+});
+
 describe("The image name of an appropriate org", function() {
   it ("should be ar_f_noWing_fore_a1_kink_noHorn_rostral_healthy.png", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake,

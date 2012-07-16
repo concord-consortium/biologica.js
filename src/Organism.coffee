@@ -3,10 +3,13 @@ class BioLogica.Organism
   constructor: (@species, @alleles, @sex) ->
     @genetics = new BioLogica.Genetics(@species, @alleles, @sex)
     @sex ?= if @genetics.genotype.chromosomes.XY?.y? then BioLogica.MALE else BioLogica.FEMALE
-    @phenotype = new BioLogica.Phenotype(@genetics)
+    @resetPhenotype()
 
   getGenotype: ->
     @genetics.genotype
+
+  resetPhenotype: ->
+    @phenotype = new BioLogica.Phenotype(@genetics)
 
   ###
     For a given trait (a species-level property), returns this organism's
@@ -41,6 +44,11 @@ BioLogica.Organism.createOrganism = (species, alleles, sex) ->
   alleles ?= ""
   sex ?= if ExtMath.flip() then BioLogica.FEMALE else BioLogica.MALE
   return new BioLogica.Organism(species, alleles, sex)
+
+BioLogica.Organism.createLiveOrganism = (species, alleles, sex) ->
+  org = new BioLogica.Organism(species, alleles, sex)
+  org.species.makeAlive org
+  return org
 
 BioLogica.Organism.createFromGametes = (species, motherGamete, fatherGamete) ->
   for i, chromosome of fatherGamete

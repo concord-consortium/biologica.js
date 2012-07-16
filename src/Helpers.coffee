@@ -1,3 +1,5 @@
+### jslint debug: true ###
+
 
 # [a,b,c,d].remove(1) => [a,c,d]
 # [a,b,c,d].remove(0,2) => [d]
@@ -13,6 +15,9 @@ Array::removeObj = (obj) ->
     true
   else
     false
+
+Array::replaceFirst = (obj, replacement) ->
+  this[this.indexOf(obj)] = replacement
 
 Array::shuffle = ->
   top = @length;

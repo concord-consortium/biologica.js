@@ -1,4 +1,4 @@
 window.BioLogica = {}
 
-BioLogica.FEMALE  = 0
-BioLogica.MALE    = 1
+BioLogica.FEMALE  = 1
+BioLogica.MALE    = 0

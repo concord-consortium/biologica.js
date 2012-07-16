@@ -203,3 +203,16 @@ BioLogica.Species.Drake =
     filename += "healthy"
 
     filename += ".png"
+
+  ###
+
+  ###
+  makeAlive: (org) ->
+    if org.getCharacteristic("liveliness") is "Dead"
+      xChromoName = if org.sex is BioLogica.MALE then "x"
+      else if ExtMath.flip() then "x1" else "x2"
+      chromsome = org.getGenotype().chromosomes["XY"][xChromoName]
+
+      replacementAllele = if ExtMath.flip() then "D" else "d"
+      org.getGenotype().replaceAllele chromsome, "dl", replacementAllele
+      org.resetPhenotype()
