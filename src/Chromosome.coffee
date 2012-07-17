@@ -1,6 +1,8 @@
 class BioLogica.Chromosome
 
-  constructor: (@species, @chromosome, @side, @alleles) ->
+  constructor: (@species, @chromosome, @side, alleles) ->
+    @alleles = alleles.sort (a,b) =>
+      return if @getAllelesPosition(a) > @getAllelesPosition(b) then 1 else -1
 
   clone: (newSide) ->
     new BioLogica.Chromosome(@species, @chromosome, newSide or @side, @alleles[..])
@@ -16,7 +18,7 @@ class BioLogica.Chromosome
 
   getAllelesPosition: (allele) ->
     geneName = @getGeneOfAllele allele
-    @species.geneList[geneName].start
+    @species.geneList[geneName]?.start or -1
 
 BioLogica.Chromosome.createChromosome = (chr1, chr2, crossPoint) ->
   newAlleles = []

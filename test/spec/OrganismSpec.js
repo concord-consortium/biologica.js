@@ -54,6 +54,15 @@ describe("An organism", function() {
   });
 
 
+  it("can be created with an alleleString with a trailing comma", function() {
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:h,", BioLogica.FEMALE);
+
+    expect(org.species.name).toBe("Drake");
+    expect(org.sex).toBe(BioLogica.FEMALE);
+    expect(org.alleles).toBe("a:h,b:h");
+  });
+
+
   it("can be created with a species, alleles and male sex, and Y chromosome will be correct", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:rh,b:rh", BioLogica.MALE);
 
@@ -66,7 +75,7 @@ describe("An organism", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake,
       {
         "1": {
-          "a": ["t", "W", "M"],
+          "a": ["W", "t", "M"],
           "b": ["Tk", "w", "m"]
         },
         "2": {
@@ -80,7 +89,7 @@ describe("An organism", function() {
       });
 
     expect(org.genetics.genotype.getAlleleString())
-      .toBe("a:t,b:Tk,a:W,b:w,a:M,b:m,a:h,b:H,a:C,b:c,a:fl,b:fl,a:Hl,b:hl,a:A1,b:A2,a:D,b:dl,a:B,b:B,a:Rh,b:Rh");
+      .toBe("a:t,b:Tk,a:M,b:m,a:W,b:w,a:h,b:H,a:C,b:c,a:fl,b:fl,a:Hl,b:hl,a:A1,b:A2,a:B,b:B,a:D,b:dl,a:Rh,b:Rh");
   });
 
   it("can provide an alleleString when created by an incomplete alleleString", function() {

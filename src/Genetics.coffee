@@ -29,6 +29,7 @@ class BioLogica.Genetics
       continue unless alleles
       for allele in alleles
         chromoName = @findChromosome allele
+        continue unless chromoName
         sides = @getSides(chromoName, sex)
         genotypeHash[chromoName][if side == "a" then sides[0] else sides[1]].push allele
     genotypeHash
@@ -179,5 +180,5 @@ class BioLogica.Genetics
     { a: ["h", "t", "Dl"], b: ["H", "t", "D"] }
 ###
 BioLogica.Genetics.parseAlleleString = (alleleString) ->
-  a: alleleString.match(/a:([^,])*/g)?.map (str) -> str.match(/[^:]+$/)[0]
-  b: alleleString.match(/b:([^,])*/g)?.map (str) -> str.match(/[^:]+$/)[0]
+  a: alleleString.match(/a:([^,])*/g)?.map (str) -> str.match(/[^:]+$/)?[0]
+  b: alleleString.match(/b:([^,])*/g)?.map (str) -> str.match(/[^:]+$/)?[0]

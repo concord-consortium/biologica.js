@@ -1,6 +1,7 @@
 class BioLogica.Organism
 
-  constructor: (@species, @alleles, @sex) ->
+  constructor: (@species, alleles, @sex) ->
+    @alleles = if typeof alleles is "string" then @preProcessAlleleString alleles else alleles
     @genetics = new BioLogica.Genetics(@species, @alleles, @sex)
     @sex ?= if @genetics.genotype.chromosomes.XY?.y? then BioLogica.MALE else BioLogica.FEMALE
     @resetPhenotype()
@@ -33,6 +34,9 @@ class BioLogica.Organism
     gametes = gametes.concat @genetics.performMeiosis(performCrossover) for i in [0...Math.floor(n/4)]
     gametes = gametes.concat @genetics.performMeiosis(performCrossover)[0...(n%4)]
     return if gametes.length is 1 then gametes[0] else gametes
+
+  preProcessAlleleString: (str) ->
+    return str.replace(/,+$/, "")   # rm trailing comma
 
   toString: ->
     sex = if @sex == BioLogica.FEMALE then "female" else "male"
