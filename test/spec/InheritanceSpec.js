@@ -81,32 +81,32 @@ describe("When we breed", function() {
     expect(wings/times).toBeBetween(0.71,0.79);
   });
 
-  it("a THth parent with recessive parent, we expect tails and horns to be independent in offspring", function() {
-    var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:H,b:h", BioLogica.FEMALE),
-        father = new BioLogica.Organism(BioLogica.Species.Drake, "a:t,b:t,a:h,b:h", BioLogica.MALE),
+  it("a THth parent with recessive parent, we expect tails and forelimbs to be independent in offspring", function() {
+    var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:Fl,b:fl", BioLogica.FEMALE),
+        father = new BioLogica.Organism(BioLogica.Species.Drake, "a:t,b:t,a:fl,b:fl", BioLogica.MALE),
         child,
-        TH = Th = tH = th = 0;
+        TF = Tf = tF = tf = 0;
         times = 1000, _times = times;
 
     while (_times--) {
       child = BioLogica.breed(mother, father);
       hasLongTail = child.getCharacteristic("tail") == "Long tail";
-      hasHorns = child.getCharacteristic("horns") == "Horns";
-      if (hasLongTail && !hasHorns) {
-        TH++;
-      } else if (hasLongTail && hasHorns) {
-        Th++;
-      } else if (!hasLongTail && !hasHorns) {
-        tH++;
-      } else if (!hasLongTail && hasHorns) {
-        th++;
+      hasForelimbs = child.getCharacteristic("forelimbs") == "Forelimbs";
+      if (hasLongTail && !hasForelimbs) {
+        TF++;
+      } else if (hasLongTail && hasForelimbs) {
+        Tf++;
+      } else if (!hasLongTail && !hasForelimbs) {
+        tF++;
+      } else if (!hasLongTail && hasForelimbs) {
+        tf++;
       }
     }
 
-    expect(TH/times).toBeBetween(0.2,0.3);
-    expect(Th/times).toBeBetween(0.2,0.3);
-    expect(tH/times).toBeBetween(0.2,0.3);
-    expect(th/times).toBeBetween(0.2,0.3);
+    expect(TF/times).toBeBetween(0.2,0.3);
+    expect(Tf/times).toBeBetween(0.2,0.3);
+    expect(tF/times).toBeBetween(0.2,0.3);
+    expect(tf/times).toBeBetween(0.2,0.3);
   });
 
   describe("without crossover", function() {

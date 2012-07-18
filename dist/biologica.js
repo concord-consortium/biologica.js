@@ -63,10 +63,17 @@
   BioLogica.Chromosome = (function() {
 
     function Chromosome(species, chromosome, side, alleles) {
+      var _this = this;
       this.species = species;
       this.chromosome = chromosome;
       this.side = side;
-      this.alleles = alleles;
+      this.alleles = alleles.sort(function(a, b) {
+        if (_this.getAllelesPosition(a) > _this.getAllelesPosition(b)) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
     }
 
     Chromosome.prototype.clone = function(newSide) {
@@ -92,9 +99,9 @@
     };
 
     Chromosome.prototype.getAllelesPosition = function(allele) {
-      var geneName;
+      var geneName, _ref;
       geneName = this.getGeneOfAllele(allele);
-      return this.species.geneList[geneName].start;
+      return ((_ref = this.species.geneList[geneName]) != null ? _ref.start : void 0) || -1;
     };
 
     return Chromosome;
@@ -244,6 +251,9 @@
         for (_j = 0, _len1 = alleles.length; _j < _len1; _j++) {
           allele = alleles[_j];
           chromoName = this.findChromosome(allele);
+          if (!chromoName) {
+            continue;
+          }
           sides = this.getSides(chromoName, sex);
           genotypeHash[chromoName][side === "a" ? sides[0] : sides[1]].push(allele);
         }
@@ -524,10 +534,12 @@
     var _ref, _ref1;
     return {
       a: (_ref = alleleString.match(/a:([^,])*/g)) != null ? _ref.map(function(str) {
-        return str.match(/[^:]+$/)[0];
+        var _ref1;
+        return (_ref1 = str.match(/[^:]+$/)) != null ? _ref1[0] : void 0;
       }) : void 0,
       b: (_ref1 = alleleString.match(/b:([^,])*/g)) != null ? _ref1.map(function(str) {
-        return str.match(/[^:]+$/)[0];
+        var _ref2;
+        return (_ref2 = str.match(/[^:]+$/)) != null ? _ref2[0] : void 0;
       }) : void 0
     };
   };
@@ -567,8 +579,8 @@
     function Organism(species, alleles, sex) {
       var _ref, _ref1;
       this.species = species;
-      this.alleles = alleles;
       this.sex = sex;
+      this.alleles = typeof alleles === "string" ? this.preProcessAlleleString(alleles) : alleles;
       this.genetics = new BioLogica.Genetics(this.species, this.alleles, this.sex);
       if ((_ref = this.sex) == null) {
         this.sex = ((_ref1 = this.genetics.genotype.chromosomes.XY) != null ? _ref1.y : void 0) != null ? BioLogica.MALE : BioLogica.FEMALE;
@@ -621,6 +633,10 @@
       } else {
         return gametes;
       }
+    };
+
+    Organism.prototype.preProcessAlleleString = function(str) {
+      return str.replace(/,+$/, "");
     };
 
     Organism.prototype.toString = function() {
@@ -693,9 +709,9 @@
     name: "Drake",
     chromosomeNames: ['1', '2', 'XY'],
     chromosomeGeneMap: {
-      '1': ['t', 'm', 'w'],
-      '2': ['h', 'c', 'fl', 'hl', 'a'],
-      'XY': ['b', 'd', 'rh']
+      '1': ['t', 'm', 'w', 'h'],
+      '2': ['c', 'b', 'fl', 'hl', 'a'],
+      'XY': ['d', 'rh']
     },
     chromosomesLength: {
       '1': 100000000,
@@ -720,13 +736,18 @@
       },
       horns: {
         alleles: ['H', 'h'],
-        start: 10000000,
+        start: 85000000,
         length: 19421
       },
       color: {
         alleles: ['C', 'c'],
         start: 50000000,
         length: 64572
+      },
+      black: {
+        alleles: ['B', 'b'],
+        start: 65000000,
+        length: 17596
       },
       forelimbs: {
         alleles: ['Fl', 'fl'],
@@ -742,11 +763,6 @@
         alleles: ['A1', 'A2', 'a'],
         start: 90000000,
         length: 425156
-      },
-      black: {
-        alleles: ['B', 'b'],
-        start: 20000000,
-        length: 17596
       },
       dilute: {
         alleles: ['D', 'd', 'dl'],

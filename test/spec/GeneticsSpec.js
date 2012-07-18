@@ -6,16 +6,18 @@ describe("An organism's genetics", function() {
   });
 
   it("creates a genotype when an organism is created with an alleleString", function() {
-    var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:H,a:t,b:Tk,b:dl,a:W,b:w,a:dl,b:D", BioLogica.FEMALE),
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:H,a:t,b:Tk,b:dl,a:c,b:C,a:W,b:w,a:dl,b:D", BioLogica.FEMALE),
         chromosomes = org.getGenotype().chromosomes;
 
     expect(chromosomes["1"].a.alleles).toContain("t");
     expect(chromosomes["1"].a.alleles).toContain("W");
     expect(chromosomes["1"].b.alleles).toContain("Tk");
     expect(chromosomes["1"].b.alleles).toContain("w");
+    expect(chromosomes["1"].a.alleles).toContain("h");
+    expect(chromosomes["1"].b.alleles).toContain("H");
 
-    expect(chromosomes["2"].a.alleles).toContain("h");
-    expect(chromosomes["2"].b.alleles).toContain("H");
+    expect(chromosomes["2"].a.alleles).toContain("c");
+    expect(chromosomes["2"].b.alleles).toContain("C");
 
     expect(chromosomes["XY"].x1.alleles).toContain("dl");
     expect(chromosomes["XY"].x2.alleles).toContain("D");
@@ -67,18 +69,18 @@ describe("An organism's genetics", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:H", BioLogica.FEMALE),
         chromosomes = org.getGenotype().chromosomes;
 
-    expect(chromosomes["1"].a.alleles.length).toBe(3);
-    expect(chromosomes["1"].b.alleles.length).toBe(3);
+    expect(chromosomes["1"].a.alleles.length).toBe(4);
+    expect(chromosomes["1"].b.alleles.length).toBe(4);
     expect(chromosomes["2"].a.alleles.length).toBe(5);
     expect(chromosomes["2"].b.alleles.length).toBe(5);
-    expect(chromosomes["XY"].x1.alleles.length).toBe(3);
-    expect(chromosomes["XY"].x2.alleles.length).toBe(3);
+    expect(chromosomes["XY"].x1.alleles.length).toBe(2);
+    expect(chromosomes["XY"].x2.alleles.length).toBe(2);
 
     var chromo1A = chromosomes["1"].a;
     expect(chromo1A.alleles).toContainAnyOneOf(["t", "T", "Tk"]);
     expect(chromo1A.alleles).toContainAnyOneOf(["m", "M"]);
     expect(chromo1A.alleles).toContainAnyOneOf(["w", "W"]);
-    expect(chromo1A.alleles).not.toContainAnyOneOf(["h", "H"]);
+    expect(chromo1A.alleles).not.toContainAnyOneOf(["c", "C"]);
   });
 
   it("contains chromosomes that are correctly named", function() {
@@ -114,7 +116,7 @@ describe("An organism's genetics", function() {
         expect(cell["1"]).toExist();
         expect(cell["1"].side).toBe("a");
         expect(cell["1"].alleles).toExist();
-        expect(cell["1"].alleles.length).toBe(3);
+        expect(cell["1"].alleles.length).toBe(4);
         expect(cell["2"]).toExist();
         expect(cell["XY"]).toExist();
         expect(cell["XY"].side).toBe('x');
@@ -148,7 +150,7 @@ describe("An organism's genetics", function() {
     });
 
     it("will independently assort chromosomes to gametes", function() {
-      var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:H,b:h", BioLogica.FEMALE),
+      var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:C,b:c", BioLogica.FEMALE),
           numGametes = 4, _numGametes,
           sameSide = oppSide = 0,
           times = 1000, _times = times;
@@ -160,8 +162,8 @@ describe("An organism's genetics", function() {
           gamete = gametes[_numGametes];
           chr1Alleles = gamete[1].alleles;
           chr2Alleles = gamete[2].alleles;
-          if (~chr1Alleles.indexOf("T") && ~chr2Alleles.indexOf("H") ||
-            ~chr1Alleles.indexOf("t") && ~chr2Alleles.indexOf("h")) {
+          if (~chr1Alleles.indexOf("T") && ~chr2Alleles.indexOf("C") ||
+            ~chr1Alleles.indexOf("t") && ~chr2Alleles.indexOf("c")) {
             sameSide++;
           } else {
             oppSide++;
@@ -371,7 +373,7 @@ describe("An species' genetics", function() {
 
   it("correctly converts an allele string into genotype", function() {
     var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "", BioLogica.FEMALE),
-        alleles = "a:h,b:H,a:t,b:Tk,b:dl,a:W,b:w,a:dl",
+        alleles = "a:c,b:C,a:t,b:Tk,b:dl,a:W,b:w,a:dl",
         chromosomes =genetics.convertAlleleStringToGenotypeHash(alleles, BioLogica.FEMALE);
 
     expect(chromosomes["1"].a).toContain("t");
@@ -379,8 +381,8 @@ describe("An species' genetics", function() {
     expect(chromosomes["1"].b).toContain("Tk");
     expect(chromosomes["1"].b).toContain("w");
 
-    expect(chromosomes["2"].a).toContain("h");
-    expect(chromosomes["2"].b).toContain("H");
+    expect(chromosomes["2"].a).toContain("c");
+    expect(chromosomes["2"].b).toContain("C");
 
     expect(chromosomes["XY"].x1).toContain("dl");
   });
@@ -424,18 +426,18 @@ describe("An species' genetics", function() {
     var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "a:h,b:H", BioLogica.FEMALE),
         chromosomes =genetics.genotype.chromosomes;
 
-    expect(chromosomes["1"].a.alleles.length).toBe(3)
-    expect(chromosomes["1"].b.alleles.length).toBe(3)
+    expect(chromosomes["1"].a.alleles.length).toBe(4)
+    expect(chromosomes["1"].b.alleles.length).toBe(4)
     expect(chromosomes["2"].a.alleles.length).toBe(5)
     expect(chromosomes["2"].b.alleles.length).toBe(5)
-    expect(chromosomes["XY"].x1.alleles.length).toBe(3)
-    expect(chromosomes["XY"].x2.alleles.length).toBe(3)
+    expect(chromosomes["XY"].x1.alleles.length).toBe(2)
+    expect(chromosomes["XY"].x2.alleles.length).toBe(2)
 
     var chromo1A = chromosomes["1"].a;
     expect(chromo1A.alleles).toContainAnyOneOf(["t", "T", "Tk"]);
     expect(chromo1A.alleles).toContainAnyOneOf(["m", "M"]);
     expect(chromo1A.alleles).toContainAnyOneOf(["w", "W"]);
-    expect(chromo1A.alleles).not.toContainAnyOneOf(["h", "H"]);
+    expect(chromo1A.alleles).not.toContainAnyOneOf(["c", "C"]);
   });
 
 });

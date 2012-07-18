@@ -7,9 +7,9 @@ BioLogica.Species.Drake =
   chromosomeNames: ['1', '2', 'XY']
 
   chromosomeGeneMap:
-    '1': ['t','m','w']
-    '2': ['h', 'c', 'fl', 'hl', 'a']
-    'XY': ['b', 'd', 'rh']
+    '1': ['t','m','w', 'h']
+    '2': ['c', 'b', 'fl', 'hl', 'a']
+    'XY': ['d', 'rh']
 
   chromosomesLength:
     '1': 100000000
@@ -31,12 +31,16 @@ BioLogica.Species.Drake =
       length: 9094
     horns:
       alleles: ['H', 'h']
-      start: 10000000
+      start: 85000000
       length: 19421
     color:
       alleles: ['C', 'c']
       start: 50000000
       length: 64572
+    black:
+      alleles: ['B', 'b']
+      start: 65000000
+      length: 17596
     forelimbs:
       alleles: ['Fl', 'fl']
       start: 80000000
@@ -49,10 +53,6 @@ BioLogica.Species.Drake =
       alleles: ['A1', 'A2', 'a']
       start: 90000000
       length: 425156
-    black:
-      alleles: ['B', 'b']
-      start: 20000000
-      length: 17596
     dilute:
       alleles: ['D', 'd', 'dl']
       start: 40000000
