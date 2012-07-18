@@ -81,7 +81,7 @@ describe("When we breed", function() {
     expect(wings/times).toBeBetween(0.71,0.79);
   });
 
-  it("a THth parent with recessive parent, we expect tails and forelimbs to be independent in offspring", function() {
+  it("a TFtf parent with recessive parent, we expect tails and forelimbs to be independent in offspring", function() {
     var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:Fl,b:fl", BioLogica.FEMALE),
         father = new BioLogica.Organism(BioLogica.Species.Drake, "a:t,b:t,a:fl,b:fl", BioLogica.MALE),
         child,
