@@ -130,22 +130,22 @@ BioLogica.Species.Drake =
                    ["M", "M", "B", "b", "D", "d"], ["M", "m", "B", "b", "D", "d"]]
       "Copper":   [["M", "M", "b", "b", "D", "D"], ["M", "m", "b", "b", "D", "D"]
                    ["M", "M", "b", "b", "D", "d"], ["M", "m", "b", "b", "D", "d"]]
-      "Argent":   [["M", "M", "B", "B", "d", "d"], ["M", "m", "B", "B", "d", "d"]
+      "Silver":   [["M", "M", "B", "B", "d", "d"], ["M", "m", "B", "B", "d", "d"]
                    ["M", "M", "B", "b", "d", "d"], ["M", "m", "B", "b", "d", "d"]]
       "Gold":     [["M", "M", "b", "b", "d", "d"], ["M", "m", "b", "b", "d", "d"]]
       "Charcoal": [["m", "m", "B", "B", "D", "D"], ["m", "m", "B", "b", "D", "D"]
                    ["m", "m", "B", "B", "D", "d"], ["m", "m", "B", "b", "D", "d"]]
-      "Earth":    [["m", "m", "b", "b", "D", "D"], ["m", "m", "b", "b", "D", "d"]]
-      "Dust":     [["m", "m", "B", "B", "d", "d"], ["m", "m", "B", "b", "d", "d"]]
+      "Lava":    [["m", "m", "b", "b", "D", "D"], ["m", "m", "b", "b", "D", "d"]]
+      "Ash":     [["m", "m", "B", "B", "d", "d"], ["m", "m", "B", "b", "d", "d"]]
       "Sand":     [["m", "m", "b", "b", "d", "d"]]
       # males and dl
       "Steel":    [["M", "M", "B", "D"], ["M", "m", "B", "D"]]
       "Copper":   [["M", "M", "b", "D"], ["M", "m", "b", "D"]]
-      "Argent":   [["M", "M", "B", "d"], ["M", "m", "B", "d"]]
+      "Silver":   [["M", "M", "B", "d"], ["M", "m", "B", "d"]]
       "Gold":     [["M", "M", "b", "d"], ["M", "m", "b", "d"]]
       "Charcoal": [["m", "m", "B", "D"], ["m", "m", "B", "D"]]
-      "Earth":    [["m", "m", "b", "D"]]
-      "Dust":     [["m", "m", "B", "d"]]
+      "Lava":    [["m", "m", "b", "D"]]
+      "Ash":     [["m", "m", "B", "d"]]
       "Sand":     [["m", "m", "b", "d"], []]
 
     "liveliness":
@@ -167,7 +167,16 @@ BioLogica.Species.Drake =
     # [color]_[sex]_[wing]_[limbs]_[armor]_[tail]_[horn]_[rostralHorn]_[health].png
     filename = ""
 
-    filename += trait("color").toLowerCase().substring(0,2) + "_"
+# Changed some names for color phenotypes but image filenames still use old phynotypic names
+    traitColor = trait("color")
+    if traitColor is "Silver"
+      traitColor = "Argent" 
+    else if traitColor is "Lava"
+      traitColor = "Earth"
+    else if traitColor is "Ash"
+      traitColor = "Dust"
+
+    filename += traitColor.toLowerCase().substring(0,2) + "_"
 
     filename += if org.sex is BioLogica.FEMALE then "f_" else "m_"
 
