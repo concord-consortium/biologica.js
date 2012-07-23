@@ -45,17 +45,17 @@ describe("The characteristic", function() {
     [ female,    "a:C,b:c,a:M,b:m,a:B,a:D,b:dl", "color",      "Steel"    ],
     [ female,    "a:C,a:M,b:M,a:b,b:b,a:D",      "color",      "Copper"   ],
     [ male,      "a:C,a:M,b:M,a:b,a:D",          "color",      "Copper"   ],
-    [ female,    "a:C,a:M,b:M,a:B,a:d,b:d",      "color",      "Argent"   ],
-    [ female,    "a:C,a:M,b:M,a:B,a:dl,b:d",     "color",      "Argent"   ],
-    [ male,      "a:C,a:M,b:M,a:B,a:d",          "color",      "Argent"   ],
+    [ female,    "a:C,a:M,b:M,a:B,a:d,b:d",      "color",      "Silver"   ],
+    [ female,    "a:C,a:M,b:M,a:B,a:dl,b:d",     "color",      "Silver"   ],
+    [ male,      "a:C,a:M,b:M,a:B,a:d",          "color",      "Silver"   ],
     [ female,    "a:C,a:M,b:m,a:b,b:b,a:d,b:d",  "color",      "Gold"     ],
     [ female,    "a:C,a:M,b:m,a:b,b:b,a:d,b:dl", "color",      "Gold"     ],
     [ male,      "a:C,a:M,b:m,a:b,a:d",          "color",      "Gold"     ],
     [ female,    "a:C,a:m,b:m,a:B,a:D",          "color",      "Charcoal" ],
-    [ female,    "a:C,a:m,b:m,a:b,b:b,a:D",      "color",      "Earth"    ],
-    [ male,      "a:C,a:m,b:m,a:b,a:D",          "color",      "Earth"    ],
-    [ female,    "a:C,a:m,b:m,a:B,a:d,b:d",      "color",      "Dust"     ],
-    [ male,      "a:C,a:m,b:m,a:B,a:d",          "color",      "Dust"     ],
+    [ female,    "a:C,a:m,b:m,a:b,b:b,a:D",      "color",      "Lava"    ],
+    [ male,      "a:C,a:m,b:m,a:b,a:D",          "color",      "Lava"    ],
+    [ female,    "a:C,a:m,b:m,a:B,a:d,b:d",      "color",      "Ash"     ],
+    [ male,      "a:C,a:m,b:m,a:B,a:d",          "color",      "Ash"     ],
     [ female,    "a:C,a:m,b:m,a:b,b:b,a:d,b:d",  "color",      "Sand"     ],
     [ male,      "a:C,a:m,b:m,a:b,a:d",          "color",      "Sand"     ],
 
@@ -99,7 +99,7 @@ describe("The traits", function() {
                               "a:t,b:Tk,a:m,b:M,a:w,b:w,a:H,b:H,a:C,b:c,a:Fl,b:fl,a:hl,b:hl,a:a,b:A2,a:B,b:B,a:dl,b:d,a:rh,b:Rh",
                               female);
     expect(org).toHaveCharacteristic("tail", "Kinked tail");
-    expect(org).toHaveCharacteristic("color", "Argent");
+    expect(org).toHaveCharacteristic("color", "Silver");
     expect(org).toHaveCharacteristic("wings", "No wings");
     expect(org).toHaveCharacteristic("horns", "Hornless");
     expect(org).toHaveCharacteristic("forelimbs", "Forelimbs");
@@ -111,7 +111,7 @@ describe("The traits", function() {
                               "a:t,b:t,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:fl,a:Hl,b:hl,a:A2,b:A2,a:B,a:d,a:rh",
                               male);
     expect(org).toHaveCharacteristic("tail", "Short tail");
-    expect(org).toHaveCharacteristic("color", "Dust");
+    expect(org).toHaveCharacteristic("color", "Ash");
     expect(org).toHaveCharacteristic("wings", "Wings");
     expect(org).toHaveCharacteristic("horns", "Horns");
     expect(org).toHaveCharacteristic("forelimbs", "No forelimbs");
