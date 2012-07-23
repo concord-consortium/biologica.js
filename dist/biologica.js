@@ -839,19 +839,19 @@
       "color": {
         "Steel": [["M", "M", "B", "B", "D", "D"], ["M", "m", "B", "B", "D", "D"], ["M", "M", "B", "b", "D", "D"], ["M", "M", "B", "B", "D", "d"], ["M", "m", "B", "b", "D", "D"], ["M", "m", "B", "B", "D", "d"], ["M", "M", "B", "b", "D", "d"], ["M", "m", "B", "b", "D", "d"]],
         "Copper": [["M", "M", "b", "b", "D", "D"], ["M", "m", "b", "b", "D", "D"], ["M", "M", "b", "b", "D", "d"], ["M", "m", "b", "b", "D", "d"]],
-        "Argent": [["M", "M", "B", "B", "d", "d"], ["M", "m", "B", "B", "d", "d"], ["M", "M", "B", "b", "d", "d"], ["M", "m", "B", "b", "d", "d"]],
+        "Silver": [["M", "M", "B", "B", "d", "d"], ["M", "m", "B", "B", "d", "d"], ["M", "M", "B", "b", "d", "d"], ["M", "m", "B", "b", "d", "d"]],
         "Gold": [["M", "M", "b", "b", "d", "d"], ["M", "m", "b", "b", "d", "d"]],
         "Charcoal": [["m", "m", "B", "B", "D", "D"], ["m", "m", "B", "b", "D", "D"], ["m", "m", "B", "B", "D", "d"], ["m", "m", "B", "b", "D", "d"]],
-        "Earth": [["m", "m", "b", "b", "D", "D"], ["m", "m", "b", "b", "D", "d"]],
-        "Dust": [["m", "m", "B", "B", "d", "d"], ["m", "m", "B", "b", "d", "d"]],
+        "Lava": [["m", "m", "b", "b", "D", "D"], ["m", "m", "b", "b", "D", "d"]],
+        "Ash": [["m", "m", "B", "B", "d", "d"], ["m", "m", "B", "b", "d", "d"]],
         "Sand": [["m", "m", "b", "b", "d", "d"]],
         "Steel": [["M", "M", "B", "D"], ["M", "m", "B", "D"]],
         "Copper": [["M", "M", "b", "D"], ["M", "m", "b", "D"]],
-        "Argent": [["M", "M", "B", "d"], ["M", "m", "B", "d"]],
+        "Silver": [["M", "M", "B", "d"], ["M", "m", "B", "d"]],
         "Gold": [["M", "M", "b", "d"], ["M", "m", "b", "d"]],
         "Charcoal": [["m", "m", "B", "D"], ["m", "m", "B", "D"]],
-        "Earth": [["m", "m", "b", "D"]],
-        "Dust": [["m", "m", "B", "d"]],
+        "Lava": [["m", "m", "b", "D"]],
+        "Ash": [["m", "m", "B", "d"]],
         "Sand": [["m", "m", "b", "d"], []]
       },
       "liveliness": {
@@ -865,7 +865,7 @@
     */
 
     getImageName: function(org) {
-      var filename, limbs, trait;
+      var filename, limbs, trait, traitColor;
       trait = function(trait) {
         return org.getCharacteristic(trait);
       };
@@ -873,7 +873,15 @@
         return "dead-drake.png";
       }
       filename = "";
-      filename += trait("color").toLowerCase().substring(0, 2) + "_";
+      traitColor = trait("color");
+      if (traitColor === "Silver") {
+        traitColor = "Argent";
+      } else if (traitColor === "Lava") {
+        traitColor = "Earth";
+      } else if (traitColor === "Ash") {
+        traitColor = "Dust";
+      }
+      filename += traitColor.toLowerCase().substring(0, 2) + "_";
       filename += org.sex === BioLogica.FEMALE ? "f_" : "m_";
       filename += trait("wings") === "Wings" ? "wing_" : "noWing_";
       limbs = "";
