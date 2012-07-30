@@ -72,12 +72,16 @@ describe("The characteristic", function() {
     var test = phenotypeTests[i],
         desc = "for "+test[2]+" of a " + (test[0] === female ? "female" : "male") +
                " with "+test[1]+" should be: "+test[3].toLowerCase();
-    it (desc, function() {
-      expect([test[0], test[1]]).toHaveCharacteristic(test[2], test[3]);
-    });
+    testCharacteristic(desc, test);
   }
 
 });
+
+function testCharacteristic(desc, test) {
+  it (desc, function() {
+    expect([test[0], test[1]]).toHaveCharacteristic(test[2], test[3]);
+  });
+}
 
 describe("The traits", function() {
   it ("of an under-specified organism should be fully specified", function() {
