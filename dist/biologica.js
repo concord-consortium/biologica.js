@@ -141,8 +141,9 @@
 
   BioLogica.Genotype = (function() {
 
-    function Genotype(species, genotypeHash) {
-      var alleles, chromosome, side, sides;
+    function Genotype(species, genotypeHash, sex) {
+      var alleles, chromosome, side, sides, _ref, _ref1;
+      this.sex = sex;
       this.chromosomes = {};
       this.allAlleles = [];
       for (chromosome in genotypeHash) {
@@ -159,11 +160,17 @@
           this.allAlleles = this.allAlleles.concat(alleles.slice(0));
         }
       }
+      if ((_ref = this.sex) == null) {
+        this.sex = ((_ref1 = this.chromosomes.XY) != null ? _ref1.y : void 0) != null ? BioLogica.MALE : BioLogica.FEMALE;
+      }
     }
 
     Genotype.prototype.containsAlleles = function(alleles) {
       var allAllelesCopy, allele, _i, _len;
       allAllelesCopy = this.allAlleles.slice(0);
+      if (this.sex === BioLogica.MALE) {
+        allAllelesCopy.push("Y");
+      }
       for (_i = 0, _len = alleles.length; _i < _len; _i++) {
         allele = alleles[_i];
         if (!allAllelesCopy.removeObj(allele)) {
@@ -220,7 +227,7 @@
       this.alleles = alleles;
       genotypeHash = typeof this.alleles === "string" ? this.convertAlleleStringToGenotypeHash(this.alleles, sex) : this.alleles;
       this.topUpChromosomes(genotypeHash);
-      this.genotype = new BioLogica.Genotype(this.species, genotypeHash);
+      this.genotype = new BioLogica.Genotype(this.species, genotypeHash, sex);
     }
 
     /*
@@ -577,13 +584,13 @@
   BioLogica.Organism = (function() {
 
     function Organism(species, alleles, sex) {
-      var _ref, _ref1;
+      var _ref;
       this.species = species;
       this.sex = sex;
       this.alleles = typeof alleles === "string" ? this.preProcessAlleleString(alleles) : alleles;
       this.genetics = new BioLogica.Genetics(this.species, this.alleles, this.sex);
       if ((_ref = this.sex) == null) {
-        this.sex = ((_ref1 = this.genetics.genotype.chromosomes.XY) != null ? _ref1.y : void 0) != null ? BioLogica.MALE : BioLogica.FEMALE;
+        this.sex = this.genetics.genotype.sex;
       }
       this.resetPhenotype();
     }
@@ -662,6 +669,12 @@
 
   BioLogica.Organism.createLiveOrganism = function(species, alleles, sex) {
     var org;
+    if (alleles == null) {
+      alleles = "";
+    }
+    if (sex == null) {
+      sex = ExtMath.flip() ? BioLogica.FEMALE : BioLogica.MALE;
+    }
     org = new BioLogica.Organism(species, alleles, sex);
     org.species.makeAlive(org);
     return org;
@@ -829,34 +842,26 @@
         "Horns": [["h", "h"]]
       },
       "nose spike": {
-        "Nose spike": [["Rh", "Rh"], ["Rh", "rh"]],
-        "No nose spike": [["rh", "rh"], ["rh"]]
+        "Nose spike": [["Rh"]],
+        "No nose spike": [["rh", "rh"], ["rh", "Y"]]
       },
       "wings": {
         "Wings": [["W", "W"], ["W", "w"]],
         "No wings": [["w", "w"]]
       },
       "color": {
-        "Steel": [["M", "M", "B", "B", "D", "D"], ["M", "m", "B", "B", "D", "D"], ["M", "M", "B", "b", "D", "D"], ["M", "M", "B", "B", "D", "d"], ["M", "m", "B", "b", "D", "D"], ["M", "m", "B", "B", "D", "d"], ["M", "M", "B", "b", "D", "d"], ["M", "m", "B", "b", "D", "d"]],
-        "Copper": [["M", "M", "b", "b", "D", "D"], ["M", "m", "b", "b", "D", "D"], ["M", "M", "b", "b", "D", "d"], ["M", "m", "b", "b", "D", "d"]],
-        "Silver": [["M", "M", "B", "B", "d", "d"], ["M", "m", "B", "B", "d", "d"], ["M", "M", "B", "b", "d", "d"], ["M", "m", "B", "b", "d", "d"]],
-        "Gold": [["M", "M", "b", "b", "d", "d"], ["M", "m", "b", "b", "d", "d"]],
-        "Charcoal": [["m", "m", "B", "B", "D", "D"], ["m", "m", "B", "b", "D", "D"], ["m", "m", "B", "B", "D", "d"], ["m", "m", "B", "b", "D", "d"]],
-        "Lava": [["m", "m", "b", "b", "D", "D"], ["m", "m", "b", "b", "D", "d"]],
-        "Ash": [["m", "m", "B", "B", "d", "d"], ["m", "m", "B", "b", "d", "d"]],
-        "Sand": [["m", "m", "b", "b", "d", "d"]],
-        "Steel": [["M", "M", "B", "D"], ["M", "m", "B", "D"]],
-        "Copper": [["M", "M", "b", "D"], ["M", "m", "b", "D"]],
-        "Silver": [["M", "M", "B", "d"], ["M", "m", "B", "d"]],
-        "Gold": [["M", "M", "b", "d"], ["M", "m", "b", "d"]],
-        "Charcoal": [["m", "m", "B", "D"], ["m", "m", "B", "D"]],
-        "Lava": [["m", "m", "b", "D"]],
-        "Ash": [["m", "m", "B", "d"]],
-        "Sand": [["m", "m", "b", "d"], []]
+        "Steel": [["M", "B", "D"]],
+        "Copper": [["M", "b", "b", "D"]],
+        "Silver": [["M", "B", "d", "d"], ["M", "B", "d", "dl"], ["M", "B", "dl", "dl"], ["M", "B", "d", "Y"], ["M", "B", "dl", "Y"]],
+        "Gold": [["M", "b", "b", "d", "d"], ["M", "b", "b", "d", "dl"], ["M", "b", "b", "dl", "dl"], ["M", "b", "b", "d", "Y"], ["M", "b", "b", "dl", "Y"]],
+        "Charcoal": [["m", "m", "B", "D"]],
+        "Lava": [["m", "m", "b", "b", "D"]],
+        "Ash": [["m", "m", "B", "d", "d"], ["m", "m", "B", "d", "dl"], ["m", "m", "B", "dl", "dl"], ["m", "m", "B", "d", "Y"], ["m", "m", "B", "dl", "Y"]],
+        "Sand": [["m", "m", "b", "b", "d", "d"], ["m", "m", "b", "b", "d", "dl"], ["m", "m", "b", "b", "dl", "dl"], ["m", "m", "b", "b", "d", "Y"], ["m", "m", "b", "b", "dl", "Y"]]
       },
       "liveliness": {
         "Alive": [["D"], ["d"]],
-        "Dead": [["dl", "dl"], ["dl"], []]
+        "Dead": [["dl", "dl"], ["dl", "Y"]]
       }
     },
     /*

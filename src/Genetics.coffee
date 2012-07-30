@@ -10,7 +10,7 @@ class BioLogica.Genetics
     # after initial chromosomes are created, fill in any missing genes with random alleles
     @topUpChromosomes(genotypeHash)
 
-    @genotype = new BioLogica.Genotype(@species, genotypeHash)
+    @genotype = new BioLogica.Genotype(@species, genotypeHash, sex)
 
   ###
     Converts an alleleString to a genotype hash

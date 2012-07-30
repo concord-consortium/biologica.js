@@ -116,41 +116,31 @@ BioLogica.Species.Drake =
       "Horns": [["h", "h"]]
 
     "nose spike":
-      "Nose spike": [["Rh", "Rh"], ["Rh", "rh"]]
-      "No nose spike": [["rh", "rh"], ["rh"]]
+      "Nose spike": [["Rh"]]
+      "No nose spike": [["rh", "rh"], ["rh", "Y"]]
 
     "wings":
       "Wings": [["W", "W"], ["W", "w"]]
       "No wings": [["w", "w"]]
 
     "color":
-      "Steel":    [["M", "M", "B", "B", "D", "D"], ["M", "m", "B", "B", "D", "D"]
-                   ["M", "M", "B", "b", "D", "D"], ["M", "M", "B", "B", "D", "d"]
-                   ["M", "m", "B", "b", "D", "D"], ["M", "m", "B", "B", "D", "d"]
-                   ["M", "M", "B", "b", "D", "d"], ["M", "m", "B", "b", "D", "d"]]
-      "Copper":   [["M", "M", "b", "b", "D", "D"], ["M", "m", "b", "b", "D", "D"]
-                   ["M", "M", "b", "b", "D", "d"], ["M", "m", "b", "b", "D", "d"]]
-      "Silver":   [["M", "M", "B", "B", "d", "d"], ["M", "m", "B", "B", "d", "d"]
-                   ["M", "M", "B", "b", "d", "d"], ["M", "m", "B", "b", "d", "d"]]
-      "Gold":     [["M", "M", "b", "b", "d", "d"], ["M", "m", "b", "b", "d", "d"]]
-      "Charcoal": [["m", "m", "B", "B", "D", "D"], ["m", "m", "B", "b", "D", "D"]
-                   ["m", "m", "B", "B", "D", "d"], ["m", "m", "B", "b", "D", "d"]]
-      "Lava":    [["m", "m", "b", "b", "D", "D"], ["m", "m", "b", "b", "D", "d"]]
-      "Ash":     [["m", "m", "B", "B", "d", "d"], ["m", "m", "B", "b", "d", "d"]]
-      "Sand":     [["m", "m", "b", "b", "d", "d"]]
-      # males and dl
-      "Steel":    [["M", "M", "B", "D"], ["M", "m", "B", "D"]]
-      "Copper":   [["M", "M", "b", "D"], ["M", "m", "b", "D"]]
-      "Silver":   [["M", "M", "B", "d"], ["M", "m", "B", "d"]]
-      "Gold":     [["M", "M", "b", "d"], ["M", "m", "b", "d"]]
-      "Charcoal": [["m", "m", "B", "D"], ["m", "m", "B", "D"]]
-      "Lava":    [["m", "m", "b", "D"]]
-      "Ash":     [["m", "m", "B", "d"]]
-      "Sand":     [["m", "m", "b", "d"], []]
+      "Steel":    [["M", "B", "D"]]
+      "Copper":   [["M", "b", "b", "D"]]
+      "Silver":   [["M", "B", "d", "d"], ["M", "B", "d", "dl"], ["M", "B", "dl", "dl"]
+                   ["M", "B", "d", "Y"], ["M", "B", "dl", "Y"]]
+      "Gold":     [["M", "b", "b", "d", "d"], ["M", "b", "b", "d", "dl"], ["M", "b", "b", "dl", "dl"]
+                   ["M", "b", "b", "d", "Y"], ["M", "b", "b", "dl", "Y"]]
+      "Charcoal": [["m", "m", "B", "D"]]
+      "Lava":     [["m", "m", "b", "b", "D"]]
+      "Ash":      [["m", "m", "B", "d", "d"], ["m", "m", "B", "d", "dl"], ["m", "m", "B", "dl", "dl"]
+                   ["m", "m", "B", "d", "Y"], ["m", "m", "B", "dl", "Y"]]
+      "Sand":     [["m", "m", "b", "b", "d", "d"], ["m", "m", "b", "b", "d", "dl"]
+                   ["m", "m", "b", "b", "dl", "dl"], ["m", "m", "b", "b", "d", "Y"]
+                   ["m", "m", "b", "b", "dl", "Y"]]
 
     "liveliness":
       "Alive":    [["D"],["d"]]
-      "Dead":     [["dl", "dl"], ["dl"], []]
+      "Dead":     [["dl", "dl"], ["dl", "Y"]]
 
   ###
     Gets the image name based on the organism's characteristics.
@@ -170,7 +160,7 @@ BioLogica.Species.Drake =
 # Changed some names for color phenotypes but image filenames still use old phynotypic names
     traitColor = trait("color")
     if traitColor is "Silver"
-      traitColor = "Argent" 
+      traitColor = "Argent"
     else if traitColor is "Lava"
       traitColor = "Earth"
     else if traitColor is "Ash"

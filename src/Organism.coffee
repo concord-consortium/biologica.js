@@ -3,7 +3,7 @@ class BioLogica.Organism
   constructor: (@species, alleles, @sex) ->
     @alleles = if typeof alleles is "string" then @preProcessAlleleString alleles else alleles
     @genetics = new BioLogica.Genetics(@species, @alleles, @sex)
-    @sex ?= if @genetics.genotype.chromosomes.XY?.y? then BioLogica.MALE else BioLogica.FEMALE
+    @sex ?= @genetics.genotype.sex
     @resetPhenotype()
 
   getGenotype: ->
@@ -50,6 +50,8 @@ BioLogica.Organism.createOrganism = (species, alleles, sex) ->
   return new BioLogica.Organism(species, alleles, sex)
 
 BioLogica.Organism.createLiveOrganism = (species, alleles, sex) ->
+  alleles ?= ""
+  sex ?= if ExtMath.flip() then BioLogica.FEMALE else BioLogica.MALE
   org = new BioLogica.Organism(species, alleles, sex)
   org.species.makeAlive org
   return org

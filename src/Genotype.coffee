@@ -15,7 +15,7 @@
 
 class BioLogica.Genotype
 
-  constructor: (species, genotypeHash) ->
+  constructor: (species, genotypeHash, @sex) ->
     # copy genotypeHash into @chromosomes
     @chromosomes = {}
     @allAlleles = []
@@ -25,9 +25,11 @@ class BioLogica.Genotype
         if side is "y" then alleles = []
         @chromosomes[chromosome][side] = new BioLogica.Chromosome(species, chromosome, side, alleles[..])
         @allAlleles = @allAlleles.concat alleles[..]
+    @sex ?= if @chromosomes.XY?.y? then BioLogica.MALE else BioLogica.FEMALE
 
   containsAlleles: (alleles) ->
     allAllelesCopy = @allAlleles[..]
+    allAllelesCopy.push "Y" if @sex is BioLogica.MALE   # add a fake 'Y' allele
     (return false unless allAllelesCopy.removeObj(allele)) for allele in alleles
     true
 
