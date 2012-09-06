@@ -55,7 +55,7 @@ BioLogica.Species.Drake =
       length: 425156
     dilute:
       alleles: ['D', 'd', 'dl']
-      start: 40000000
+      start: 20000000
       length: 152673
     nose:
       alleles: ['Rh', 'rh']
