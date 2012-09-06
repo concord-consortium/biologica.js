@@ -724,7 +724,7 @@
     chromosomeGeneMap: {
       '1': ['t', 'm', 'w', 'h'],
       '2': ['c', 'b', 'fl', 'hl', 'a'],
-      'XY': ['d', 'rh']
+      'XY': ['d', 'rh', 'bog']
     },
     chromosomesLength: {
       '1': 100000000,
@@ -779,8 +779,13 @@
       },
       dilute: {
         alleles: ['D', 'd', 'dl'],
-        start: 40000000,
+        start: 20000000,
         length: 152673
+      },
+      bogbreath: {
+        alleles: ['Bog', 'bog'],
+        start: 22000000,
+        length: 199642
       },
       nose: {
         alleles: ['Rh', 'rh'],
@@ -814,6 +819,8 @@
       'dl': 'dl',
       'Rh': 'Nose spike',
       'rh': 'No nose spike',
+      'Bog': 'Normal metabolism',
+      'bog': 'Bog breath',
       'Y': 'Y',
       '': ''
     },
@@ -859,6 +866,10 @@
         "Lava": [["C", "m", "m", "b", "b", "D"]],
         "Ash": [["C", "m", "m", "B", "d", "d"], ["C", "m", "m", "B", "d", "dl"], ["C", "m", "m", "B", "dl", "dl"], ["C", "m", "m", "B", "d", "Y"], ["C", "m", "m", "B", "dl", "Y"]],
         "Sand": [["C", "m", "m", "b", "b", "d", "d"], ["C", "m", "m", "b", "b", "d", "dl"], ["C", "m", "m", "b", "b", "dl", "dl"], ["C", "m", "m", "b", "b", "d", "Y"], ["C", "m", "m", "b", "b", "dl", "Y"]]
+      },
+      "metabolism": {
+        "Bog breath": [['bog', 'bog'], ['bog', 'Y']],
+        "Normal metabolism": [['Bog', 'Bog'], ['Bog', 'bog'], ['Bog', 'Y']]
       },
       "liveliness": {
         "Alive": [["D"], ["d"]],
@@ -927,7 +938,7 @@
       })();
       filename += trait("horns") === "Horns" ? "horn_" : "noHorn_";
       filename += trait("nose spike") === "Nose spike" ? "rostral_" : "noRostral_";
-      filename += "healthy";
+      filename += trait("metabolism") === "Bog breath" ? "bogbreath" : "healthy";
       return filename += ".png";
     },
     /*

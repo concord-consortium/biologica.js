@@ -9,7 +9,7 @@ BioLogica.Species.Drake =
   chromosomeGeneMap:
     '1': ['t','m','w', 'h']
     '2': ['c', 'b', 'fl', 'hl', 'a']
-    'XY': ['d', 'rh']
+    'XY': ['d', 'rh', 'bog']
 
   chromosomesLength:
     '1': 100000000
@@ -57,6 +57,10 @@ BioLogica.Species.Drake =
       alleles: ['D', 'd', 'dl']
       start: 20000000
       length: 152673
+    bogbreath:
+      alleles: ['Bog', 'bog']
+      start: 22000000
+      length: 199642
     nose:
       alleles: ['Rh', 'rh']
       start: 60000000
@@ -88,6 +92,8 @@ BioLogica.Species.Drake =
       'dl': 'dl'
       'Rh': 'Nose spike'
       'rh': 'No nose spike'
+      'Bog': 'Normal metabolism'
+      'bog': 'Bog breath'
       'Y' : 'Y'
       '' : ''
 
@@ -138,6 +144,10 @@ BioLogica.Species.Drake =
       "Sand":     [["C", "m", "m", "b", "b", "d", "d"], ["C", "m", "m", "b", "b", "d", "dl"]
                    ["C", "m", "m", "b", "b", "dl", "dl"], ["C", "m", "m", "b", "b", "d", "Y"]
                    ["C", "m", "m", "b", "b", "dl", "Y"]]
+
+    "metabolism":
+      "Bog breath": [['bog','bog'],['bog','Y']]
+      "Normal metabolism": [['Bog', 'Bog'],['Bog','bog'],['Bog','Y']]
 
     "liveliness":
       "Alive":    [["D"],["d"]]
@@ -200,7 +210,7 @@ BioLogica.Species.Drake =
 
     filename += if trait("nose spike") is "Nose spike" then "rostral_" else "noRostral_"
 
-    filename += "healthy"
+    filename += if trait("metabolism") is "Bog breath" then "bogbreath" else "healthy"
 
     filename += ".png"
 
