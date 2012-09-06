@@ -73,8 +73,8 @@ describe("An organism's genetics", function() {
     expect(chromosomes["1"].b.alleles.length).toBe(4);
     expect(chromosomes["2"].a.alleles.length).toBe(5);
     expect(chromosomes["2"].b.alleles.length).toBe(5);
-    expect(chromosomes["XY"].x1.alleles.length).toBe(2);
-    expect(chromosomes["XY"].x2.alleles.length).toBe(2);
+    expect(chromosomes["XY"].x1.alleles.length).toBe(3);
+    expect(chromosomes["XY"].x2.alleles.length).toBe(3);
 
     var chromo1A = chromosomes["1"].a;
     expect(chromo1A.alleles).toContainAnyOneOf(["t", "T", "Tk"]);
@@ -430,8 +430,8 @@ describe("An species' genetics", function() {
     expect(chromosomes["1"].b.alleles.length).toBe(4)
     expect(chromosomes["2"].a.alleles.length).toBe(5)
     expect(chromosomes["2"].b.alleles.length).toBe(5)
-    expect(chromosomes["XY"].x1.alleles.length).toBe(2)
-    expect(chromosomes["XY"].x2.alleles.length).toBe(2)
+    expect(chromosomes["XY"].x1.alleles.length).toBe(3)
+    expect(chromosomes["XY"].x2.alleles.length).toBe(3)
 
     var chromo1A = chromosomes["1"].a;
     expect(chromo1A.alleles).toContainAnyOneOf(["t", "T", "Tk"]);

@@ -83,13 +83,13 @@ describe("An organism", function() {
           "b": ["c","b", "fl","hl","A2"]
         },
         "XY": {
-          "x1": ["D","Rh"],
-          "x2": ["dl","Rh"]
+          "x1": ["D","Rh","Bog"],
+          "x2": ["dl","Rh","bog"]
         }
       });
 
     expect(org.genetics.genotype.getAlleleString())
-      .toBe("a:t,b:Tk,a:M,b:m,a:W,b:w,a:h,b:H,a:C,b:c,a:B,b:b,a:fl,b:fl,a:Hl,b:hl,a:A1,b:A2,a:D,b:dl,a:Rh,b:Rh");
+      .toBe("a:t,b:Tk,a:M,b:m,a:W,b:w,a:h,b:H,a:C,b:c,a:B,b:b,a:fl,b:fl,a:Hl,b:hl,a:A1,b:A2,a:D,b:dl,a:Bog,b:bog,a:Rh,b:Rh");
   });
 
   it("can provide an alleleString when created by an incomplete alleleString", function() {
