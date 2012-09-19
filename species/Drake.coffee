@@ -35,11 +35,11 @@ BioLogica.Species.Drake =
       length: 19421
     color:
       alleles: ['C', 'c']
-      start: 50000000
+      start: 15000000
       length: 64572
     black:
       alleles: ['B', 'b']
-      start: 65000000
+      start: 25000000
       length: 17596
     forelimbs:
       alleles: ['Fl', 'fl']
