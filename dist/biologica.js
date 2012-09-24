@@ -268,6 +268,13 @@
       return genotypeHash;
     };
 
+    Genetics.prototype.getAlleleString = function() {
+      if (typeof this.alleles === "string") {
+        return this.alleles;
+      }
+      return this.genotype.getAlleleString();
+    };
+
     /*
         "tops-up" the chromosomes: fills in any missing genes with random alleles.
         At the moment this assumes that all chromosomes have been specified, even if they
@@ -616,6 +623,10 @@
 
     Organism.prototype.getImageName = function() {
       return this.species.getImageName(this);
+    };
+
+    Organism.prototype.getAlleleString = function() {
+      return this.genetics.getAlleleString();
     };
 
     /*

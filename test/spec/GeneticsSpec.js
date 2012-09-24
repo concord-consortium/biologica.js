@@ -455,6 +455,15 @@ describe("The Genotype object", function() {
     expect(genotype.containsAlleles(["rh", "rh"])).toBe(false)
     expect(genotype.containsAlleles([])).toBe(true)
   });
+
+  it("can be converted back into a string", function() {
+    var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:H,b:H", BioLogica.FEMALE),
+      father = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:h", BioLogica.MALE),
+      child = BioLogica.breed(mother, father);
+
+    expect(typeof child.getAlleleString()).toBe("string");
+    expect(child.getAlleleString()).toContain("a:H,b:h");
+  });
 });
 
 describe("The Genetics library", function() {

@@ -23,6 +23,9 @@ class BioLogica.Organism
   getImageName: ->
     @species.getImageName(this)
 
+  getAlleleString: ->
+    @genetics.getAlleleString()
+
   ###
     Creates n gametes, using crossover during meiosis by default .
     If only one gamete is requested, that gamete will be returned. Otherwise an
