@@ -186,7 +186,7 @@
     };
 
     Genotype.prototype.getAlleleString = function() {
-      var allele, alleleString, alleles, c, chromosome, chromosomes, i, otherSide, side, _i, _len, _ref, _ref1;
+      var allele, alleleString, alleles, bAllele, c, chromosome, chromosomes, i, otherSide, side, _i, _len, _ref, _ref1, _ref2;
       alleleString = "";
       _ref = this.chromosomes;
       for (c in _ref) {
@@ -207,7 +207,10 @@
             allele = alleles[i];
             alleleString += "" + side + ":" + allele + ",";
             if (chromosomes[otherSide]) {
-              alleleString += "b:" + ((_ref1 = chromosomes[otherSide]) != null ? _ref1.alleles[i] : void 0) + ",";
+              bAllele = (_ref1 = chromosomes[otherSide]) != null ? _ref1.alleles[i] : void 0;
+              if (bAllele) {
+                alleleString += "b:" + ((_ref2 = chromosomes[otherSide]) != null ? _ref2.alleles[i] : void 0) + ",";
+              }
             }
           }
         }

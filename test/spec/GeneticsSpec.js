@@ -464,6 +464,18 @@ describe("The Genotype object", function() {
     expect(typeof child.getAlleleString()).toBe("string");
     expect(child.getAlleleString()).toContain("a:H,b:h");
   });
+
+  it("can be converted back into a string and the converted string doesn't contain 'undefined'", function() {
+    var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:H,b:H", BioLogica.FEMALE),
+      father = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:h", BioLogica.MALE),
+      times = 4;
+
+    // ensure no male child has 'undefined' alleles on b-side of XY
+    while (times--) {
+      child = BioLogica.breed(mother, father);
+      expect(child.getAlleleString()).not.toContain("undefined");
+    }
+  });
 });
 
 describe("The Genetics library", function() {
