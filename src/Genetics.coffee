@@ -35,7 +35,6 @@ class BioLogica.Genetics
     genotypeHash
 
   getAlleleString: ->
-    return @alleles if typeof @alleles is "string"
     @genotype.getAlleleString()
 
 

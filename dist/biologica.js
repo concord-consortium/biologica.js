@@ -272,9 +272,6 @@
     };
 
     Genetics.prototype.getAlleleString = function() {
-      if (typeof this.alleles === "string") {
-        return this.alleles;
-      }
       return this.genotype.getAlleleString();
     };
 

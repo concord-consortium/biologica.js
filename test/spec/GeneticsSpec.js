@@ -461,6 +461,9 @@ describe("The Genotype object", function() {
       father = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:h", BioLogica.MALE),
       child = BioLogica.breed(mother, father);
 
+    expect(typeof mother.getAlleleString()).toBe("string");
+    expect(mother.getAlleleString().length).toBeGreaterThan(10);
+
     expect(typeof child.getAlleleString()).toBe("string");
     expect(child.getAlleleString()).toContain("a:H,b:h");
   });
