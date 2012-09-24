@@ -566,6 +566,7 @@
     function Phenotype(genetics) {
       var alleles, possibleAlleles, possibleCharacteristic, possibleCharacteristics, trait, _i, _len, _ref;
       this.characteristics = {};
+      this.allCharacteristics = [];
       _ref = genetics.species.traitRules;
       for (trait in _ref) {
         if (!__hasProp.call(_ref, trait)) continue;
@@ -577,6 +578,7 @@
             alleles = possibleAlleles[_i];
             if (genetics.genotype.containsAlleles(alleles)) {
               this.characteristics[trait] = possibleCharacteristic;
+              this.allCharacteristics.push(possibleCharacteristic);
               break;
             }
           }
@@ -622,6 +624,15 @@
 
     Organism.prototype.getCharacteristic = function(trait) {
       return this.phenotype.characteristics[trait];
+    };
+
+    /*
+        Returns an array containing all the org's characteristics, e.g. [Wings, No horns, ...]
+    */
+
+
+    Organism.prototype.getAllCharacteristics = function() {
+      return this.phenotype.allCharacteristics;
     };
 
     Organism.prototype.getImageName = function() {

@@ -20,6 +20,12 @@ class BioLogica.Organism
   getCharacteristic: (trait) ->
     return @phenotype.characteristics[trait]
 
+  ###
+    Returns an array containing all the org's characteristics, e.g. [Wings, No horns, ...]
+  ###
+  getAllCharacteristics: ->
+    return @phenotype.allCharacteristics
+
   getImageName: ->
     @species.getImageName(this)
 

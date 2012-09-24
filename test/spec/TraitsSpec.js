@@ -131,6 +131,15 @@ describe("The traits", function() {
     expect(org).toHaveCharacteristic("armor", "Three armor");
     expect(org).toHaveCharacteristic("nose spike", "No nose spike");
   });
+
+  it("should all be contained in the allCharacteristics array", function() {
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:H,a:W"),
+        characteristics = org.getAllCharacteristics();
+
+    expect(characteristics).toContain("Hornless");
+    expect(characteristics).toContain("Wings");
+    expect(characteristics).not.toContain("No wings");
+  });
 });
 
 describe("Given we may not want dead drakes", function() {
