@@ -119,10 +119,6 @@ BioLogica.Species.GGDrake =
       "Bog breath": [['bog','bog'],['bog','Y']]
       "Normal metabolism": [['Bog', 'Bog'],['Bog','bog'],['Bog','Y']]
 
-    "nose spike":
-      "Nose spike": [["Rh"]]
-      "No nose spike": [["rh", "rh"], ["rh", "Y"]]
-
     "fire breathing":
       "No fire breathing": [["Fb"]]
       "Fire breathing": [["fb", "fb"], ["fb", "Y"]]
