@@ -46,20 +46,13 @@ describe("For a GGDrake, the characteristic", function() {
     [ female,    "a:C,a:M,b:m,a:b,b:b,a:d,b:dl", "color",      "Gold"     ],
     [ male,      "a:C,a:M,b:m,a:b,b:b,a:d",      "color",      "Gold"     ],
     [ female,    "a:C,a:m,b:m,a:B,a:D",          "color",      "Charcoal" ],
-    [ female,    "a:C,a:m,b:m,a:b,b:b,a:D",      "color",      "Lava"    ],
-    [ male,      "a:C,a:m,b:m,a:b,b:b,a:D",      "color",      "Lava"    ],
-    [ female,    "a:C,a:m,b:m,a:B,a:d,b:d",      "color",      "Ash"     ],
-    [ male,      "a:C,a:m,b:m,a:B,a:d",          "color",      "Ash"     ],
+    [ female,    "a:C,a:m,b:m,a:b,b:b,a:D",      "color",      "Lava"     ],
+    [ male,      "a:C,a:m,b:m,a:b,b:b,a:D",      "color",      "Lava"     ],
+    [ female,    "a:C,a:m,b:m,a:B,a:d,b:d",      "color",      "Ash"      ],
+    [ male,      "a:C,a:m,b:m,a:B,a:d",          "color",      "Ash"      ],
     [ female,    "a:C,a:m,b:m,a:b,b:b,a:d,b:d",  "color",      "Sand"     ],
     [ male,      "a:C,a:m,b:m,a:b,b:b,a:d",      "color",      "Sand"     ],
-    [ male,      "a:c,b:c",                      "color",      "Frost"     ],
-
-    [ male,      "a:bog",         "metabolism",   "Bog breath"         ],
-    [ male,      "a:Bog",         "metabolism",   "Normal metabolism"  ],
-    [ female,    "a:bog,b:bog",   "metabolism",   "Bog breath"         ],
-    [ female,    "a:Bog,b:bog",   "metabolism",   "Normal metabolism"  ],
-    [ female,    "a:bog,b:Bog",   "metabolism",   "Normal metabolism"  ],
-    [ female,    "a:Bog,b:Bog",   "metabolism",   "Normal metabolism"  ]
+    [ male,      "a:c,b:c",                      "color",      "Frost"    ]
   ];
 
   for (var i=0,ii=phenotypeTests.length; i<ii; i++ ) {
