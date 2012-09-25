@@ -301,7 +301,7 @@ describe("An organism's genetics", function() {
             split++;
           }
         }
-        expect(split/(times * numGametes)).toBeBetween(0.085,0.95);
+        expect(split/(times * numGametes)).toBeBetween(0.0845,0.955);
       });
 
       it("should separate T and W in 36% of gametes", function() {
