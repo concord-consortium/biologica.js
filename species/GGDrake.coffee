@@ -114,6 +114,9 @@ BioLogica.Species.GGDrake =
       "Fire breathing": [["fb", "fb"], ["fb", "Y"]]
 
     "color":
+      "Gray":     [["M"]]
+      "Green":    [["m","m"]]
+      ###
       "Frost":    [["c","c"]]
       "Steel":    [["C", "M", "B", "D"]]
       "Copper":   [["C", "M", "b", "b", "D"]]
@@ -128,6 +131,7 @@ BioLogica.Species.GGDrake =
       "Sand":     [["C", "m", "m", "b", "b", "d", "d"], ["C", "m", "m", "b", "b", "d", "dl"]
                    ["C", "m", "m", "b", "b", "dl", "dl"], ["C", "m", "m", "b", "b", "d", "Y"]
                    ["C", "m", "m", "b", "b", "dl", "Y"]]
+      ###
 
   ###
     GGDrakes are pieced together by sprites
