@@ -98,6 +98,7 @@ BioLogica.Species.Drake =
       '' : ''
 
   traitRules:
+    # Make sure you fully specify all of the possibilities, or it will mess up the automated moves calculator in Geniverse
     "armor":
       "Five armor": [["A1", "A1"], ["A1", "A2"]]
       "Three armor": [["A1", "a"], ["A2", "A2"]]
@@ -122,7 +123,7 @@ BioLogica.Species.Drake =
       "Horns": [["h", "h"]]
 
     "nose spike":
-      "Nose spike": [["Rh"]]
+      "Nose spike": combinations([["Rh"], ["Rh", "rh","Y"]])
       "No nose spike": [["rh", "rh"], ["rh", "Y"]]
 
     "wings":
@@ -131,26 +132,21 @@ BioLogica.Species.Drake =
 
     "color":
       "Frost":    [["c","c"]]
-      "Steel":    [["C", "M", "B", "D"]]
-      "Copper":   [["C", "M", "b", "b", "D"]]
-      "Silver":   [["C", "M", "B", "d", "d"], ["C", "M", "B", "d", "dl"], ["C", "M", "B", "dl", "dl"]
-                   ["C", "M", "B", "d", "Y"], ["C", "M", "B", "dl", "Y"]]
-      "Gold":     [["C", "M", "b", "b", "d", "d"], ["C", "M", "b", "b", "d", "dl"], ["C", "M", "b", "b", "dl", "dl"]
-                   ["C", "M", "b", "b", "d", "Y"], ["C", "M", "b", "b", "dl", "Y"]]
-      "Charcoal": [["C", "m", "m", "B", "D"]]
-      "Lava":     [["C", "m", "m", "b", "b", "D"]]
-      "Ash":      [["C", "m", "m", "B", "d", "d"], ["C", "m", "m", "B", "d", "dl"], ["C", "m", "m", "B", "dl", "dl"]
-                   ["C", "m", "m", "B", "d", "Y"], ["C", "m", "m", "B", "dl", "Y"]]
-      "Sand":     [["C", "m", "m", "b", "b", "d", "d"], ["C", "m", "m", "b", "b", "d", "dl"]
-                   ["C", "m", "m", "b", "b", "dl", "dl"], ["C", "m", "m", "b", "b", "d", "Y"]
-                   ["C", "m", "m", "b", "b", "dl", "Y"]]
+      "Steel":    combinations([["C"],["C","c"],["M"],["M","m"],["B"],["B","b"],["D"],["D","d","dl","Y"]])
+      "Copper":   combinations([["C"],["C","c"],["M"],["M","m"],["b"],["b"],["D"],["D","d","dl","Y"]])
+      "Silver":   combinations([["C"],["C","c"],["M"],["M","m"],["B"],["B","b"],["d","dl"],["d","dl","Y"]])
+      "Gold":     combinations([["C"],["C","c"],["M"],["M","m"],["b"],["b"],["d","dl"],["d","dl","Y"]])
+      "Charcoal": combinations([["C"],["C","c"],["m"],["m"],["B"],["B","b"],["D"],["D","d","dl","Y"]])
+      "Lava":     combinations([["C"],["C","c"],["m"],["m"],["b"],["b"],["D"],["D","d","dl","Y"]])
+      "Ash":      combinations([["C"],["C","c"],["m"],["m"],["B"],["B","b"],["d","dl"],["d","dl","Y"]])
+      "Sand":     combinations([["C"],["C","c"],["m"],["m"],["b"],["b"],["d","dl"],["d","dl","Y"]])
 
     "metabolism":
       "Bog breath": [['bog','bog'],['bog','Y']]
       "Normal metabolism": [['Bog', 'Bog'],['Bog','bog'],['Bog','Y']]
 
     "liveliness":
-      "Alive":    [["D"],["d"]]
+      "Alive":    combinations([["D","d"],["D","d","dl","Y"]])
       "Dead":     [["dl", "dl"], ["dl", "Y"]]
 
   ###

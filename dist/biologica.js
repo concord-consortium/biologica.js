@@ -5,7 +5,8 @@
 
 
 (function() {
-  var __hasProp = {}.hasOwnProperty,
+  var combinations,
+    __hasProp = {}.hasOwnProperty,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   Array.prototype.remove = function(from, to) {
@@ -52,6 +53,29 @@
 
   ExtMath.flip = function() {
     return ExtMath.randomInt(2);
+  };
+
+  combinations = function(arr) {
+    var combo, combos, currentOpts, opts, r, result, _i, _j, _len, _len1;
+    result = [];
+    currentOpts = arr[0];
+    if (arr.length === 1) {
+      return currentOpts.slice(0);
+    }
+    combos = combinations(arr.slice(1));
+    for (_i = 0, _len = combos.length; _i < _len; _i++) {
+      combo = combos[_i];
+      if (typeof combo === "string") {
+        combo = [combo];
+      }
+      for (_j = 0, _len1 = currentOpts.length; _j < _len1; _j++) {
+        opts = currentOpts[_j];
+        r = combo.slice(0);
+        r.unshift(opts);
+        result.push(r);
+      }
+    }
+    return result.slice(0);
   };
 
   window.BioLogica = {};
@@ -849,7 +873,7 @@
         "Horns": [["h", "h"]]
       },
       "nose spike": {
-        "Nose spike": [["Rh"]],
+        "Nose spike": combinations([["Rh"], ["Rh", "rh", "Y"]]),
         "No nose spike": [["rh", "rh"], ["rh", "Y"]]
       },
       "wings": {
@@ -858,21 +882,21 @@
       },
       "color": {
         "Frost": [["c", "c"]],
-        "Steel": [["C", "M", "B", "D"]],
-        "Copper": [["C", "M", "b", "b", "D"]],
-        "Silver": [["C", "M", "B", "d", "d"], ["C", "M", "B", "d", "dl"], ["C", "M", "B", "dl", "dl"], ["C", "M", "B", "d", "Y"], ["C", "M", "B", "dl", "Y"]],
-        "Gold": [["C", "M", "b", "b", "d", "d"], ["C", "M", "b", "b", "d", "dl"], ["C", "M", "b", "b", "dl", "dl"], ["C", "M", "b", "b", "d", "Y"], ["C", "M", "b", "b", "dl", "Y"]],
-        "Charcoal": [["C", "m", "m", "B", "D"]],
-        "Lava": [["C", "m", "m", "b", "b", "D"]],
-        "Ash": [["C", "m", "m", "B", "d", "d"], ["C", "m", "m", "B", "d", "dl"], ["C", "m", "m", "B", "dl", "dl"], ["C", "m", "m", "B", "d", "Y"], ["C", "m", "m", "B", "dl", "Y"]],
-        "Sand": [["C", "m", "m", "b", "b", "d", "d"], ["C", "m", "m", "b", "b", "d", "dl"], ["C", "m", "m", "b", "b", "dl", "dl"], ["C", "m", "m", "b", "b", "d", "Y"], ["C", "m", "m", "b", "b", "dl", "Y"]]
+        "Steel": combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["B"], ["B", "b"], ["D"], ["D", "d", "dl", "Y"]]),
+        "Copper": combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["b"], ["b"], ["D"], ["D", "d", "dl", "Y"]]),
+        "Silver": combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["B"], ["B", "b"], ["d", "dl"], ["d", "dl", "Y"]]),
+        "Gold": combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["b"], ["b"], ["d", "dl"], ["d", "dl", "Y"]]),
+        "Charcoal": combinations([["C"], ["C", "c"], ["m"], ["m"], ["B"], ["B", "b"], ["D"], ["D", "d", "dl", "Y"]]),
+        "Lava": combinations([["C"], ["C", "c"], ["m"], ["m"], ["b"], ["b"], ["D"], ["D", "d", "dl", "Y"]]),
+        "Ash": combinations([["C"], ["C", "c"], ["m"], ["m"], ["B"], ["B", "b"], ["d", "dl"], ["d", "dl", "Y"]]),
+        "Sand": combinations([["C"], ["C", "c"], ["m"], ["m"], ["b"], ["b"], ["d", "dl"], ["d", "dl", "Y"]])
       },
       "metabolism": {
         "Bog breath": [['bog', 'bog'], ['bog', 'Y']],
         "Normal metabolism": [['Bog', 'Bog'], ['Bog', 'bog'], ['Bog', 'Y']]
       },
       "liveliness": {
-        "Alive": [["D"], ["d"]],
+        "Alive": combinations([["D", "d"], ["D", "d", "dl", "Y"]]),
         "Dead": [["dl", "dl"], ["dl", "Y"]]
       }
     },
