@@ -35,13 +35,17 @@ beforeEach(function() {
       return contains;
     },
     toHaveCharacteristic: function(trait, characteristic) {
+      var org;
       if (this.actual.length) {
         var sex = this.actual[0],
-            alleles = this.actual[1],
-            org = new BioLogica.Organism(BioLogica.Species.Drake, alleles, sex);
+            alleles = this.actual[1];
+        org = new BioLogica.Organism(BioLogica.Species.Drake, alleles, sex);
       } else {
         org = this.actual;
       }
+      this.message = function() {
+        return "Expected trait " + trait + " to be " + characteristic + " but got " + org.getCharacteristic(trait) + " from org " + org.toString();
+      };
       return org.getCharacteristic(trait) == characteristic;
     }
   });
