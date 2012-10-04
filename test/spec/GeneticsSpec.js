@@ -301,7 +301,7 @@ describe("An organism's genetics", function() {
             split++;
           }
         }
-        expect(split/(times * numGametes)).toBeBetween(0.085,0.95);
+        expect(split/(times * numGametes)).toBeBetween(0.0845,0.955);
       });
 
       it("should separate T and W in 36% of gametes", function() {
@@ -454,6 +454,30 @@ describe("The Genotype object", function() {
     expect(genotype.containsAlleles(["rh"])).toBe(true)
     expect(genotype.containsAlleles(["rh", "rh"])).toBe(false)
     expect(genotype.containsAlleles([])).toBe(true)
+  });
+
+  it("can be converted back into a string", function() {
+    var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:H,b:H", BioLogica.FEMALE),
+      father = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:h", BioLogica.MALE),
+      child = BioLogica.breed(mother, father);
+
+    expect(typeof mother.getAlleleString()).toBe("string");
+    expect(mother.getAlleleString().length).toBeGreaterThan(10);
+
+    expect(typeof child.getAlleleString()).toBe("string");
+    expect(child.getAlleleString()).toContain("a:H,b:h");
+  });
+
+  it("can be converted back into a string and the converted string doesn't contain 'undefined'", function() {
+    var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:H,b:H", BioLogica.FEMALE),
+      father = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:h", BioLogica.MALE),
+      times = 4;
+
+    // ensure no male child has 'undefined' alleles on b-side of XY
+    while (times--) {
+      child = BioLogica.breed(mother, father);
+      expect(child.getAlleleString()).not.toContain("undefined");
+    }
   });
 });
 

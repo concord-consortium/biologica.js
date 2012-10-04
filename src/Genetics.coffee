@@ -34,6 +34,10 @@ class BioLogica.Genetics
         genotypeHash[chromoName][if side == "a" then sides[0] else sides[1]].push allele
     genotypeHash
 
+  getAlleleString: ->
+    @genotype.getAlleleString()
+
+
   ###
     "tops-up" the chromosomes: fills in any missing genes with random alleles.
     At the moment this assumes that all chromosomes have been specified, even if they

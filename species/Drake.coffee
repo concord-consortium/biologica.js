@@ -1,4 +1,4 @@
-BioLogica.Species = {}
+BioLogica.Species = BioLogica.Species || {}
 
 BioLogica.Species.Drake =
 

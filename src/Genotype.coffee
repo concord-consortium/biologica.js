@@ -49,7 +49,8 @@ class BioLogica.Genotype
         for allele, i in alleles
           alleleString += "#{side}:#{allele},"
           if chromosomes[otherSide]
-            alleleString += "b:#{chromosomes[otherSide]?.alleles[i]},"
+            bAllele = chromosomes[otherSide]?.alleles[i]
+            alleleString += "b:#{chromosomes[otherSide]?.alleles[i]}," if bAllele
 
 
     alleleString.substring(0,alleleString.length-1)
