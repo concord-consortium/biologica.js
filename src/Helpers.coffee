@@ -36,18 +36,3 @@ ExtMath.randomInt = (max) ->
 
 ExtMath.flip = ->
   ExtMath.randomInt(2)
-
-combinations = (arr) ->
-  result = []
-  currentOpts = arr[0]
-  if arr.length == 1
-    return currentOpts.slice(0)
-  combos = combinations(arr.slice(1))
-  for combo in combos
-    if typeof combo == "string"
-      combo = [combo]
-    for opts in currentOpts
-      r = combo.slice(0)
-      r.unshift(opts)
-      result.push(r)
-  return result.slice(0)

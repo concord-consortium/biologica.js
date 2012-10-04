@@ -123,7 +123,7 @@ BioLogica.Species.Drake =
       "Horns": [["h", "h"]]
 
     "nose spike":
-      "Nose spike": combinations([["Rh"], ["Rh", "rh","Y"]])
+      "Nose spike": BioLogica.combinations([["Rh"], ["Rh", "rh","Y"]])
       "No nose spike": [["rh", "rh"], ["rh", "Y"]]
 
     "wings":
@@ -132,21 +132,21 @@ BioLogica.Species.Drake =
 
     "color":
       "Frost":    [["c","c"]]
-      "Steel":    combinations([["C"],["C","c"],["M"],["M","m"],["B"],["B","b"],["D"],["D","d","dl","Y"]])
-      "Copper":   combinations([["C"],["C","c"],["M"],["M","m"],["b"],["b"],["D"],["D","d","dl","Y"]])
-      "Silver":   combinations([["C"],["C","c"],["M"],["M","m"],["B"],["B","b"],["d","dl"],["d","dl","Y"]])
-      "Gold":     combinations([["C"],["C","c"],["M"],["M","m"],["b"],["b"],["d","dl"],["d","dl","Y"]])
-      "Charcoal": combinations([["C"],["C","c"],["m"],["m"],["B"],["B","b"],["D"],["D","d","dl","Y"]])
-      "Lava":     combinations([["C"],["C","c"],["m"],["m"],["b"],["b"],["D"],["D","d","dl","Y"]])
-      "Ash":      combinations([["C"],["C","c"],["m"],["m"],["B"],["B","b"],["d","dl"],["d","dl","Y"]])
-      "Sand":     combinations([["C"],["C","c"],["m"],["m"],["b"],["b"],["d","dl"],["d","dl","Y"]])
+      "Steel":    BioLogica.combinations([["C"],["C","c"],["M"],["M","m"],["B"],["B","b"],["D"],["D","d","dl","Y"]])
+      "Copper":   BioLogica.combinations([["C"],["C","c"],["M"],["M","m"],["b"],["b"],["D"],["D","d","dl","Y"]])
+      "Silver":   BioLogica.combinations([["C"],["C","c"],["M"],["M","m"],["B"],["B","b"],["d","dl"],["d","dl","Y"]])
+      "Gold":     BioLogica.combinations([["C"],["C","c"],["M"],["M","m"],["b"],["b"],["d","dl"],["d","dl","Y"]])
+      "Charcoal": BioLogica.combinations([["C"],["C","c"],["m"],["m"],["B"],["B","b"],["D"],["D","d","dl","Y"]])
+      "Lava":     BioLogica.combinations([["C"],["C","c"],["m"],["m"],["b"],["b"],["D"],["D","d","dl","Y"]])
+      "Ash":      BioLogica.combinations([["C"],["C","c"],["m"],["m"],["B"],["B","b"],["d","dl"],["d","dl","Y"]])
+      "Sand":     BioLogica.combinations([["C"],["C","c"],["m"],["m"],["b"],["b"],["d","dl"],["d","dl","Y"]])
 
     "metabolism":
       "Bog breath": [['bog','bog'],['bog','Y']]
       "Normal metabolism": [['Bog', 'Bog'],['Bog','bog'],['Bog','Y']]
 
     "liveliness":
-      "Alive":    combinations([["D","d"],["D","d","dl","Y"]])
+      "Alive":    BioLogica.combinations([["D","d"],["D","d","dl","Y"]])
       "Dead":     [["dl", "dl"], ["dl", "Y"]]
 
   ###
