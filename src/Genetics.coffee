@@ -115,6 +115,7 @@ class BioLogica.Genetics
   performMeiosis: (performCrossover) ->
     cells = [{}, {}, {}, {}]
 
+    crossInfo = {}
     for own chromoName, chromosomes of @genotype.chromosomes
       sisterChromatids = {}
       sisterChromatidIds = ["b2", "b1", "a2", "a1"]
@@ -124,11 +125,18 @@ class BioLogica.Genetics
         sisterChromatids[sisterChromatidIds.pop()] = chromosome.clone(newSide)
         sisterChromatids[sisterChromatidIds.pop()] = chromosome.clone(newSide)
         containsYchromosome = true if side is "y"
-      @crossover sisterChromatids if performCrossover and !containsYchromosome
+      cross = @crossover sisterChromatids if performCrossover and !containsYchromosome
       sisterChromatidIds = ["b2", "b1", "a2", "a1"].shuffle()
       for cell, i in cells
-        cell[chromoName] = sisterChromatids[sisterChromatidIds[i]]
-    cells
+        chromaId = sisterChromatidIds[i]
+        cell[chromoName] = sisterChromatids[chromaId]
+        # translate the cross info chromatidIds to the cell indexes
+        for j in [0...cross.length]
+          cr = cross[j]
+          cr.start_cell = i if cr.start == chromaId
+          cr.end_cell = i if cr.end == chromaId
+      crossInfo[chromoName] = cross
+    return {cells: cells, crossInfo: crossInfo}
 
   getHaploidChromatidSide: (chromatid) ->
     if chromatid.side is "b"
@@ -139,13 +147,16 @@ class BioLogica.Genetics
 
   crossover: (sisterChromatids) ->
     crossoverPoints = @createCrossoverPoints sisterChromatids.a1
+    crossovers = []
     for point in crossoverPoints
       # pick chromatids to cross
       startSide = ["a1", "a2"][ExtMath.flip()]
       endSide   = ["b1", "b2"][ExtMath.flip()]
+      crossovers.push {start: startSide, end: endSide, point: point}
       newChromatids = @crossChromatids(sisterChromatids[startSide], sisterChromatids[endSide], point)
       sisterChromatids[startSide] = newChromatids[0]
       sisterChromatids[endSide]   = newChromatids[1]
+    return crossovers
 
   crossChromatids: (chr1, chr2, point) ->
     return [

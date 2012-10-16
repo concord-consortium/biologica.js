@@ -40,9 +40,18 @@ class BioLogica.Organism
   createGametes: (n, performCrossover) ->
     performCrossover ?= true     # default
     gametes = []
-    gametes = gametes.concat @genetics.performMeiosis(performCrossover) for i in [0...Math.floor(n/4)]
-    gametes = gametes.concat @genetics.performMeiosis(performCrossover)[0...(n%4)]
+    gametes = gametes.concat @genetics.performMeiosis(performCrossover).cells for i in [0...Math.floor(n/4)]
+    gametes = gametes.concat @genetics.performMeiosis(performCrossover).cells[0...(n%4)]
     return if gametes.length is 1 then gametes[0] else gametes
+
+  # returns gametes in sets of 4, and will always return a complete set.
+  # So the number of sets for arg N will be the smallest Y where 4*Y >= N
+  # ie, arg 3 -> [{}], arg 6 -> [{},{}], arg 8 -> [{},{}], arg 9 -> [{},{},{}]
+  createGametesWithCrossInfo: (n) ->
+    gametes = []
+    gametes = gametes.concat @genetics.performMeiosis(true) for i in [0...Math.floor(n/4)]
+    gametes = gametes.concat @genetics.performMeiosis(true) if n % 4 != 0
+    return gametes
 
   preProcessAlleleString: (str) ->
     return str.replace(/,+$/, "")   # rm trailing comma

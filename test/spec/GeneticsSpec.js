@@ -102,14 +102,14 @@ describe("An organism's genetics", function() {
   describe("when performing meiosis", function(){
     it("will get four cells", function() {
       var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE),
-          cells = org.genetics.performMeiosis();
+          cells = org.genetics.performMeiosis().cells;
 
       expect(cells.length).toBe(4);
     });
 
     it("will have each cell be haploid", function() {
       var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE),
-          cells = org.genetics.performMeiosis();
+          cells = org.genetics.performMeiosis().cells;
 
       for (var i=0; i<4; i++) {
         cell = cells[i];
@@ -125,7 +125,7 @@ describe("An organism's genetics", function() {
 
     it("will have half the haplod cells of a male be Y", function() {
       var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.MALE),
-          cells = org.genetics.performMeiosis(),
+          cells = org.genetics.performMeiosis().cells,
           numX = numY = 0;
 
       for (var i=0; i<4; i++) {
