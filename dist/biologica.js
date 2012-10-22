@@ -497,7 +497,9 @@
           cell = cells[i];
           chromaId = sisterChromatidIds[i];
           chroma = sisterChromatids[chromaId];
-          chroma.side = this.getHaploidChromatidSide(chroma);
+          if (!performCrossover) {
+            chroma.side = this.getHaploidChromatidSide(chroma);
+          }
           cell[chromoName] = chroma;
           if (cross != null) {
             for (j = _j = 0, _ref1 = cross.length; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; j = 0 <= _ref1 ? ++_j : --_j) {
@@ -785,7 +787,15 @@
         chromosome.side = "b";
       }
     }
-    if (fatherGamete["XY"].side === "x") {
+    for (i in motherGamete) {
+      chromosome = motherGamete[i];
+      if (chromosome.side === "b") {
+        chromosome.side = "a";
+      }
+    }
+    if (fatherGamete["XY"].side === "y") {
+      motherGamete["XY"].side = "x";
+    } else {
       motherGamete["XY"].side = "x1";
       fatherGamete["XY"].side = "x2";
     }

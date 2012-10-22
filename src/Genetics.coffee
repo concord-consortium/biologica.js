@@ -129,9 +129,8 @@ class BioLogica.Genetics
       for cell, i in cells
         chromaId = sisterChromatidIds[i]
         chroma = sisterChromatids[chromaId]
-        unless performCrossover
-          chroma.side = @getHaploidChromatidSide chroma
-          cell[chromoName] = chroma
+        chroma.side = @getHaploidChromatidSide chroma unless performCrossover
+        cell[chromoName] = chroma
         # translate the cross info chromatidIds to the cell indexes
         if cross?
           for j in [0...cross.length]
