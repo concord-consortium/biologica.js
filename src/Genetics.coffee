@@ -121,15 +121,16 @@ class BioLogica.Genetics
       sisterChromatidIds = ["b2", "b1", "a2", "a1"]
       containsYchromosome = false
       for own side, chromosome of chromosomes
-        newSide = @getHaploidChromatidSide chromosome
-        sisterChromatids[sisterChromatidIds.pop()] = chromosome.clone(newSide)
-        sisterChromatids[sisterChromatidIds.pop()] = chromosome.clone(newSide)
+        sisterChromatids[sisterChromatidIds.pop()] = chromosome.clone()
+        sisterChromatids[sisterChromatidIds.pop()] = chromosome.clone()
         containsYchromosome = true if side is "y"
       cross = @crossover sisterChromatids if performCrossover and !containsYchromosome
       sisterChromatidIds = ["b2", "b1", "a2", "a1"].shuffle()
       for cell, i in cells
         chromaId = sisterChromatidIds[i]
-        cell[chromoName] = sisterChromatids[chromaId]
+        chroma = sisterChromatids[chromaId]
+        chroma.side = @getHaploidChromatidSide chroma
+        cell[chromoName] = chroma
         # translate the cross info chromatidIds to the cell indexes
         if cross?
           for j in [0...cross.length]
