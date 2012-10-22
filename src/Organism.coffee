@@ -78,9 +78,15 @@ BioLogica.Organism.createFromGametes = (species, motherGamete, fatherGamete) ->
   for i, chromosome of fatherGamete
     chromosome.side = "b" if chromosome.side is "a"
 
-  if fatherGamete["XY"].side is "x"
+  for i, chromosome of motherGamete
+    chromosome.side = "a" if chromosome.side is "b"
+
+  if fatherGamete["XY"].side == "y"
+    motherGamete["XY"].side = "x"
+  else
     motherGamete["XY"].side = "x1"
     fatherGamete["XY"].side = "x2"
+
 
   genotypeHash = {}
   for own chromoName, chromatidA of motherGamete
