@@ -131,10 +131,11 @@ class BioLogica.Genetics
         chromaId = sisterChromatidIds[i]
         cell[chromoName] = sisterChromatids[chromaId]
         # translate the cross info chromatidIds to the cell indexes
-        for j in [0...cross.length]
-          cr = cross[j]
-          cr.start_cell = i if cr.start == chromaId
-          cr.end_cell = i if cr.end == chromaId
+        if cross?
+          for j in [0...cross.length]
+            cr = cross[j]
+            cr.start_cell = i if cr.start == chromaId
+            cr.end_cell = i if cr.end == chromaId
       crossInfo[chromoName] = cross
     return {cells: cells, crossInfo: crossInfo}
 
