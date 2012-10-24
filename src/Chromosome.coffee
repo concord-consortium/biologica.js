@@ -1,8 +1,16 @@
 class BioLogica.Chromosome
 
   constructor: (@species, @chromosome, side, alleles) ->
-    @alleles = alleles.sort (a,b) =>
+    seenGenes = []
+    @alleles = alleles.sort((a,b)=>
       return if @getAllelesPosition(a) > @getAllelesPosition(b) then 1 else -1
+    ).filter (item)=>
+      gene = @getGeneOfAllele(item)
+      if seenGenes.indexOf(gene) != -1
+        console.warn("Duplicate allele found: " + item) if console?
+        return false
+      seenGenes.push(gene)
+      return true
 
     if typeof(side) is "object"
       @side = side[0]

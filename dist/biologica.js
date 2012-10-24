@@ -86,16 +86,28 @@
   BioLogica.Chromosome = (function() {
 
     function Chromosome(species, chromosome, side, alleles) {
-      var al, i, s, _i, _ref,
+      var al, i, s, seenGenes, _i, _ref,
         _this = this;
       this.species = species;
       this.chromosome = chromosome;
+      seenGenes = [];
       this.alleles = alleles.sort(function(a, b) {
         if (_this.getAllelesPosition(a) > _this.getAllelesPosition(b)) {
           return 1;
         } else {
           return -1;
         }
+      }).filter(function(item) {
+        var gene;
+        gene = _this.getGeneOfAllele(item);
+        if (seenGenes.indexOf(gene) !== -1) {
+          if (typeof console !== "undefined" && console !== null) {
+            console.warn("Duplicate allele found: " + item);
+          }
+          return false;
+        }
+        seenGenes.push(gene);
+        return true;
       });
       if (typeof side === "object") {
         this.side = side[0];
