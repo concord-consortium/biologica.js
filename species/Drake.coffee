@@ -92,7 +92,7 @@ BioLogica.Species.Drake =
       'dl': 'dl'
       'Rh': 'Nose spike'
       'rh': 'No nose spike'
-      'Bog': 'Normal metabolism'
+      'Bog': 'Healthy'
       'bog': 'Bog breath'
       'Y' : 'Y'
       '' : ''
@@ -141,9 +141,9 @@ BioLogica.Species.Drake =
       "Ash":      BioLogica.combinations([["C"],["C","c"],["m"],["m"],["B"],["B","b"],["d","dl"],["d","dl","Y"]])
       "Sand":     BioLogica.combinations([["C"],["C","c"],["m"],["m"],["b"],["b"],["d","dl"],["d","dl","Y"]])
 
-    "metabolism":
+    "health":
       "Bog breath": [['bog','bog'],['bog','Y']]
-      "Normal metabolism": [['Bog', 'Bog'],['Bog','bog'],['Bog','Y']]
+      "Healthy": [['Bog', 'Bog'],['Bog','bog'],['Bog','Y']]
 
     "liveliness":
       "Alive":    BioLogica.combinations([["D","d"],["D","d","dl","Y"]])
@@ -206,7 +206,7 @@ BioLogica.Species.Drake =
 
     filename += if trait("nose spike") is "Nose spike" then "rostral_" else "noRostral_"
 
-    filename += if trait("metabolism") is "Bog breath" then "bogbreath" else "healthy"
+    filename += if trait("health") is "Bog breath" then "bogbreath" else "healthy"
 
     filename += ".png"
 

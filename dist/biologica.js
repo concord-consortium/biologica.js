@@ -938,7 +938,7 @@
       'dl': 'dl',
       'Rh': 'Nose spike',
       'rh': 'No nose spike',
-      'Bog': 'Normal metabolism',
+      'Bog': 'Healthy',
       'bog': 'Bog breath',
       'Y': 'Y',
       '': ''
@@ -986,9 +986,9 @@
         "Ash": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["B"], ["B", "b"], ["d", "dl"], ["d", "dl", "Y"]]),
         "Sand": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["b"], ["b"], ["d", "dl"], ["d", "dl", "Y"]])
       },
-      "metabolism": {
+      "health": {
         "Bog breath": [['bog', 'bog'], ['bog', 'Y']],
-        "Normal metabolism": [['Bog', 'Bog'], ['Bog', 'bog'], ['Bog', 'Y']]
+        "Healthy": [['Bog', 'Bog'], ['Bog', 'bog'], ['Bog', 'Y']]
       },
       "liveliness": {
         "Alive": BioLogica.combinations([["D", "d"], ["D", "d", "dl", "Y"]]),
@@ -1057,7 +1057,7 @@
       })();
       filename += trait("horns") === "Horns" ? "horn_" : "noHorn_";
       filename += trait("nose spike") === "Nose spike" ? "rostral_" : "noRostral_";
-      filename += trait("metabolism") === "Bog breath" ? "bogbreath" : "healthy";
+      filename += trait("health") === "Bog breath" ? "bogbreath" : "healthy";
       return filename += ".png";
     },
     /*
