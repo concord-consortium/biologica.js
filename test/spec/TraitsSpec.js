@@ -60,12 +60,12 @@ describe("The characteristic", function() {
     [ male,      "a:C,a:m,b:m,a:b,b:b,a:d",      "color",      "Sand"     ],
     [ male,      "a:c,b:c",                      "color",      "Frost"     ],
 
-    [ male,      "a:bog",         "metabolism",   "Bog breath"         ],
-    [ male,      "a:Bog",         "metabolism",   "Normal metabolism"  ],
-    [ female,    "a:bog,b:bog",   "metabolism",   "Bog breath"         ],
-    [ female,    "a:Bog,b:bog",   "metabolism",   "Normal metabolism"  ],
-    [ female,    "a:bog,b:Bog",   "metabolism",   "Normal metabolism"  ],
-    [ female,    "a:Bog,b:Bog",   "metabolism",   "Normal metabolism"  ],
+    [ male,      "a:bog",         "health",   "Bog breath"  ],
+    [ male,      "a:Bog",         "health",   "Healthy"     ],
+    [ female,    "a:bog,b:bog",   "health",   "Bog breath"  ],
+    [ female,    "a:Bog,b:bog",   "health",   "Healthy"     ],
+    [ female,    "a:bog,b:Bog",   "health",   "Healthy"     ],
+    [ female,    "a:Bog,b:Bog",   "health",   "Healthy"     ],
 
     [ female,    "a:M,b:M,a:dl,b:dl,a:A1,b:A1",  "liveliness", "Dead"     ],
     [ male,      "a:dl",                         "liveliness", "Dead"     ],
