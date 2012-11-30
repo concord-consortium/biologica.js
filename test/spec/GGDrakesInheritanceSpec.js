@@ -22,9 +22,9 @@ describe("For a GGDrake, the characteristic", function() {
     [ female,    "a:H,b:h",       "horns",           "Reverse horns"     ],
     [ female,    "a:h,b:h",       "horns",           "Forward horns"     ],
 
-    [ female,    "a:Fb",          "fire breathing",  "No fire breathing" ],
-    [ female,    "a:fb,b:Fb",     "fire breathing",  "No fire breathing" ],
-    [ female,    "a:fb,b:fb",     "fire breathing",  "Fire breathing"    ],
+    [ female,    "a:F",           "fire breathing",  "No fire breathing" ],
+    [ female,    "a:f,b:F",       "fire breathing",  "No fire breathing" ],
+    [ female,    "a:f,b:f",       "fire breathing",  "Fire breathing"    ],
 
     [ female,    "a:S,b:S",       "spikes",          "Wide spikes"       ],
     [ female,    "a:S,b:s",       "spikes",          "Medium spikes"     ],

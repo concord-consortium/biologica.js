@@ -9,7 +9,7 @@ BioLogica.Species.GGDrake =
   chromosomeGeneMap:
     '1': ['t','m','w', 'h']
     '2': ['c', 'b', 'a', 's']
-    'XY': ['d', 'fb']
+    'XY': ['d', 'f']
 
   chromosomesLength:
     '1': 100000000
@@ -54,7 +54,7 @@ BioLogica.Species.GGDrake =
       start: 20000000
       length: 152673
     firebreathing:
-      alleles: ['Fb', 'fb']
+      alleles: ['F', 'f']
       start: 60000000
       length: 1000
 
@@ -81,8 +81,8 @@ BioLogica.Species.GGDrake =
       'dl': 'dl'
       'Rh': 'Nose spike'
       'rh': 'No nose spike'
-      'Fb': 'No fire breathing'
-      'fb': 'Fire breathing'
+      'F': 'No fire breathing'
+      'f': 'Fire breathing'
       'Y' : 'Y'
       '' : ''
 
@@ -110,8 +110,8 @@ BioLogica.Species.GGDrake =
       "Narrow spikes": [["s", "s"]]
 
     "fire breathing":
-      "No fire breathing": [["Fb"]]
-      "Fire breathing": [["fb", "fb"], ["fb", "Y"]]
+      "No fire breathing": [["F"]]
+      "Fire breathing": [["f", "f"], ["f", "Y"]]
 
     "color":
       "Gray":     [["M"]]
