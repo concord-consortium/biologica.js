@@ -18,9 +18,9 @@ describe("For a GGDrake, the characteristic", function() {
     [ female,    "a:Tk,b:t",      "tail",            "Kinked tail"       ],
     [ female,    "a:t,b:t",       "tail",            "Short tail"        ],
 
-    [ female,    "a:H",           "horns",           "Hornless"          ],
-    [ female,    "a:H,b:h",       "horns",           "Hornless"          ],
-    [ female,    "a:h,b:h",       "horns",           "Horns"             ],
+    [ female,    "a:H",           "horns",           "Reverse horns"     ],
+    [ female,    "a:H,b:h",       "horns",           "Reverse horns"     ],
+    [ female,    "a:h,b:h",       "horns",           "Forward horns"     ],
 
     [ female,    "a:Fb",          "fire breathing",  "No fire breathing" ],
     [ female,    "a:fb,b:Fb",     "fire breathing",  "No fire breathing" ],
@@ -30,12 +30,12 @@ describe("For a GGDrake, the characteristic", function() {
     [ female,    "a:S,b:s",       "spikes",          "Medium spikes"     ],
     [ female,    "a:s,b:s",       "spikes",          "Narrow spikes"     ],
 
-    [ female,    "a:Fl",          "forelimbs",       "Short forelimbs"   ],
-    [ female,    "a:fl,b:fl",     "forelimbs",       "Long forelimbs"    ],
+    [ female,    "a:A",           "armor",           "No armor"          ],
+    [ female,    "a:a,b:a",       "armor",           "Armor"             ],
 
     [ female,    "a:M,b:M",                      "color",      "Gray"    ],
     [ female,    "a:M,b:m",                      "color",      "Gray"    ],
-    [ female,    "a:m,b:m",                      "color",      "Green"    ]
+    [ female,    "a:m,b:m",                      "color",      "Green"   ]
 
     // [ female,    "a:c,b:c",                      "color",      "Frost"    ],
     // [ female,    "a:C,a:M,b:M,a:B,a:D",          "color",      "Steel"    ],

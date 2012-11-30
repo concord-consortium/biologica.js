@@ -8,7 +8,7 @@ BioLogica.Species.GGDrake =
 
   chromosomeGeneMap:
     '1': ['t','m','w', 'h']
-    '2': ['c', 'b', 'fl', 's']
+    '2': ['c', 'b', 'a', 's']
     'XY': ['d', 'fb']
 
   chromosomesLength:
@@ -41,8 +41,8 @@ BioLogica.Species.GGDrake =
       alleles: ['B', 'b']
       start: 25000000
       length: 17596
-    forelimbs:
-      alleles: ['Fl', 'fl']
+    armor:
+      alleles: ['A', 'a']
       start: 80000000
       length: 122234
     spikes:
@@ -70,8 +70,8 @@ BioLogica.Species.GGDrake =
       'h': 'Horns'
       'C': 'Colored'
       'c': 'Colorless'
-      'Fl': 'Short forelimbs'
-      'fl': 'Long forelimbs'
+      'A': 'No armor'
+      'a': 'Armor'
       'S': 'Spikes wide'
       's': 'Spikes narrow'
       'B': 'Black'
@@ -97,12 +97,12 @@ BioLogica.Species.GGDrake =
       "No wings": [["w", "w"]]
 
     "horns":
-      "Hornless": [["H", "H"], ["H", "h"]]
-      "Horns": [["h", "h"]]
+      "Reverse horns": [["H", "H"], ["H", "h"]]
+      "Forward horns": [["h", "h"]]
 
-    "forelimbs":
-      "Short forelimbs": [["Fl", "Fl"], ["Fl", "fl"]]
-      "Long forelimbs": [["fl", "fl"]]
+    "armor":
+      "No armor": [["A", "A"], ["A", "a"]]
+      "Armor": [["a", "a"]]
 
     "spikes":
       "Wide spikes": [["S", "S"]]
