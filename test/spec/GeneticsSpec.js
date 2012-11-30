@@ -257,20 +257,20 @@ describe("An organism's genetics", function() {
             chr2 = org.getGenotype().chromosomes[1]["b"];   // tmw
 
         newChromatids = org.genetics.crossChromatids(chr1, chr2, 0);
-        expect(newChromatids[0].alleles).toContainAllOf(["T", "M", "W"]);
-        expect(newChromatids[1].alleles).toContainAllOf(["t", "m", "w"]);
+        expect(newChromatids[1].alleles).toContainAllOf(["T", "M", "W"]);
+        expect(newChromatids[0].alleles).toContainAllOf(["t", "m", "w"]);
 
         newChromatids = org.genetics.crossChromatids(chr1, chr2, 10000000);
-        expect(newChromatids[0].alleles).toContainAllOf(["T", "M", "W"]);
-        expect(newChromatids[1].alleles).toContainAllOf(["t", "m", "w"]);
+        expect(newChromatids[1].alleles).toContainAllOf(["T", "M", "W"]);
+        expect(newChromatids[0].alleles).toContainAllOf(["t", "m", "w"]);
 
         newChromatids = org.genetics.crossChromatids(chr1, chr2, 10000001);
-        expect(newChromatids[0].alleles).toContainAllOf(["t", "M", "W"]);
-        expect(newChromatids[1].alleles).toContainAllOf(["T", "m", "w"]);
+        expect(newChromatids[1].alleles).toContainAllOf(["t", "M", "W"]);
+        expect(newChromatids[0].alleles).toContainAllOf(["T", "m", "w"]);
 
         newChromatids = org.genetics.crossChromatids(chr1, chr2, 20000001);
-        expect(newChromatids[0].alleles).toContainAllOf(["t", "m", "W"]);
-        expect(newChromatids[1].alleles).toContainAllOf(["T", "M", "w"]);
+        expect(newChromatids[1].alleles).toContainAllOf(["t", "m", "W"]);
+        expect(newChromatids[0].alleles).toContainAllOf(["T", "M", "w"]);
       });
 
       it("should separate T and M in 9% of gametes", function() {

@@ -32,8 +32,7 @@ class BioLogica.Chromosome
     @species.chromosomesLength[@chromosome]
 
   getGeneOfAllele: (allele) ->
-    for own geneName, gene of @species.geneList
-      return geneName if ~gene.alleles.indexOf allele
+    return BioLogica.Genetics.getGeneOfAllele(@species, allele)
 
   getAllelesPosition: (allele) ->
     geneName = @getGeneOfAllele allele
@@ -42,6 +41,7 @@ class BioLogica.Chromosome
 BioLogica.Chromosome.createChromosome = (chr1, chr2, crossPoint) ->
   newAlleles = []
   newSides = []
+  crossedAlleles = []
   for allele, i in chr1.alleles
     if chr1.getAllelesPosition(allele) < crossPoint
       newAlleles.push allele
@@ -49,4 +49,7 @@ BioLogica.Chromosome.createChromosome = (chr1, chr2, crossPoint) ->
     else
       newAlleles.push chr2.alleles[i]
       newSides.push chr2.allelesWithSides[i].side
-  return new BioLogica.Chromosome(chr1.species, chr1.chromosome, newSides, newAlleles)
+      crossedAlleles.push [allele, chr2.alleles[i]]
+  chromo = new BioLogica.Chromosome(chr1.species, chr1.chromosome, newSides, newAlleles)
+  chromo.crossedAlleles = crossedAlleles
+  return chromo

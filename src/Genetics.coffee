@@ -116,6 +116,7 @@ class BioLogica.Genetics
     cells = [{}, {}, {}, {}]
 
     crossInfo = {}
+    endCellInfo = {}
     for own chromoName, chromosomes of @genotype.chromosomes
       sisterChromatids = {}
       sisterChromatidIds = ["b2", "b1", "a2", "a1"]
@@ -124,13 +125,16 @@ class BioLogica.Genetics
         sisterChromatids[sisterChromatidIds.pop()] = chromosome.clone()
         sisterChromatids[sisterChromatidIds.pop()] = chromosome.clone()
         containsYchromosome = true if side is "y"
+      cross = null
       cross = @crossover sisterChromatids if performCrossover and !containsYchromosome
       sisterChromatidIds = ["b2", "b1", "a2", "a1"].shuffle()
+      endCellInfo[chromoName] = {}
       for cell, i in cells
         chromaId = sisterChromatidIds[i]
         chroma = sisterChromatids[chromaId]
         chroma.side = @getHaploidChromatidSide chroma unless performCrossover
         cell[chromoName] = chroma
+        endCellInfo[chromoName][chromaId] = i
         # translate the cross info chromatidIds to the cell indexes
         if cross?
           for j in [0...cross.length]
@@ -138,7 +142,7 @@ class BioLogica.Genetics
             cr.start_cell = i if cr.start == chromaId
             cr.end_cell = i if cr.end == chromaId
       crossInfo[chromoName] = cross
-    return {cells: cells, crossInfo: crossInfo}
+    return {cells: cells, crossInfo: crossInfo, endCellInfo: endCellInfo}
 
   getHaploidChromatidSide: (chromatid) ->
     if chromatid.side is "b"
@@ -154,16 +158,16 @@ class BioLogica.Genetics
       # pick chromatids to cross
       startSide = ["a1", "a2"][ExtMath.flip()]
       endSide   = ["b1", "b2"][ExtMath.flip()]
-      crossovers.push {start: startSide, end: endSide, point: point}
       newChromatids = @crossChromatids(sisterChromatids[startSide], sisterChromatids[endSide], point)
       sisterChromatids[startSide] = newChromatids[0]
       sisterChromatids[endSide]   = newChromatids[1]
+      crossovers.push {start: startSide, end: endSide, point: point, crossedAlleles: newChromatids[0].crossedAlleles.slice(0)}
     return crossovers
 
   crossChromatids: (chr1, chr2, point) ->
     return [
-      BioLogica.Chromosome.createChromosome(chr2, chr1, point)
       BioLogica.Chromosome.createChromosome(chr1, chr2, point)
+      BioLogica.Chromosome.createChromosome(chr2, chr1, point)
     ]
 
   ###
@@ -199,3 +203,7 @@ class BioLogica.Genetics
 BioLogica.Genetics.parseAlleleString = (alleleString) ->
   a: alleleString.match(/a:([^,])*/g)?.map (str) -> str.match(/[^:]+$/)?[0]
   b: alleleString.match(/b:([^,])*/g)?.map (str) -> str.match(/[^:]+$/)?[0]
+
+BioLogica.Genetics.getGeneOfAllele = (species, allele) ->
+  for own geneName, gene of species.geneList
+    return geneName if ~gene.alleles.indexOf allele
