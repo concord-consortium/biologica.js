@@ -6,7 +6,7 @@ describe("An organism's genetics", function() {
   });
 
   it("creates a genotype when an organism is created with an alleleString", function() {
-    var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:H,a:t,b:Tk,b:dl,a:c,b:C,a:W,b:w,a:dl,b:D", BioLogica.FEMALE),
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:H,a:t,b:Tk,a:c,b:C,a:W,b:w,a:dl,b:D", BioLogica.FEMALE),
         chromosomes = org.getGenotype().chromosomes;
 
     expect(chromosomes["1"].a.alleles).toContain("t");
