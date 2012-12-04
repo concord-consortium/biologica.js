@@ -8,7 +8,7 @@ BioLogica.Species.GGDrake =
 
   chromosomeGeneMap:
     '1': ['t','m','w', 'h']
-    '2': ['c', 'b', 'a', 's']
+    '2': ['c', 'g', 'a', 's']
     'XY': ['d', 'f']
 
   chromosomesLength:
@@ -37,8 +37,8 @@ BioLogica.Species.GGDrake =
       alleles: ['C', 'c']
       start: 15000000
       length: 64572
-    black:
-      alleles: ['B', 'b']
+    green:
+      alleles: ['G', 'g']
       start: 25000000
       length: 17596
     armor:
@@ -50,7 +50,7 @@ BioLogica.Species.GGDrake =
       start: 90000000
       length: 6371
     dilute:
-      alleles: ['D', 'd', 'dl']
+      alleles: ['D', 'd']
       start: 20000000
       length: 152673
     firebreathing:
@@ -74,13 +74,10 @@ BioLogica.Species.GGDrake =
       'a': 'Armor'
       'S': 'Spikes wide'
       's': 'Spikes narrow'
-      'B': 'Black'
-      'b': 'Brown'
+      'G': 'Green'
+      'g': 'Purple'
       'D': 'Full color'
       'd': 'Dilute color'
-      'dl': 'dl'
-      'Rh': 'Nose spike'
-      'rh': 'No nose spike'
       'F': 'No fire breathing'
       'f': 'Fire breathing'
       'Y' : 'Y'
@@ -114,24 +111,15 @@ BioLogica.Species.GGDrake =
       "Fire breathing": [["f", "f"], ["f", "Y"]]
 
     "color":
-      "Gray":     [["M"]]
-      "Green":    [["m","m"]]
-      ###
-      "Frost":    [["c","c"]]
-      "Steel":    [["C", "M", "B", "D"]]
-      "Copper":   [["C", "M", "b", "b", "D"]]
-      "Silver":   [["C", "M", "B", "d", "d"], ["C", "M", "B", "d", "dl"], ["C", "M", "B", "dl", "dl"]
-                   ["C", "M", "B", "d", "Y"], ["C", "M", "B", "dl", "Y"]]
-      "Gold":     [["C", "M", "b", "b", "d", "d"], ["C", "M", "b", "b", "d", "dl"], ["C", "M", "b", "b", "dl", "dl"]
-                   ["C", "M", "b", "b", "d", "Y"], ["C", "M", "b", "b", "dl", "Y"]]
-      "Charcoal": [["C", "m", "m", "B", "D"]]
-      "Lava":     [["C", "m", "m", "b", "b", "D"]]
-      "Ash":      [["C", "m", "m", "B", "d", "d"], ["C", "m", "m", "B", "d", "dl"], ["C", "m", "m", "B", "dl", "dl"]
-                   ["C", "m", "m", "B", "d", "Y"], ["C", "m", "m", "B", "dl", "Y"]]
-      "Sand":     [["C", "m", "m", "b", "b", "d", "d"], ["C", "m", "m", "b", "b", "d", "dl"]
-                   ["C", "m", "m", "b", "b", "dl", "dl"], ["C", "m", "m", "b", "b", "d", "Y"]
-                   ["C", "m", "m", "b", "b", "dl", "Y"]]
-      ###
+      "Shiny green":    [["C", "G", "M", "D"]]
+      "Shiny blue":     [["C", "G", "M", "d", "d"], ["C", "G", "M", "d", "Y"]]
+      "Green":          [["C", "G", "m", "m", "D"]]
+      "Blue":           [["C", "G", "m", "m", "d", "d"], ["C", "G", "m", "m", "d", "Y"]]
+      "Shiny purple":   [["C", "g", "g", "M", "D"]]
+      "Shiny red":      [["C", "g", "g", "M", "d", "d"], ["C", "g", "g", "M", "d", "Y"]]
+      "Purple":         [["C", "g", "g", "m", "m", "D"]]
+      "Red":            [["C", "g", "g", "m", "m", "d", "d"], ["C", "g", "g", "m", "m", "d", "Y"]]
+      "Albino":         [["c", "c"]]
 
   ###
     GGDrakes are pieced together by sprites

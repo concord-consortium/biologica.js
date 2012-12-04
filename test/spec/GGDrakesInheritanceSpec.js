@@ -33,30 +33,20 @@ describe("For a GGDrake, the characteristic", function() {
     [ female,    "a:A",           "armor",           "No armor"          ],
     [ female,    "a:a,b:a",       "armor",           "Armor"             ],
 
-    [ female,    "a:M,b:M",                      "color",      "Gray"    ],
-    [ female,    "a:M,b:m",                      "color",      "Gray"    ],
-    [ female,    "a:m,b:m",                      "color",      "Green"   ]
+    [ female,    "a:C,a:G,a:M,a:D",             "color",  "Shiny green"  ],
+    [ male,      "a:C,a:G,a:g,a:M,b:m,a:D",     "color",  "Shiny green"  ],
+    [ female,    "a:C,a:G,a:M,a:d,b:d",         "color",  "Shiny blue"   ],
+    [ male,      "a:C,a:G,a:M,a:d",             "color",  "Shiny blue"   ],
+    [ female,    "a:C,a:G,a:m,b:m,a:D",         "color",  "Green"        ],
+    [ female,    "a:C,a:G,a:m,b:m,a:d,b:d",     "color",  "Blue"         ],
+    [ female,    "a:C,a:g,b:g,a:M,a:D",         "color",  "Shiny purple" ],
+    [ male,      "a:C,a:g,b:g,a:g,a:M,b:m,a:D", "color",  "Shiny purple" ],
+    [ female,    "a:C,a:g,b:g,a:M,a:d,b:d",     "color",  "Shiny red"    ],
+    [ male,      "a:C,a:g,b:g,a:M,a:d",         "color",  "Shiny red"    ],
+    [ female,    "a:C,a:g,b:g,a:m,b:m,a:D",     "color",  "Purple"       ],
+    [ female,    "a:C,a:g,b:g,a:m,b:m,a:d,b:d", "color",  "Red"          ],
+    [ female,    "a:c,b:c",                     "color",  "Albino"       ]
 
-    // [ female,    "a:c,b:c",                      "color",      "Frost"    ],
-    // [ female,    "a:C,a:M,b:M,a:B,a:D",          "color",      "Steel"    ],
-    // [ female,    "a:C,b:c,a:M,b:m,a:B,a:D,b:d",  "color",      "Steel"    ],
-    // [ female,    "a:C,b:c,a:M,b:m,a:B,a:D,b:dl", "color",      "Steel"    ],
-    // [ female,    "a:C,a:M,b:M,a:b,b:b,a:D",      "color",      "Copper"   ],
-    // [ male,      "a:C,a:M,b:M,a:b,b:b,a:D",      "color",      "Copper"   ],
-    // [ female,    "a:C,a:M,b:M,a:B,a:d,b:d",      "color",      "Silver"   ],
-    // [ female,    "a:C,a:M,b:M,a:B,a:dl,b:d",     "color",      "Silver"   ],
-    // [ male,      "a:C,a:M,b:M,a:B,a:d",          "color",      "Silver"   ],
-    // [ female,    "a:C,a:M,b:m,a:b,b:b,a:d,b:d",  "color",      "Gold"     ],
-    // [ female,    "a:C,a:M,b:m,a:b,b:b,a:d,b:dl", "color",      "Gold"     ],
-    // [ male,      "a:C,a:M,b:m,a:b,b:b,a:d",      "color",      "Gold"     ],
-    // [ female,    "a:C,a:m,b:m,a:B,a:D",          "color",      "Charcoal" ],
-    // [ female,    "a:C,a:m,b:m,a:b,b:b,a:D",      "color",      "Lava"     ],
-    // [ male,      "a:C,a:m,b:m,a:b,b:b,a:D",      "color",      "Lava"     ],
-    // [ female,    "a:C,a:m,b:m,a:B,a:d,b:d",      "color",      "Ash"      ],
-    // [ male,      "a:C,a:m,b:m,a:B,a:d",          "color",      "Ash"      ],
-    // [ female,    "a:C,a:m,b:m,a:b,b:b,a:d,b:d",  "color",      "Sand"     ],
-    // [ male,      "a:C,a:m,b:m,a:b,b:b,a:d",      "color",      "Sand"     ],
-    // [ male,      "a:c,b:c",                      "color",      "Frost"    ]
   ];
 
   for (var i=0,ii=phenotypeTests.length; i<ii; i++ ) {
