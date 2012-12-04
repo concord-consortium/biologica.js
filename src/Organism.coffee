@@ -47,10 +47,11 @@ class BioLogica.Organism
   # returns gametes in sets of 4, and will always return a complete set.
   # So the number of sets for arg N will be the smallest Y where 4*Y >= N
   # ie, arg 3 -> [{}], arg 6 -> [{},{}], arg 8 -> [{},{}], arg 9 -> [{},{},{}]
-  createGametesWithCrossInfo: (n) ->
+  createGametesWithCrossInfo: (n, performCrossover) ->
+    performCrossover ?= true     # default
     gametes = []
-    gametes = gametes.concat @genetics.performMeiosis(true) for i in [0...Math.floor(n/4)]
-    gametes = gametes.concat @genetics.performMeiosis(true) if n % 4 != 0
+    gametes = gametes.concat @genetics.performMeiosis(performCrossover) for i in [0...Math.floor(n/4)]
+    gametes = gametes.concat @genetics.performMeiosis(performCrossover) if n % 4 != 0
     return gametes
 
   preProcessAlleleString: (str) ->
