@@ -46,6 +46,19 @@ describe("The species", function() {
         }
       });
 
+      it ("has an alleleLabel for every allele", function() {
+        for (geneName in species.geneList) {
+          if (!species.geneList.hasOwnProperty(geneName)) continue;
+          var gene = species.geneList[geneName];
+          for (var j=0, jj=gene.alleles.length; j<jj; j++) {
+            var allele = gene.alleles[j];
+            console.log("checking "+allele)
+            console.log("got "+species.alleleLabelMap[allele])
+            expect(species.alleleLabelMap[allele]).toBeDefined();
+          }
+        }
+      });
+
     });
   }
 });
