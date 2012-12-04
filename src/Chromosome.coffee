@@ -32,7 +32,7 @@ class BioLogica.Chromosome
     @species.chromosomesLength[@chromosome]
 
   getGeneOfAllele: (allele) ->
-    return BioLogica.Genetics.getGeneOfAllele(@species, allele)
+    return BioLogica.Genetics.getGeneOfAllele(@species, allele)?.name
 
   getAllelesPosition: (allele) ->
     geneName = @getGeneOfAllele allele

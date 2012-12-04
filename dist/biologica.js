@@ -136,7 +136,8 @@
     };
 
     Chromosome.prototype.getGeneOfAllele = function(allele) {
-      return BioLogica.Genetics.getGeneOfAllele(this.species, allele);
+      var _ref;
+      return (_ref = BioLogica.Genetics.getGeneOfAllele(this.species, allele)) != null ? _ref.name : void 0;
     };
 
     Chromosome.prototype.getAllelesPosition = function(allele) {
@@ -644,7 +645,9 @@
       if (!__hasProp.call(_ref, geneName)) continue;
       gene = _ref[geneName];
       if (~gene.alleles.indexOf(allele)) {
-        return geneName;
+        return $.extend(true, {
+          name: geneName
+        }, gene);
       }
     }
   };
