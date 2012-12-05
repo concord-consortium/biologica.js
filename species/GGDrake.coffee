@@ -21,7 +21,7 @@ BioLogica.Species.GGDrake =
       alleles: ['T', 'Tk', 't']
       start: 10000000
       length: 10584
-    metalic:
+    metallic:
       alleles: ['M', 'm']
       start: 20000000
       length: 259610

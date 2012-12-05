@@ -890,7 +890,7 @@
         start: 10000000,
         length: 10584
       },
-      metalic: {
+      metallic: {
         alleles: ['M', 'm'],
         start: 20000000,
         length: 259610
@@ -1130,7 +1130,7 @@
         start: 10000000,
         length: 10584
       },
-      metalic: {
+      metallic: {
         alleles: ['M', 'm'],
         start: 20000000,
         length: 259610
