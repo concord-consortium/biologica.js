@@ -36,9 +36,3 @@ ExtMath.randomInt = (max) ->
 
 ExtMath.flip = ->
   ExtMath.randomInt(2)
-
-Object::shallowClone = (clone)->
-  clone ?= {}
-  for own prop,val of this
-    clone[prop] = val
-  return clone

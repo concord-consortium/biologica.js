@@ -207,5 +207,5 @@ BioLogica.Genetics.parseAlleleString = (alleleString) ->
 BioLogica.Genetics.getGeneOfAllele = (species, allele) ->
   for own geneName, gene of species.geneList
     if ~gene.alleles.indexOf allele
-      clone = gene.shallowClone({name: geneName})
-      return clone
+      gene.name = geneName
+      return gene
