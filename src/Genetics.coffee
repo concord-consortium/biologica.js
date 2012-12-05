@@ -206,4 +206,6 @@ BioLogica.Genetics.parseAlleleString = (alleleString) ->
 
 BioLogica.Genetics.getGeneOfAllele = (species, allele) ->
   for own geneName, gene of species.geneList
-    return $.extend(true, {name: geneName}, gene) if ~gene.alleles.indexOf allele
+    if ~gene.alleles.indexOf allele
+      clone = gene.shallowClone({name: geneName})
+      return clone

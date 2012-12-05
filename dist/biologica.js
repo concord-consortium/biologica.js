@@ -54,6 +54,19 @@
     return ExtMath.randomInt(2);
   };
 
+  Object.prototype.shallowClone = function(clone) {
+    var prop, val;
+    if (clone == null) {
+      clone = {};
+    }
+    for (prop in this) {
+      if (!__hasProp.call(this, prop)) continue;
+      val = this[prop];
+      clone[prop] = val;
+    }
+    return clone;
+  };
+
   window.BioLogica = {};
 
   BioLogica.FEMALE = 1;
@@ -639,15 +652,16 @@
   };
 
   BioLogica.Genetics.getGeneOfAllele = function(species, allele) {
-    var gene, geneName, _ref;
+    var clone, gene, geneName, _ref;
     _ref = species.geneList;
     for (geneName in _ref) {
       if (!__hasProp.call(_ref, geneName)) continue;
       gene = _ref[geneName];
       if (~gene.alleles.indexOf(allele)) {
-        return $.extend(true, {
+        clone = gene.shallowClone({
           name: geneName
-        }, gene);
+        });
+        return clone;
       }
     }
   };
