@@ -2,7 +2,7 @@ BioLogica.Species = BioLogica.Species || {}
 
 BioLogica.Species.GGDrake =
 
-  name: "GGDrake"
+  name: 'GGDrake'
 
   chromosomeNames: ['1', '2', 'XY']
 
@@ -84,42 +84,42 @@ BioLogica.Species.GGDrake =
       '' : ''
 
   traitRules:
-    "tail":
-      "Long tail": [["T", "T"], ["T", "Tk"], ["T", "t"]]
-      "Kinked tail": [["Tk", "Tk"], ["Tk", "t"]],
-      "Short tail": [["t", "t"]]
+    'tail':
+      'Long tail': [['T', 'T'], ['T', 'Tk'], ['T', 't']]
+      'Kinked tail': [['Tk', 'Tk'], ['Tk', 't']],
+      'Short tail': [['t', 't']]
 
-    "wings":
-      "Wings": [["W", "W"], ["W", "w"]]
-      "No wings": [["w", "w"]]
+    'wings':
+      'Wings': [['W', 'W'], ['W', 'w']]
+      'No wings': [['w', 'w']]
 
-    "horns":
-      "Reverse horns": [["H", "H"], ["H", "h"]]
-      "Forward horns": [["h", "h"]]
+    'horns':
+      'Reverse horns': [['H', 'H'], ['H', 'h']]
+      'Forward horns': [['h', 'h']]
 
-    "armor":
-      "No armor": [["A", "A"], ["A", "a"]]
-      "Armor": [["a", "a"]]
+    'armor':
+      'No armor': [['A', 'A'], ['A', 'a']]
+      'Armor': [['a', 'a']]
 
-    "spikes":
-      "Wide spikes": [["S", "S"]]
-      "Medium spikes": [["S", "s"]]
-      "Narrow spikes": [["s", "s"]]
+    'spikes':
+      'Wide spikes': [['S', 'S']]
+      'Medium spikes': [['S', 's']]
+      'Narrow spikes': [['s', 's']]
 
-    "fire breathing":
-      "No fire breathing": [["F"]]
-      "Fire breathing": [["f", "f"], ["f", "Y"]]
+    'fire breathing':
+      'No fire breathing': [['F']]
+      'Fire breathing': [['f', 'f'], ['f', 'Y']]
 
-    "color":
-      "Shiny green":    [["C", "G", "M", "D"]]
-      "Shiny blue":     [["C", "G", "M", "d", "d"], ["C", "G", "M", "d", "Y"]]
-      "Green":          [["C", "G", "m", "m", "D"]]
-      "Blue":           [["C", "G", "m", "m", "d", "d"], ["C", "G", "m", "m", "d", "Y"]]
-      "Shiny purple":   [["C", "g", "g", "M", "D"]]
-      "Shiny red":      [["C", "g", "g", "M", "d", "d"], ["C", "g", "g", "M", "d", "Y"]]
-      "Purple":         [["C", "g", "g", "m", "m", "D"]]
-      "Red":            [["C", "g", "g", "m", "m", "d", "d"], ["C", "g", "g", "m", "m", "d", "Y"]]
-      "Albino":         [["c", "c"]]
+    'color':
+      'Shiny green':    [['C', 'G', 'M', 'D']]
+      'Shiny blue':     [['C', 'G', 'M', 'd', 'd'], ['C', 'G', 'M', 'd', 'Y']]
+      'Green':          [['C', 'G', 'm', 'm', 'D']]
+      'Blue':           [['C', 'G', 'm', 'm', 'd', 'd'], ['C', 'G', 'm', 'm', 'd', 'Y']]
+      'Shiny purple':   [['C', 'g', 'g', 'M', 'D']]
+      'Shiny red':      [['C', 'g', 'g', 'M', 'd', 'd'], ['C', 'g', 'g', 'M', 'd', 'Y']]
+      'Purple':         [['C', 'g', 'g', 'm', 'm', 'D']]
+      'Red':            [['C', 'g', 'g', 'm', 'm', 'd', 'd'], ['C', 'g', 'g', 'm', 'm', 'd', 'Y']]
+      'Albino':         [['c', 'c']]
 
   ###
     GGDrakes are pieced together by sprites
