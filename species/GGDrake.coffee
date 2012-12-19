@@ -121,6 +121,10 @@ BioLogica.Species.GGDrake =
       'Red':            [['C1', 'G2', 'G2', 'M2', 'M2', 'D2', 'D2'], ['C1', 'G2', 'G2', 'M2', 'M2', 'D2', 'Y']]
       'Albino':         [['C2', 'C2']]
 
+    'metallic':
+      'Metallic':       [['M1']]
+      'Nonmetallic':    [['M2','M2']]
+
   ###
     GGDrakes are pieced together by sprites
   ###

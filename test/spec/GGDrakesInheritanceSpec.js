@@ -33,6 +33,9 @@ describe("For a GGDrake, the characteristic", function() {
     [ female,    "a:A1",             "armor",           "No armor"          ],
     [ female,    "a:A2,b:A2",        "armor",           "Armor"             ],
 
+    [ female,    "a:M1",             "metallic",        "Metallic"          ],
+    [ female,    "a:M2,b:M2",        "metallic",        "Nonmetallic"       ],
+
     [ female,    "a:C1,a:G1,a:M1,a:D1",                 "color",  "Shiny green"  ],
     [ male,      "a:C1,a:G1,a:G2,a:M1,b:M2,a:D1",       "color",  "Shiny green"  ],
     [ female,    "a:C1,a:G1,a:M1,a:D2,b:D2",            "color",  "Shiny blue"   ],
