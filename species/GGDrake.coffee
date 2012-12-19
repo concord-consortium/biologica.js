@@ -111,15 +111,15 @@ BioLogica.Species.GGDrake =
       'Fire breathing': [['F2', 'F2'], ['F2', 'Y']]
 
     'color':
-      'Shiny green':    [['C1', 'G1', 'M1', 'D1']]
-      'Shiny blue':     [['C1', 'G1', 'M1', 'D2', 'D2'], ['C1', 'G1', 'M1', 'D2', 'Y']]
-      'Green':          [['C1', 'G1', 'M2', 'M2', 'D1']]
-      'Blue':           [['C1', 'G1', 'M2', 'M2', 'D2', 'D2'], ['C1', 'G1', 'M2', 'M2', 'D2', 'Y']]
-      'Shiny purple':   [['C1', 'G2', 'G2', 'M1', 'D1']]
-      'Shiny red':      [['C1', 'G2', 'G2', 'M1', 'D2', 'D2'], ['C1', 'G2', 'G2', 'M1', 'D2', 'Y']]
-      'Purple':         [['C1', 'G2', 'G2', 'M2', 'M2', 'D1']]
-      'Red':            [['C1', 'G2', 'G2', 'M2', 'M2', 'D2', 'D2'], ['C1', 'G2', 'G2', 'M2', 'M2', 'D2', 'Y']]
-      'Albino':         [['C2', 'C2']]
+      'Metallic green':    [['C1', 'G1', 'M1', 'D1']]
+      'Metallic blue':     [['C1', 'G1', 'M1', 'D2', 'D2'], ['C1', 'G1', 'M1', 'D2', 'Y']]
+      'Green':             [['C1', 'G1', 'M2', 'M2', 'D1']]
+      'Blue':              [['C1', 'G1', 'M2', 'M2', 'D2', 'D2'], ['C1', 'G1', 'M2', 'M2', 'D2', 'Y']]
+      'Metallic purple':   [['C1', 'G2', 'G2', 'M1', 'D1']]
+      'Metallic red':      [['C1', 'G2', 'G2', 'M1', 'D2', 'D2'], ['C1', 'G2', 'G2', 'M1', 'D2', 'Y']]
+      'Purple':            [['C1', 'G2', 'G2', 'M2', 'M2', 'D1']]
+      'Red':               [['C1', 'G2', 'G2', 'M2', 'M2', 'D2', 'D2'], ['C1', 'G2', 'G2', 'M2', 'M2', 'D2', 'Y']]
+      'Albino':            [['C2', 'C2']]
 
     'metallic':
       'Metallic':       [['M1']]
