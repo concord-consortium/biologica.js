@@ -36,19 +36,11 @@ describe("For a GGDrake, the characteristic", function() {
     [ female,    "a:M1",             "metallic",        "Metallic"          ],
     [ female,    "a:M2,b:M2",        "metallic",        "Nonmetallic"       ],
 
-    [ female,    "a:C1,a:G1,a:M1,a:D1",                 "color",  "Metallic green"  ],
-    [ male,      "a:C1,a:G1,a:G2,a:M1,b:M2,a:D1",       "color",  "Metallic green"  ],
-    [ female,    "a:C1,a:G1,a:M1,a:D2,b:D2",            "color",  "Metallic blue"   ],
-    [ male,      "a:C1,a:G1,a:M1,a:D2",                 "color",  "Metallic blue"   ],
-    [ female,    "a:C1,a:G1,a:M2,b:M2,a:D1",            "color",  "Green"        ],
-    [ female,    "a:C1,a:G1,a:M2,b:M2,a:D2,b:D2",       "color",  "Blue"         ],
-    [ female,    "a:C1,a:G2,b:G2,a:M1,a:D1",            "color",  "Metallic purple" ],
-    [ male,      "a:C1,a:G2,b:G2,a:G2,a:M1,b:M2,a:D1",  "color",  "Metallic purple" ],
-    [ female,    "a:C1,a:G2,b:G2,a:M1,a:D2,b:D2",       "color",  "Metallic red"    ],
-    [ male,      "a:C1,a:G2,b:G2,a:M1,a:D2",            "color",  "Metallic red"    ],
-    [ female,    "a:C1,a:G2,b:G2,a:M2,b:M2,a:D1",       "color",  "Purple"       ],
-    [ female,    "a:C1,a:G2,b:G2,a:M2,b:M2,a:D2,b:D2",  "color",  "Red"          ],
-    [ female,    "a:C2,b:C2",                           "color",  "Albino"       ]
+    [ female,    "a:C1,a:G1,a:D1",               "color",    "Green"        ],
+    [ female,    "a:C1,a:G1,a:D2,b:D2",          "color",    "Blue"         ],
+    [ female,    "a:C1,a:G2,b:G2,a:D1",          "color",    "Purple"       ],
+    [ female,    "a:C1,a:G2,b:G2,a:D2,b:D2",     "color",    "Red"          ],
+    [ female,    "a:C2,b:C2",                    "color",    "Albino"       ]
 
   ];
 
