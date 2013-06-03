@@ -1,7 +1,7 @@
 var female = BioLogica.FEMALE,
     male   = BioLogica.MALE;
 
-describe("The characteristic", function() {
+describe("For a Drake, the characteristic", function() {
 
   var phenotypeTests = [
   //   Sex      Alleles          Trait         Characteristic   //

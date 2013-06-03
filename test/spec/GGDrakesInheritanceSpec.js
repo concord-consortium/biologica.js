@@ -1,5 +1,4 @@
-var species = BioLogica.Species.GGDrake,
-    female = BioLogica.FEMALE,
+var female = BioLogica.FEMALE,
     male   = BioLogica.MALE;
 
 describe("For a GGDrake, the characteristic", function() {
@@ -55,7 +54,7 @@ describe("For a GGDrake, the characteristic", function() {
 
 function testCharacteristic(desc, test) {
   it (desc, function() {
-    expect([test[0], test[1], species]).toHaveCharacteristic(test[2], test[3]);
+    expect([test[0], test[1], BioLogica.Species.GGDrake]).toHaveCharacteristic(test[2], test[3]);
   });
 }
 
