@@ -4,6 +4,10 @@ describe("The species", function() {
     if (!BioLogica.Species.hasOwnProperty(speciesName)) continue;
 
     var species = BioLogica.Species[speciesName];
+    testSpecies(species);
+  }
+
+  function testSpecies(species) {
 
     describe(species.name, function() {
 
@@ -52,8 +56,6 @@ describe("The species", function() {
           var gene = species.geneList[geneName];
           for (var j=0, jj=gene.alleles.length; j<jj; j++) {
             var allele = gene.alleles[j];
-            console.log("checking "+allele)
-            console.log("got "+species.alleleLabelMap[allele])
             expect(species.alleleLabelMap[allele]).toBeDefined();
           }
         }
