@@ -17,9 +17,10 @@ appFiles  = [
 
 speciesFiles = [
   'Drake'
+  'GenivilleDrake'
   'GGDrake'
   'GGTournamentDrake'
-  'GenivilleDrake'
+  'GGLizard'
 ]
 
 task 'compile', 'Build single application file including species', ->
