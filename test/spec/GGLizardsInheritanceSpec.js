@@ -32,6 +32,7 @@ describe("For a GGLizard, the characteristic", function() {
     [ female,    "a:L2,b:L2",        "legs",          "Short legs"           ],
 
     [ male,      "a:V1",             "venomous",      "Non venomous"         ],
+    [ male,      "a:V2",             "venomous",      "Venomous"             ],
     [ female,    "a:V2,b:V1",        "venomous",      "Non venomous"         ],
     [ female,    "a:V2,b:V2",        "venomous",      "Venomous"             ],
 
