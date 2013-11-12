@@ -8,7 +8,7 @@ BioLogica.Species.GGLizard =
 
   chromosomeGeneMap:
     '1': ['R3', 'M2', 'W2', 'E2']
-    '2': ['B2', 'C2', 'G2', 'L2']
+    '2': ['Q2', 'C2', 'G2', 'L2']
     'XY': ['D2', 'V2']
 
   chromosomesLength:
@@ -33,8 +33,8 @@ BioLogica.Species.GGLizard =
       alleles: ['E1', 'E2']
       start: 80000000
       length: 122234
-    barb:
-      alleles: ['B1', 'B2']
+    quill:
+      alleles: ['Q1', 'Q2']
       start: 15000000
       length: 19421
     color:
@@ -64,10 +64,10 @@ BioLogica.Species.GGLizard =
       'R3': 'Pointy ridges'
       'M1': 'Metallic'
       'M2': 'Nonmetallic'
-      'W1': 'Curly Wings'
-      'W2': 'Flat wings'
-      'B1': 'Barb 1'
-      'B2': 'Barb 2'
+      'W1': 'Wings'
+      'W2': 'No wings'
+      'Q1': 'Quill 1'
+      'Q2': 'Quill 2'
       'C1': 'Colored'
       'C2': 'Colorless'
       'E1': 'No ear flaps'
@@ -90,12 +90,12 @@ BioLogica.Species.GGLizard =
       'Pointy ridges':  [['R3', 'R3']]
 
     'wings':
-      'Curly wings': [['W1']]
-      'Flat wings': [['W2', 'W2']]
+      'Wings': [['W1']]
+      'No wings': [['W2', 'W2']]
 
-    'barb':
-      'Barb 1': [['B1']]
-      'Barb 2': [['B2', 'B2']]
+    'quill':
+      'Quill 1': [['Q1']]
+      'Quill 2': [['Q2', 'Q2']]
 
     'ear flaps':
       'No ear flaps': [['E1']]

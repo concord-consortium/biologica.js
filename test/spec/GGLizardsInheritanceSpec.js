@@ -15,17 +15,17 @@ describe("For a GGLizard, the characteristic", function() {
     [ female,    "a:M1",             "metallic",      "Metallic"             ],
     [ female,    "a:M2,b:M2",        "metallic",      "Nonmetallic"          ],
 
-    [ female,    "a:W1",             "wings",         "Curly wings"          ],
-    [ female,    "a:W1,b:W1",        "wings",         "Curly wings"          ],
-    [ female,    "a:W1,b:W2",        "wings",         "Curly wings"          ],
-    [ female,    "a:W2,b:W2",        "wings",         "Flat wings"           ],
+    [ female,    "a:W1",             "wings",         "Wings"                ],
+    [ female,    "a:W1,b:W1",        "wings",         "Wings"                ],
+    [ female,    "a:W1,b:W2",        "wings",         "Wings"                ],
+    [ female,    "a:W2,b:W2",        "wings",         "No wings"             ],
 
     [ female,    "a:E1",             "ear flaps",     "No ear flaps"         ],
     [ female,    "a:E2,b:E2",        "ear flaps",     "Ear flaps"            ],
 
-    [ female,    "a:B1",             "barb",          "Barb 1"               ],
-    [ female,    "a:B1,b:B2",        "barb",          "Barb 1"               ],
-    [ female,    "a:B2,b:B2",        "barb",          "Barb 2"               ],
+    [ female,    "a:Q1",             "quill",         "Quill 1"              ],
+    [ female,    "a:Q1,b:Q2",        "quill",         "Quill 1"              ],
+    [ female,    "a:Q2,b:Q2",        "quill",         "Quill 2"              ],
 
     [ female,    "a:L1,b:L1",        "legs",          "Long legs"            ],
     [ female,    "a:L1,b:L2",        "legs",          "Medium legs"          ],
