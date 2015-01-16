@@ -349,6 +349,15 @@ describe("An species' genetics", function() {
     expect(genetics.isAlleleOfGene("rh", "D")).toBe(false);
   });
 
+  it("correctly returns the gene for a specific allele", function() {
+    var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "", BioLogica.FEMALE);
+
+    expect(genetics.geneForAllele("T")).toBe('tail');
+    expect(genetics.geneForAllele("dl")).toBe('dilute');
+    expect(genetics.geneForAllele("Rh")).toBe('nose');
+    expect(genetics.geneForAllele("rh")).toBe('nose');
+  });
+
   it("correctly finds the chromosome an allele belongs to", function() {
     var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "", BioLogica.FEMALE);
 
@@ -478,6 +487,45 @@ describe("The Genotype object", function() {
       child = BioLogica.breed(mother, father);
       expect(child.getAlleleString()).not.toContain("undefined");
     }
+  });
+
+  it("can be converted back into a string for specific genes", function() {
+    var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:H,b:H", BioLogica.FEMALE),
+      father = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:h", BioLogica.MALE),
+      child = BioLogica.breed(mother, father);
+
+    expect(typeof mother.genetics.genotype.getAlleleString(['horns'], mother.genetics)).toBe("string");
+    expect(mother.genetics.genotype.getAlleleString(['horns'], mother.genetics)).toEqual("a:H,b:H");
+
+    expect(typeof child.genetics.genotype.getAlleleString(['horns'], child.genetics)).toBe("string");
+    expect(child.genetics.genotype.getAlleleString(['horns'], child.genetics)).toEqual("a:H,b:h");
+  });
+
+  it('can be converted back into a string for specific traits', function () {
+
+    var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:C,b:C,a:m,b:m,a:b,b:b,a:D,b:D", BioLogica.FEMALE),
+      father = new BioLogica.Organism(BioLogica.Species.Drake, "a:c,b:c,a:M,b:M,a:B,b:B,a:d,b:d", BioLogica.MALE),
+      child = BioLogica.breed(mother, father);
+
+    while (child.sex === BioLogica.MALE) {
+      child = BioLogica.breed(mother, father);
+    }
+
+    motherVal = mother.genetics.getAlleleStringForTrait('color');
+    expect(typeof motherVal).toBe("string");
+    expect(motherVal).toEqual("a:m,b:m,a:C,b:C,a:b,b:b,a:D,b:D");
+
+    childVal = child.genetics.getAlleleStringForTrait('color');
+    expect(typeof childVal).toBe("string");
+    expect(childVal).toEqual("a:m,b:M,a:C,b:c,a:b,b:B,a:D,b:d");
+
+    motherVal = mother.getAlleleStringForTrait('color');
+    expect(typeof motherVal).toBe("string");
+    expect(motherVal).toEqual("a:m,b:m,a:C,b:C,a:b,b:b,a:D,b:D");
+
+    childVal = child.getAlleleStringForTrait('color');
+    expect(typeof childVal).toBe("string");
+    expect(childVal).toEqual("a:m,b:M,a:C,b:c,a:b,b:B,a:D,b:d");
   });
 });
 

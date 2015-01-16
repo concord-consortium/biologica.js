@@ -38,6 +38,29 @@ class BioLogica.Genetics
     @genotype.getAlleleString()
 
 
+  getAlleleStringForTrait: (trait) ->
+    genes = []
+    allAlleles = []
+    for own characteristic, alleles of @species.traitRules[trait]
+      allAlleles = allAlleles.concat alleles.reduce (a,b) ->
+        a.concat(b)
+      , []
+
+    # get only the unique values
+    allAlleles = allAlleles.reduce (p, c) ->
+      if p.indexOf(c) < 0
+        p.push(c)
+      return p
+    , []
+
+    # get the unique gene values
+    for a in allAlleles
+      gene = @geneForAllele(a)
+      if gene not in genes
+        genes.push(@geneForAllele(a))
+
+    @genotype.getAlleleString(genes, @)
+
   ###
     "tops-up" the chromosomes: fills in any missing genes with random alleles.
     At the moment this assumes that all chromosomes have been specified, even if they
@@ -67,6 +90,12 @@ class BioLogica.Genetics
       if allele in allelesOfGene && exampleOfGene in allelesOfGene
         return true
     false
+
+  geneForAllele: (allele) ->
+    for own gene of @species.geneList
+      allelesOfGene = @species.geneList[gene].alleles
+      if allele in allelesOfGene
+        return gene
 
   ###
     Finds the chromosome that a given allele is part of

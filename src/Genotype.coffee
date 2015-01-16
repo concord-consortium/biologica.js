@@ -38,7 +38,7 @@ class BioLogica.Genotype
     @allAlleles.replaceFirst allele, newAllele        # this is safe because allAlleles is order-agnostic
 
   # returns a: b: style string of genotype
-  getAlleleString: ->
+  getAlleleString: (genes=[], genetics=null)->
     alleleString = ""
     for own c, chromosomes of @chromosomes
       for own side, chromosome of chromosomes
@@ -47,10 +47,11 @@ class BioLogica.Genotype
         if (side is "x" or side is "x1") then side = "a"
         if side isnt "a" then continue
         for allele, i in alleles
-          alleleString += "#{side}:#{allele},"
-          if chromosomes[otherSide]
-            bAllele = chromosomes[otherSide]?.alleles[i]
-            alleleString += "b:#{chromosomes[otherSide]?.alleles[i]}," if bAllele
+          if (genes.length is 0) or (genetics.geneForAllele(allele) in genes)
+            alleleString += "#{side}:#{allele},"
+            if chromosomes[otherSide]
+              bAllele = chromosomes[otherSide]?.alleles[i]
+              alleleString += "b:#{chromosomes[otherSide]?.alleles[i]}," if bAllele
 
 
     alleleString.substring(0,alleleString.length-1)

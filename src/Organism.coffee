@@ -32,6 +32,9 @@ class BioLogica.Organism
   getAlleleString: ->
     @genetics.getAlleleString()
 
+  getAlleleStringForTrait: (trait) ->
+    @genetics.getAlleleStringForTrait(trait)
+
   ###
     Creates n gametes, using crossover during meiosis by default .
     If only one gamete is requested, that gamete will be returned. Otherwise an
