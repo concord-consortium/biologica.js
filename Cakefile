@@ -16,6 +16,7 @@ appFiles  = [
 ]
 
 speciesFiles = [
+  'Dragon'
   'Drake'
   'GenivilleDrake'
   'GGDrake'
