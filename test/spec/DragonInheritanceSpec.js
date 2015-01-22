@@ -89,7 +89,7 @@ describe("For a Dragon, the characteristic", function() {
 
   for (var i=0,ii=phenotypeTests.length; i<ii; i++ ) {
     var test = phenotypeTests[i],
-        desc = "for "+pad(test[2],11) +" of a " + pad((test[0] === female ? "female" : "male"),6) +
+        desc = "the "+pad(test[2],11) +" of a " + pad((test[0] === female ? "female" : "male"),6) +
                " with "+pad(test[1],16)+" should be: "+pad(test[3].toLowerCase(), 13);
     testCharacteristic(desc, test);
   }
