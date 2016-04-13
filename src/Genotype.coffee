@@ -30,12 +30,19 @@ class BioLogica.Genotype
   containsAlleles: (alleles) ->
     allAllelesCopy = @allAlleles[..]
     allAllelesCopy.push "Y" if @sex is BioLogica.MALE   # add a fake 'Y' allele
-    (return false unless allAllelesCopy.removeObj(allele)) for allele in alleles
+    (return false unless arrayRemoveObject(allAllelesCopy, allele)) for allele in alleles
     true
 
+  replaceAlleleChromName: (chromName, side, allele, newAllele) ->
+    chromosomePair = @chromosomes[chromName]
+    chromosome = chromosomePair? and chromosomePair[side]
+    @replaceAllele chromosome, allele, newAllele if chromosome?
+
   replaceAllele: (chromosome, allele, newAllele) ->
-    chromosome.alleles.replaceFirst allele, newAllele
-    @allAlleles.replaceFirst allele, newAllele        # this is safe because allAlleles is order-agnostic
+    chromosome.replaceAllele allele, newAllele
+    index = @allAlleles.indexOf(allele)
+    if (index >= 0)
+      @allAlleles[index] = newAllele    # this is safe because allAlleles is order-agnostic
 
   # returns a: b: style string of genotype
   getAlleleString: (genes=[], genetics=null)->

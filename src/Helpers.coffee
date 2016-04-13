@@ -1,33 +1,23 @@
 ### jslint debug: true ###
 
 
-# [a,b,c,d].remove(1) => [a,c,d]
-# [a,b,c,d].remove(0,2) => [d]
-Array::remove = (from, to) ->
-  rest = this.slice((to || from) + 1 || this.length);
-  this.length = if from < 0 then this.length + from else from;
-  return this.push.apply(this, rest);
-
-Array::removeObj = (obj) ->
-  i = this.indexOf(obj)
-  if ~i
-    this.remove(i)
+arrayRemoveObject = (array, obj) ->
+  i = array.indexOf(obj)
+  if i >= 0
+    array.splice(i, 1)
     true
   else
     false
 
-Array::replaceFirst = (obj, replacement) ->
-  this[this.indexOf(obj)] = replacement
-
-Array::shuffle = ->
-  top = @length;
+arrayShuffle = (array) ->
+  top = array.length;
   if top
     while (--top)
       current = Math.floor(Math.random() * (top + 1));
-      tmp = this[current];
-      this[current] = this[top];
-      this[top] = tmp;
-  return this;
+      tmp = array[current];
+      array[current] = array[top];
+      array[top] = tmp;
+  return array;
 
 window.ExtMath = {}
 

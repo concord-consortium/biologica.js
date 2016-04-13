@@ -80,7 +80,7 @@ class BioLogica.Genetics
 
   ###
     Returns true if the allele passed is a member of the gene, where the
-    gene is indeicated by an example allele.
+    gene is indicated by an example allele.
     isAlleleOfGene("dl", "D") => true
     isAlleleOfGene("rh", "D") => false
   ###
@@ -139,7 +139,7 @@ class BioLogica.Genetics
       false
 
   ###
-    Returns four haploid cells, without crossover for now
+    Returns four haploid cells, with optional crossover
   ###
   performMeiosis: (performCrossover) ->
     cells = [{}, {}, {}, {}]
@@ -156,7 +156,7 @@ class BioLogica.Genetics
         containsYchromosome = true if side is "y"
       cross = null
       cross = @crossover sisterChromatids if performCrossover and !containsYchromosome
-      sisterChromatidIds = ["b2", "b1", "a2", "a1"].shuffle()
+      sisterChromatidIds = arrayShuffle ["b2", "b1", "a2", "a1"]
       endCellInfo[chromoName] = {}
       for cell, i in cells
         chromaId = sisterChromatidIds[i]
@@ -214,7 +214,7 @@ class BioLogica.Genetics
     totalDeciMorgans = Math.floor chromatid.lengthInCentimorgans / 10;
     crossoverPoints = (i for i in [0...totalDeciMorgans] when Math.random() < 0.2)
     while crossoverPoints.length > 3
-      crossoverPoints.remove(ExtMath.randomInt crossoverPoints.length)
+      crossoverPoints.splice((ExtMath.randomInt crossoverPoints.length), 1)
     lengthOfDM = chromatid.getlengthInBasePairs() / totalDeciMorgans
     for crossoverPoint, i in crossoverPoints
       positionOnDM = ExtMath.randomInt lengthOfDM

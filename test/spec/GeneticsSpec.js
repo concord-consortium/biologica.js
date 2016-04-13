@@ -141,7 +141,7 @@ describe("An organism's genetics", function() {
       expect(numY).toBe(2);
     });
 
-    it("will can create any number of gametes", function() {
+    it("will create any number of gametes", function() {
       var org = new BioLogica.Organism(BioLogica.Species.Drake, "", BioLogica.FEMALE);
 
       expect(org.createGametes(1)).toExist();
@@ -170,7 +170,7 @@ describe("An organism's genetics", function() {
           }
         }
       }
-      expect(sameSide/(times*numGametes)).toBeBetween(0.475,0.525);
+      expect(sameSide/(times*numGametes)).toBeBetween(0.47,0.53);
     });
 
     describe("and when not performing crossover", function() {
@@ -275,11 +275,11 @@ describe("An organism's genetics", function() {
 
       it("should separate T and M in 9% of gametes", function() {
         // T and M are 10cM apart. The probablility of one cross between them is 10%, and there is
-        // a small change of 2 or 3 crosses between them.
+        // a small chance of 2 or 3 crosses between them.
         // From http://en.wikipedia.org/wiki/Centimorgan#Relation_to_the_probability_of_recombination,
         // we expect p[recombination|distance of 10cM] to be (1 - e^(-20/100)) / 2 = 0.0906 = 9%
         var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:M,b:m", BioLogica.FEMALE),
-            times = 1000, _times = times,
+            times = 2000, _times = times,
             numGametes = 16, _numGametes = numGametes,
             gametesChr1 = [],
             notSplit = split = 0;
@@ -301,17 +301,17 @@ describe("An organism's genetics", function() {
             split++;
           }
         }
-        expect(split/(times * numGametes)).toBeBetween(0.0843,0.958);
+        expect(split/(times * numGametes)).toBeBetween(0.08,0.10);
       });
 
       it("should separate T and W in 36% of gametes", function() {
-        // Normally we'd expect we expect
+        // Normally we'd expect
         // p[recombination|distance of 60cM] to be (1 - e^(-60/100)) / 2 = 0.349 = 35%
         // However, we cap the number of crossovers at 3, so this slightly increases the probability
         // of getting an odd number of splits. Without fully doing the calculation, 36% separation
         // seems about right
         var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:W,b:w", BioLogica.FEMALE),
-            times = 1000, _times = times,
+            times = 2000, _times = times,
             numGametes = 16, _numGametes = numGametes,
             gametesChr1 = [],
             notSplit = split = 0;
@@ -333,7 +333,7 @@ describe("An organism's genetics", function() {
             split++;
           }
         }
-        expect(split/(times * numGametes)).toBeBetween(0.335,0.385);
+        expect(split/(times * numGametes)).toBeBetween(0.32,0.40);
       });
     });
   });
