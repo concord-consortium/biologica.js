@@ -38,6 +38,10 @@ class BioLogica.Chromosome
     geneName = @getGeneOfAllele allele
     @species.geneList[geneName]?.start or -1
 
+  replaceAllele: (prevAllele, newAllele) ->
+    index = @alleles.indexOf(prevAllele)
+    @alleles[index] = newAllele if (index >= 0)
+
 BioLogica.Chromosome.createChromosome = (chr1, chr2, crossPoint) ->
   newAlleles = []
   newSides = []

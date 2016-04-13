@@ -78,7 +78,7 @@ describe("When we breed", function() {
       }
     }
 
-    expect(wings/times).toBeBetween(0.71,0.79);
+    expect(wings/times).toBeBetween(0.7,0.8);
   });
 
   it("a TFtf parent with recessive parent, we expect tails and forelimbs to be independent in offspring", function() {
@@ -110,7 +110,7 @@ describe("When we breed", function() {
   });
 
   describe("without crossover", function() {
-    it("a heterozygous TWtw parent and a rec parent, any offspring with long tail should have wings and visa-versa", function() {
+    it("a heterozygous TWtw parent and a rec parent, any offspring with long tail should have wings and vice versa", function() {
       var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:W,b:w", BioLogica.FEMALE),
           father = new BioLogica.Organism(BioLogica.Species.Drake, "a:t,b:t,a:w,b:w", BioLogica.MALE),
           child,
@@ -137,7 +137,7 @@ describe("When we breed", function() {
   });
 
   describe("with crossover", function() {
-    it("a heterozygous TWtw parent and a rec parent, 36% of offspring with long tail should have no wings or visa-versa", function() {
+    it("a heterozygous TWtw parent and a rec parent, 36% of offspring with long tail should have no wings or vice versa", function() {
       var mother = new BioLogica.Organism(BioLogica.Species.Drake, "a:T,b:t,a:W,b:w", BioLogica.FEMALE),
           father = new BioLogica.Organism(BioLogica.Species.Drake, "a:t,b:t,a:w,b:w", BioLogica.MALE),
           child,
@@ -157,7 +157,7 @@ describe("When we breed", function() {
         }
       }
 
-      expect(neither/times).toBeBetween(0.33,0.39);
+      expect(neither/times).toBeBetween(0.32,0.40);
     })
   });
 });

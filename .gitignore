@@ -1,0 +1,5 @@
+# Packages
+node_modules/
+
+# OS or Editor folders
+.DS_Store

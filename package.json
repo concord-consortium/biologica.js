@@ -1,0 +1,21 @@
+{
+  "name": "biologica.js",
+  "version": "0.0.2",
+  "description": "A genetics and breeding engine",
+  "main": "dist/biologica.min.js",
+  "dependencies": {},
+  "devDependencies": {
+    "yuicompressor": "^2.4.8"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/concord-consortium/biologica.js.git"
+  },
+  "author": "Sam Fentress <sfentress@concord.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/concord-consortium/biologica.js/issues"
+  },
+  "homepage": "https://github.com/concord-consortium/biologica.js"
+}
