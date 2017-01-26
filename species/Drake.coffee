@@ -82,9 +82,9 @@ BioLogica.Species.Drake =
       'fl': 'No forelimbs'
       'Hl': 'Hindlimbs'
       'hl': 'No hindlimbs'
-      'A1': "'A1' armor"
-      'A2': "'A2' armor"
-      'a': "'a' armor"
+      'A1': "5 armor"
+      'A2': "3 armor"
+      'a': "0 armor"
       'B': 'Black'
       'b': 'Brown'
       'D': 'Full color'

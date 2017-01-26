@@ -979,482 +979,6 @@
 
   BioLogica.Species = BioLogica.Species || {};
 
-  BioLogica.Species.Drake = {
-    name: "Drake",
-    chromosomeNames: ['1', '2', 'XY'],
-    chromosomeGeneMap: {
-      '1': ['t', 'm', 'w', 'h'],
-      '2': ['c', 'b', 'fl', 'hl', 'a'],
-      'XY': ['d', 'rh', 'bog']
-    },
-    chromosomesLength: {
-      '1': 100000000,
-      '2': 100000000,
-      'XY': 70000000
-    },
-    geneList: {
-      tail: {
-        alleles: ['T', 'Tk', 't'],
-        start: 10000000,
-        length: 10584
-      },
-      metallic: {
-        alleles: ['M', 'm'],
-        start: 20000000,
-        length: 259610
-      },
-      wings: {
-        alleles: ['W', 'w'],
-        start: 70000000,
-        length: 9094
-      },
-      horns: {
-        alleles: ['H', 'h'],
-        start: 85000000,
-        length: 19421
-      },
-      color: {
-        alleles: ['C', 'c'],
-        start: 15000000,
-        length: 64572
-      },
-      black: {
-        alleles: ['B', 'b'],
-        start: 25000000,
-        length: 17596
-      },
-      forelimbs: {
-        alleles: ['Fl', 'fl'],
-        start: 80000000,
-        length: 122234
-      },
-      hindlimbs: {
-        alleles: ['Hl', 'hl'],
-        start: 85000000,
-        length: 6371
-      },
-      armor: {
-        alleles: ['A1', 'A2', 'a'],
-        start: 90000000,
-        length: 425156
-      },
-      dilute: {
-        alleles: ['D', 'd', 'dl'],
-        start: 20000000,
-        length: 152673
-      },
-      bogbreath: {
-        alleles: ['Bog', 'bog'],
-        start: 22000000,
-        length: 199642
-      },
-      nose: {
-        alleles: ['Rh', 'rh'],
-        start: 60000000,
-        length: 2950
-      }
-    },
-    alleleLabelMap: {
-      'T': 'Long tail',
-      'Tk': 'Kinked tail',
-      't': 'Short tail',
-      'M': 'Metallic',
-      'm': 'Nonmetallic',
-      'W': 'Wings',
-      'w': 'No wings',
-      'H': 'No horns',
-      'h': 'Horns',
-      'C': 'Colored',
-      'c': 'Colorless',
-      'Fl': 'Forelimbs',
-      'fl': 'No forelimbs',
-      'Hl': 'Hindlimbs',
-      'hl': 'No hindlimbs',
-      'A1': "'A1' armor",
-      'A2': "'A2' armor",
-      'a': "'a' armor",
-      'B': 'Black',
-      'b': 'Brown',
-      'D': 'Full color',
-      'd': 'Dilute color',
-      'dl': 'dl',
-      'Rh': 'Nose spike',
-      'rh': 'No nose spike',
-      'Bog': 'Healthy',
-      'bog': 'Bog breath',
-      'Y': 'Y',
-      '': ''
-    },
-    traitRules: {
-      "armor": {
-        "Five armor": [["A1", "A1"], ["A1", "A2"]],
-        "Three armor": [["A1", "a"], ["A2", "A2"]],
-        "One armor": [["A2", "a"]],
-        "No armor": [["a", "a"]]
-      },
-      "tail": {
-        "Long tail": [["T", "T"], ["T", "Tk"], ["T", "t"]],
-        "Kinked tail": [["Tk", "Tk"], ["Tk", "t"]],
-        "Short tail": [["t", "t"]]
-      },
-      "forelimbs": {
-        "Forelimbs": [["Fl", "Fl"], ["Fl", "fl"]],
-        "No forelimbs": [["fl", "fl"]]
-      },
-      "hindlimbs": {
-        "Hindlimbs": [["Hl", "Hl"], ["Hl", "hl"]],
-        "No hindlimbs": [["hl", "hl"]]
-      },
-      "horns": {
-        "Hornless": [["H", "H"], ["H", "h"]],
-        "Horns": [["h", "h"]]
-      },
-      "nose spike": {
-        "Nose spike": BioLogica.combinations([["Rh"], ["Rh", "rh", "Y"]]),
-        "No nose spike": [["rh", "rh"], ["rh", "Y"]]
-      },
-      "wings": {
-        "Wings": [["W", "W"], ["W", "w"]],
-        "No wings": [["w", "w"]]
-      },
-      "color": {
-        "Frost": [["c", "c"]],
-        "Steel": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["B"], ["B", "b"], ["D"], ["D", "d", "dl", "Y"]]),
-        "Copper": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["b"], ["b"], ["D"], ["D", "d", "dl", "Y"]]),
-        "Silver": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["B"], ["B", "b"], ["d", "dl"], ["d", "dl", "Y"]]),
-        "Gold": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["b"], ["b"], ["d", "dl"], ["d", "dl", "Y"]]),
-        "Charcoal": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["B"], ["B", "b"], ["D"], ["D", "d", "dl", "Y"]]),
-        "Lava": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["b"], ["b"], ["D"], ["D", "d", "dl", "Y"]]),
-        "Ash": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["B"], ["B", "b"], ["d", "dl"], ["d", "dl", "Y"]]),
-        "Sand": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["b"], ["b"], ["d", "dl"], ["d", "dl", "Y"]])
-      },
-      "health": {
-        "Bog breath": [['bog', 'bog'], ['bog', 'Y']],
-        "Healthy": [['Bog', 'Bog'], ['Bog', 'bog'], ['Bog', 'Y']]
-      },
-      "liveliness": {
-        "Alive": BioLogica.combinations([["D", "d"], ["D", "d", "dl", "Y"]]),
-        "Dead": [["dl", "dl"], ["dl", "Y"]]
-      }
-    },
-
-    /*
-      Gets the image name based on the organism's characteristics.
-      Requires the BioLogica.js library, and for org to be a BioLogica.js organism
-     */
-    getImageName: function(org) {
-      var filename, limbs, trait, traitColor;
-      trait = function(trait) {
-        return org.getCharacteristic(trait);
-      };
-      if (trait("liveliness") === "Dead") {
-        return "dead-drake.png";
-      }
-      filename = "";
-      traitColor = trait("color");
-      if (traitColor === "Silver") {
-        traitColor = "Argent";
-      } else if (traitColor === "Lava") {
-        traitColor = "Earth";
-      } else if (traitColor === "Ash") {
-        traitColor = "Dust";
-      }
-      filename += traitColor.toLowerCase().substring(0, 2) + "_";
-      filename += org.sex === BioLogica.FEMALE ? "f_" : "m_";
-      filename += trait("wings") === "Wings" ? "wing_" : "noWing_";
-      limbs = "";
-      if (trait("forelimbs") === "Forelimbs") {
-        if (trait("hindlimbs") === "Hindlimbs") {
-          limbs = "allLimb_";
-        } else {
-          limbs = "fore_";
-        }
-      } else if (trait("hindlimbs") === "Hindlimbs") {
-        limbs = "hind_";
-      } else {
-        limbs = "noLimb_";
-      }
-      filename += limbs;
-      filename += (function() {
-        switch (trait("armor")) {
-          case "Five armor":
-            return "a5_";
-          case "Three armor":
-            return "a3_";
-          case "One armor":
-            return "a1_";
-          default:
-            return "a0_";
-        }
-      })();
-      filename += (function() {
-        switch (trait("tail")) {
-          case "Long tail":
-            return "flair_";
-          case "Kinked tail":
-            return "kink_";
-          default:
-            return "short_";
-        }
-      })();
-      filename += trait("horns") === "Horns" ? "horn_" : "noHorn_";
-      filename += trait("nose spike") === "Nose spike" ? "rostral_" : "noRostral_";
-      filename += trait("health") === "Bog breath" ? "bogbreath" : "healthy";
-      return filename += ".png";
-    },
-
-    /*
-     */
-    makeAlive: function(org) {
-      var chromsome, replacementAllele, xChromoName;
-      if (org.getCharacteristic("liveliness") === "Dead") {
-        xChromoName = org.sex === BioLogica.MALE ? "x" : ExtMath.flip() ? "x1" : "x2";
-        chromsome = org.getGenotype().chromosomes["XY"][xChromoName];
-        replacementAllele = ExtMath.flip() ? "D" : "d";
-        org.getGenotype().replaceAllele(chromsome, "dl", replacementAllele);
-        return org.resetPhenotype();
-      }
-    }
-  };
-
-  BioLogica.Species = BioLogica.Species || {};
-
-  BioLogica.Species.GenivilleDrake = {
-    name: "GenivilleDrake",
-    chromosomeNames: ['1', '2', 'XY'],
-    chromosomeGeneMap: {
-      '1': ['t', 'm', 'w', 'h'],
-      '2': ['c', 'b', 'fl', 'hl', 'a'],
-      'XY': ['d', 'rh', 'bog']
-    },
-    chromosomesLength: {
-      '1': 100000000,
-      '2': 100000000,
-      'XY': 70000000
-    },
-    geneList: {
-      tail: {
-        alleles: ['T', 'Tk', 't'],
-        start: 10000000,
-        length: 10584
-      },
-      metallic: {
-        alleles: ['M', 'm'],
-        start: 20000000,
-        length: 259610
-      },
-      wings: {
-        alleles: ['W', 'w'],
-        start: 70000000,
-        length: 9094
-      },
-      horns: {
-        alleles: ['H', 'h'],
-        start: 85000000,
-        length: 19421
-      },
-      color: {
-        alleles: ['C', 'c'],
-        start: 15000000,
-        length: 64572
-      },
-      black: {
-        alleles: ['B', 'b'],
-        start: 25000000,
-        length: 17596
-      },
-      forelimbs: {
-        alleles: ['Fl', 'fl'],
-        start: 80000000,
-        length: 122234
-      },
-      hindlimbs: {
-        alleles: ['Hl', 'hl'],
-        start: 85000000,
-        length: 6371
-      },
-      armor: {
-        alleles: ['A', 'a'],
-        start: 90000000,
-        length: 425156
-      },
-      dilute: {
-        alleles: ['D', 'd', 'dl'],
-        start: 20000000,
-        length: 152673
-      },
-      bogbreath: {
-        alleles: ['Bog', 'bog'],
-        start: 22000000,
-        length: 199642
-      },
-      nose: {
-        alleles: ['Rh', 'rh'],
-        start: 60000000,
-        length: 2950
-      }
-    },
-    alleleLabelMap: {
-      'T': 'Long tail',
-      'Tk': 'Kinked tail',
-      't': 'Short tail',
-      'M': 'Metallic',
-      'm': 'Nonmetallic',
-      'W': 'Wings',
-      'w': 'No wings',
-      'H': 'No horns',
-      'h': 'Horns',
-      'C': 'Colored',
-      'c': 'Colorless',
-      'Fl': 'Forelimbs',
-      'fl': 'No forelimbs',
-      'Hl': 'Hindlimbs',
-      'hl': 'No hindlimbs',
-      'A': 'Armor',
-      'a': 'No armor',
-      'B': 'Black',
-      'b': 'Brown',
-      'D': 'Full color',
-      'd': 'Dilute color',
-      'dl': 'dl',
-      'Rh': 'Nose spike',
-      'rh': 'No nose spike',
-      'Bog': 'Healthy',
-      'bog': 'Bog breath',
-      'Y': 'Y',
-      '': ''
-    },
-    traitRules: {
-      "armor": {
-        "Five armor": [["A", "A"]],
-        "Three armor": [["A", "a"]],
-        "No armor": [["a", "a"]]
-      },
-      "tail": {
-        "Long tail": [["T", "T"], ["T", "Tk"], ["T", "t"]],
-        "Kinked tail": [["Tk", "Tk"], ["Tk", "t"]],
-        "Short tail": [["t", "t"]]
-      },
-      "forelimbs": {
-        "Forelimbs": [["Fl", "Fl"], ["Fl", "fl"]],
-        "No forelimbs": [["fl", "fl"]]
-      },
-      "hindlimbs": {
-        "Hindlimbs": [["Hl", "Hl"], ["Hl", "hl"]],
-        "No hindlimbs": [["hl", "hl"]]
-      },
-      "horns": {
-        "Hornless": [["H", "H"], ["H", "h"]],
-        "Horns": [["h", "h"]]
-      },
-      "nose spike": {
-        "Nose spike": BioLogica.combinations([["Rh"], ["Rh", "rh", "Y"]]),
-        "No nose spike": [["rh", "rh"], ["rh", "Y"]]
-      },
-      "wings": {
-        "Wings": [["W", "W"], ["W", "w"]],
-        "No wings": [["w", "w"]]
-      },
-      "color": {
-        "Frost": [["c", "c"]],
-        "Steel": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["B"], ["B", "b"], ["D"], ["D", "d", "dl", "Y"]]),
-        "Copper": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["b"], ["b"], ["D"], ["D", "d", "dl", "Y"]]),
-        "Silver": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["B"], ["B", "b"], ["d", "dl"], ["d", "dl", "Y"]]),
-        "Gold": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["b"], ["b"], ["d", "dl"], ["d", "dl", "Y"]]),
-        "Charcoal": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["B"], ["B", "b"], ["D"], ["D", "d", "dl", "Y"]]),
-        "Lava": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["b"], ["b"], ["D"], ["D", "d", "dl", "Y"]]),
-        "Ash": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["B"], ["B", "b"], ["d", "dl"], ["d", "dl", "Y"]]),
-        "Sand": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["b"], ["b"], ["d", "dl"], ["d", "dl", "Y"]])
-      },
-      "health": {
-        "Bog breath": [['bog', 'bog'], ['bog', 'Y']],
-        "Healthy": [['Bog', 'Bog'], ['Bog', 'bog'], ['Bog', 'Y']]
-      },
-      "liveliness": {
-        "Alive": BioLogica.combinations([["D", "d"], ["D", "d", "dl", "Y"]]),
-        "Dead": [["dl", "dl"], ["dl", "Y"]]
-      }
-    },
-
-    /*
-      Gets the image name based on the organism's characteristics.
-      Requires the BioLogica.js library, and for org to be a BioLogica.js organism
-     */
-    getImageName: function(org) {
-      var filename, limbs, trait, traitColor;
-      trait = function(trait) {
-        return org.getCharacteristic(trait);
-      };
-      if (trait("liveliness") === "Dead") {
-        return "dead-GenivilleDrake.png";
-      }
-      filename = "";
-      traitColor = trait("color");
-      if (traitColor === "Silver") {
-        traitColor = "Argent";
-      } else if (traitColor === "Lava") {
-        traitColor = "Earth";
-      } else if (traitColor === "Ash") {
-        traitColor = "Dust";
-      }
-      filename += traitColor.toLowerCase().substring(0, 2) + "_";
-      filename += org.sex === BioLogica.FEMALE ? "f_" : "m_";
-      filename += trait("wings") === "Wings" ? "wing_" : "noWing_";
-      limbs = "";
-      if (trait("forelimbs") === "Forelimbs") {
-        if (trait("hindlimbs") === "Hindlimbs") {
-          limbs = "allLimb_";
-        } else {
-          limbs = "fore_";
-        }
-      } else if (trait("hindlimbs") === "Hindlimbs") {
-        limbs = "hind_";
-      } else {
-        limbs = "noLimb_";
-      }
-      filename += limbs;
-      filename += (function() {
-        switch (trait("armor")) {
-          case "Five armor":
-            return "a5_";
-          case "Three armor":
-            return "a3_";
-          default:
-            return "a0_";
-        }
-      })();
-      filename += (function() {
-        switch (trait("tail")) {
-          case "Long tail":
-            return "flair_";
-          case "Kinked tail":
-            return "kink_";
-          default:
-            return "short_";
-        }
-      })();
-      filename += trait("horns") === "Horns" ? "horn_" : "noHorn_";
-      filename += trait("nose spike") === "Nose spike" ? "rostral_" : "noRostral_";
-      filename += trait("health") === "Bog breath" ? "bogbreath" : "healthy";
-      return filename += ".png";
-    },
-
-    /*
-     */
-    makeAlive: function(org) {
-      var chromsome, replacementAllele, xChromoName;
-      if (org.getCharacteristic("liveliness") === "Dead") {
-        xChromoName = org.sex === BioLogica.MALE ? "x" : ExtMath.flip() ? "x1" : "x2";
-        chromsome = org.getGenotype().chromosomes["XY"][xChromoName];
-        replacementAllele = ExtMath.flip() ? "D" : "d";
-        org.getGenotype().replaceAllele(chromsome, "dl", replacementAllele);
-        return org.resetPhenotype();
-      }
-    }
-  };
-
-  BioLogica.Species = BioLogica.Species || {};
-
   BioLogica.Species.Dragon = {
     name: 'Dragon',
     chromosomeNames: ['1', '2', 'XY'],
@@ -1621,6 +1145,246 @@
           }
         }
         org.getGenotype().replaceAllele(chromosome, 'b', 'B');
+        return org.resetPhenotype();
+      }
+    }
+  };
+
+  BioLogica.Species = BioLogica.Species || {};
+
+  BioLogica.Species.Drake = {
+    name: "Drake",
+    chromosomeNames: ['1', '2', 'XY'],
+    chromosomeGeneMap: {
+      '1': ['t', 'm', 'w', 'h'],
+      '2': ['c', 'b', 'fl', 'hl', 'a'],
+      'XY': ['d', 'rh', 'bog']
+    },
+    chromosomesLength: {
+      '1': 100000000,
+      '2': 100000000,
+      'XY': 70000000
+    },
+    geneList: {
+      tail: {
+        alleles: ['T', 'Tk', 't'],
+        start: 10000000,
+        length: 10584
+      },
+      metallic: {
+        alleles: ['M', 'm'],
+        start: 20000000,
+        length: 259610
+      },
+      wings: {
+        alleles: ['W', 'w'],
+        start: 70000000,
+        length: 9094
+      },
+      horns: {
+        alleles: ['H', 'h'],
+        start: 85000000,
+        length: 19421
+      },
+      color: {
+        alleles: ['C', 'c'],
+        start: 15000000,
+        length: 64572
+      },
+      black: {
+        alleles: ['B', 'b'],
+        start: 25000000,
+        length: 17596
+      },
+      forelimbs: {
+        alleles: ['Fl', 'fl'],
+        start: 80000000,
+        length: 122234
+      },
+      hindlimbs: {
+        alleles: ['Hl', 'hl'],
+        start: 85000000,
+        length: 6371
+      },
+      armor: {
+        alleles: ['A1', 'A2', 'a'],
+        start: 90000000,
+        length: 425156
+      },
+      dilute: {
+        alleles: ['D', 'd', 'dl'],
+        start: 20000000,
+        length: 152673
+      },
+      bogbreath: {
+        alleles: ['Bog', 'bog'],
+        start: 22000000,
+        length: 199642
+      },
+      nose: {
+        alleles: ['Rh', 'rh'],
+        start: 60000000,
+        length: 2950
+      }
+    },
+    alleleLabelMap: {
+      'T': 'Long tail',
+      'Tk': 'Kinked tail',
+      't': 'Short tail',
+      'M': 'Metallic',
+      'm': 'Nonmetallic',
+      'W': 'Wings',
+      'w': 'No wings',
+      'H': 'No horns',
+      'h': 'Horns',
+      'C': 'Colored',
+      'c': 'Colorless',
+      'Fl': 'Forelimbs',
+      'fl': 'No forelimbs',
+      'Hl': 'Hindlimbs',
+      'hl': 'No hindlimbs',
+      'A1': "5 armor",
+      'A2': "3 armor",
+      'a': "0 armor",
+      'B': 'Black',
+      'b': 'Brown',
+      'D': 'Full color',
+      'd': 'Dilute color',
+      'dl': 'dl',
+      'Rh': 'Nose spike',
+      'rh': 'No nose spike',
+      'Bog': 'Healthy',
+      'bog': 'Bog breath',
+      'Y': 'Y',
+      '': ''
+    },
+    traitRules: {
+      "armor": {
+        "Five armor": [["A1", "A1"], ["A1", "A2"]],
+        "Three armor": [["A1", "a"], ["A2", "A2"]],
+        "One armor": [["A2", "a"]],
+        "No armor": [["a", "a"]]
+      },
+      "tail": {
+        "Long tail": [["T", "T"], ["T", "Tk"], ["T", "t"]],
+        "Kinked tail": [["Tk", "Tk"], ["Tk", "t"]],
+        "Short tail": [["t", "t"]]
+      },
+      "forelimbs": {
+        "Forelimbs": [["Fl", "Fl"], ["Fl", "fl"]],
+        "No forelimbs": [["fl", "fl"]]
+      },
+      "hindlimbs": {
+        "Hindlimbs": [["Hl", "Hl"], ["Hl", "hl"]],
+        "No hindlimbs": [["hl", "hl"]]
+      },
+      "horns": {
+        "Hornless": [["H", "H"], ["H", "h"]],
+        "Horns": [["h", "h"]]
+      },
+      "nose spike": {
+        "Nose spike": BioLogica.combinations([["Rh"], ["Rh", "rh", "Y"]]),
+        "No nose spike": [["rh", "rh"], ["rh", "Y"]]
+      },
+      "wings": {
+        "Wings": [["W", "W"], ["W", "w"]],
+        "No wings": [["w", "w"]]
+      },
+      "color": {
+        "Frost": [["c", "c"]],
+        "Steel": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["B"], ["B", "b"], ["D"], ["D", "d", "dl", "Y"]]),
+        "Copper": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["b"], ["b"], ["D"], ["D", "d", "dl", "Y"]]),
+        "Silver": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["B"], ["B", "b"], ["d", "dl"], ["d", "dl", "Y"]]),
+        "Gold": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["b"], ["b"], ["d", "dl"], ["d", "dl", "Y"]]),
+        "Charcoal": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["B"], ["B", "b"], ["D"], ["D", "d", "dl", "Y"]]),
+        "Lava": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["b"], ["b"], ["D"], ["D", "d", "dl", "Y"]]),
+        "Ash": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["B"], ["B", "b"], ["d", "dl"], ["d", "dl", "Y"]]),
+        "Sand": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["b"], ["b"], ["d", "dl"], ["d", "dl", "Y"]])
+      },
+      "health": {
+        "Bog breath": [['bog', 'bog'], ['bog', 'Y']],
+        "Healthy": [['Bog', 'Bog'], ['Bog', 'bog'], ['Bog', 'Y']]
+      },
+      "liveliness": {
+        "Alive": BioLogica.combinations([["D", "d"], ["D", "d", "dl", "Y"]]),
+        "Dead": [["dl", "dl"], ["dl", "Y"]]
+      }
+    },
+
+    /*
+      Gets the image name based on the organism's characteristics.
+      Requires the BioLogica.js library, and for org to be a BioLogica.js organism
+     */
+    getImageName: function(org) {
+      var filename, limbs, trait, traitColor;
+      trait = function(trait) {
+        return org.getCharacteristic(trait);
+      };
+      if (trait("liveliness") === "Dead") {
+        return "dead-drake.png";
+      }
+      filename = "";
+      traitColor = trait("color");
+      if (traitColor === "Silver") {
+        traitColor = "Argent";
+      } else if (traitColor === "Lava") {
+        traitColor = "Earth";
+      } else if (traitColor === "Ash") {
+        traitColor = "Dust";
+      }
+      filename += traitColor.toLowerCase().substring(0, 2) + "_";
+      filename += org.sex === BioLogica.FEMALE ? "f_" : "m_";
+      filename += trait("wings") === "Wings" ? "wing_" : "noWing_";
+      limbs = "";
+      if (trait("forelimbs") === "Forelimbs") {
+        if (trait("hindlimbs") === "Hindlimbs") {
+          limbs = "allLimb_";
+        } else {
+          limbs = "fore_";
+        }
+      } else if (trait("hindlimbs") === "Hindlimbs") {
+        limbs = "hind_";
+      } else {
+        limbs = "noLimb_";
+      }
+      filename += limbs;
+      filename += (function() {
+        switch (trait("armor")) {
+          case "Five armor":
+            return "a5_";
+          case "Three armor":
+            return "a3_";
+          case "One armor":
+            return "a1_";
+          default:
+            return "a0_";
+        }
+      })();
+      filename += (function() {
+        switch (trait("tail")) {
+          case "Long tail":
+            return "flair_";
+          case "Kinked tail":
+            return "kink_";
+          default:
+            return "short_";
+        }
+      })();
+      filename += trait("horns") === "Horns" ? "horn_" : "noHorn_";
+      filename += trait("nose spike") === "Nose spike" ? "rostral_" : "noRostral_";
+      filename += trait("health") === "Bog breath" ? "bogbreath" : "healthy";
+      return filename += ".png";
+    },
+
+    /*
+     */
+    makeAlive: function(org) {
+      var chromsome, replacementAllele, xChromoName;
+      if (org.getCharacteristic("liveliness") === "Dead") {
+        xChromoName = org.sex === BioLogica.MALE ? "x" : ExtMath.flip() ? "x1" : "x2";
+        chromsome = org.getGenotype().chromosomes["XY"][xChromoName];
+        replacementAllele = ExtMath.flip() ? "D" : "d";
+        org.getGenotype().replaceAllele(chromsome, "dl", replacementAllele);
         return org.resetPhenotype();
       }
     }
@@ -2040,6 +1804,242 @@
       GGLizards have no lethal characteristics
      */
     makeAlive: function(org) {}
+  };
+
+  BioLogica.Species = BioLogica.Species || {};
+
+  BioLogica.Species.GenivilleDrake = {
+    name: "GenivilleDrake",
+    chromosomeNames: ['1', '2', 'XY'],
+    chromosomeGeneMap: {
+      '1': ['t', 'm', 'w', 'h'],
+      '2': ['c', 'b', 'fl', 'hl', 'a'],
+      'XY': ['d', 'rh', 'bog']
+    },
+    chromosomesLength: {
+      '1': 100000000,
+      '2': 100000000,
+      'XY': 70000000
+    },
+    geneList: {
+      tail: {
+        alleles: ['T', 'Tk', 't'],
+        start: 10000000,
+        length: 10584
+      },
+      metallic: {
+        alleles: ['M', 'm'],
+        start: 20000000,
+        length: 259610
+      },
+      wings: {
+        alleles: ['W', 'w'],
+        start: 70000000,
+        length: 9094
+      },
+      horns: {
+        alleles: ['H', 'h'],
+        start: 85000000,
+        length: 19421
+      },
+      color: {
+        alleles: ['C', 'c'],
+        start: 15000000,
+        length: 64572
+      },
+      black: {
+        alleles: ['B', 'b'],
+        start: 25000000,
+        length: 17596
+      },
+      forelimbs: {
+        alleles: ['Fl', 'fl'],
+        start: 80000000,
+        length: 122234
+      },
+      hindlimbs: {
+        alleles: ['Hl', 'hl'],
+        start: 85000000,
+        length: 6371
+      },
+      armor: {
+        alleles: ['A', 'a'],
+        start: 90000000,
+        length: 425156
+      },
+      dilute: {
+        alleles: ['D', 'd', 'dl'],
+        start: 20000000,
+        length: 152673
+      },
+      bogbreath: {
+        alleles: ['Bog', 'bog'],
+        start: 22000000,
+        length: 199642
+      },
+      nose: {
+        alleles: ['Rh', 'rh'],
+        start: 60000000,
+        length: 2950
+      }
+    },
+    alleleLabelMap: {
+      'T': 'Long tail',
+      'Tk': 'Kinked tail',
+      't': 'Short tail',
+      'M': 'Metallic',
+      'm': 'Nonmetallic',
+      'W': 'Wings',
+      'w': 'No wings',
+      'H': 'No horns',
+      'h': 'Horns',
+      'C': 'Colored',
+      'c': 'Colorless',
+      'Fl': 'Forelimbs',
+      'fl': 'No forelimbs',
+      'Hl': 'Hindlimbs',
+      'hl': 'No hindlimbs',
+      'A': 'Armor',
+      'a': 'No armor',
+      'B': 'Black',
+      'b': 'Brown',
+      'D': 'Full color',
+      'd': 'Dilute color',
+      'dl': 'dl',
+      'Rh': 'Nose spike',
+      'rh': 'No nose spike',
+      'Bog': 'Healthy',
+      'bog': 'Bog breath',
+      'Y': 'Y',
+      '': ''
+    },
+    traitRules: {
+      "armor": {
+        "Five armor": [["A", "A"]],
+        "Three armor": [["A", "a"]],
+        "No armor": [["a", "a"]]
+      },
+      "tail": {
+        "Long tail": [["T", "T"], ["T", "Tk"], ["T", "t"]],
+        "Kinked tail": [["Tk", "Tk"], ["Tk", "t"]],
+        "Short tail": [["t", "t"]]
+      },
+      "forelimbs": {
+        "Forelimbs": [["Fl", "Fl"], ["Fl", "fl"]],
+        "No forelimbs": [["fl", "fl"]]
+      },
+      "hindlimbs": {
+        "Hindlimbs": [["Hl", "Hl"], ["Hl", "hl"]],
+        "No hindlimbs": [["hl", "hl"]]
+      },
+      "horns": {
+        "Hornless": [["H", "H"], ["H", "h"]],
+        "Horns": [["h", "h"]]
+      },
+      "nose spike": {
+        "Nose spike": BioLogica.combinations([["Rh"], ["Rh", "rh", "Y"]]),
+        "No nose spike": [["rh", "rh"], ["rh", "Y"]]
+      },
+      "wings": {
+        "Wings": [["W", "W"], ["W", "w"]],
+        "No wings": [["w", "w"]]
+      },
+      "color": {
+        "Frost": [["c", "c"]],
+        "Steel": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["B"], ["B", "b"], ["D"], ["D", "d", "dl", "Y"]]),
+        "Copper": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["b"], ["b"], ["D"], ["D", "d", "dl", "Y"]]),
+        "Silver": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["B"], ["B", "b"], ["d", "dl"], ["d", "dl", "Y"]]),
+        "Gold": BioLogica.combinations([["C"], ["C", "c"], ["M"], ["M", "m"], ["b"], ["b"], ["d", "dl"], ["d", "dl", "Y"]]),
+        "Charcoal": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["B"], ["B", "b"], ["D"], ["D", "d", "dl", "Y"]]),
+        "Lava": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["b"], ["b"], ["D"], ["D", "d", "dl", "Y"]]),
+        "Ash": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["B"], ["B", "b"], ["d", "dl"], ["d", "dl", "Y"]]),
+        "Sand": BioLogica.combinations([["C"], ["C", "c"], ["m"], ["m"], ["b"], ["b"], ["d", "dl"], ["d", "dl", "Y"]])
+      },
+      "health": {
+        "Bog breath": [['bog', 'bog'], ['bog', 'Y']],
+        "Healthy": [['Bog', 'Bog'], ['Bog', 'bog'], ['Bog', 'Y']]
+      },
+      "liveliness": {
+        "Alive": BioLogica.combinations([["D", "d"], ["D", "d", "dl", "Y"]]),
+        "Dead": [["dl", "dl"], ["dl", "Y"]]
+      }
+    },
+
+    /*
+      Gets the image name based on the organism's characteristics.
+      Requires the BioLogica.js library, and for org to be a BioLogica.js organism
+     */
+    getImageName: function(org) {
+      var filename, limbs, trait, traitColor;
+      trait = function(trait) {
+        return org.getCharacteristic(trait);
+      };
+      if (trait("liveliness") === "Dead") {
+        return "dead-GenivilleDrake.png";
+      }
+      filename = "";
+      traitColor = trait("color");
+      if (traitColor === "Silver") {
+        traitColor = "Argent";
+      } else if (traitColor === "Lava") {
+        traitColor = "Earth";
+      } else if (traitColor === "Ash") {
+        traitColor = "Dust";
+      }
+      filename += traitColor.toLowerCase().substring(0, 2) + "_";
+      filename += org.sex === BioLogica.FEMALE ? "f_" : "m_";
+      filename += trait("wings") === "Wings" ? "wing_" : "noWing_";
+      limbs = "";
+      if (trait("forelimbs") === "Forelimbs") {
+        if (trait("hindlimbs") === "Hindlimbs") {
+          limbs = "allLimb_";
+        } else {
+          limbs = "fore_";
+        }
+      } else if (trait("hindlimbs") === "Hindlimbs") {
+        limbs = "hind_";
+      } else {
+        limbs = "noLimb_";
+      }
+      filename += limbs;
+      filename += (function() {
+        switch (trait("armor")) {
+          case "Five armor":
+            return "a5_";
+          case "Three armor":
+            return "a3_";
+          default:
+            return "a0_";
+        }
+      })();
+      filename += (function() {
+        switch (trait("tail")) {
+          case "Long tail":
+            return "flair_";
+          case "Kinked tail":
+            return "kink_";
+          default:
+            return "short_";
+        }
+      })();
+      filename += trait("horns") === "Horns" ? "horn_" : "noHorn_";
+      filename += trait("nose spike") === "Nose spike" ? "rostral_" : "noRostral_";
+      filename += trait("health") === "Bog breath" ? "bogbreath" : "healthy";
+      return filename += ".png";
+    },
+
+    /*
+     */
+    makeAlive: function(org) {
+      var chromsome, replacementAllele, xChromoName;
+      if (org.getCharacteristic("liveliness") === "Dead") {
+        xChromoName = org.sex === BioLogica.MALE ? "x" : ExtMath.flip() ? "x1" : "x2";
+        chromsome = org.getGenotype().chromosomes["XY"][xChromoName];
+        replacementAllele = ExtMath.flip() ? "D" : "d";
+        org.getGenotype().replaceAllele(chromsome, "dl", replacementAllele);
+        return org.resetPhenotype();
+      }
+    }
   };
 
 }).call(this);
