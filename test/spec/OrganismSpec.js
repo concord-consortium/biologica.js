@@ -101,4 +101,12 @@ describe("An organism", function() {
     expect(!!~alleleString.indexOf("a:Rh") || !!~alleleString.indexOf("a:rh")).toBe(true);
     expect(!!~alleleString.indexOf("b:Rh") || !!~alleleString.indexOf("b:rh")).toBe(false);
   });
+
+  it("can provide an alleleString when created by an alleleString with options", function() {
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:Tk/t,b:A1/A2", BioLogica.MALE),
+        alleleString = org.genetics.genotype.getAlleleString();
+
+    expect(/a:(Tk|t)/.test(alleleString)).toBe(true);
+    expect(/b:(A1|A2)/.test(alleleString)).toBe(true);
+  });
 });

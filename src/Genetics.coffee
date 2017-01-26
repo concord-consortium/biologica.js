@@ -16,6 +16,7 @@ class BioLogica.Genetics
     Converts an alleleString to a genotype hash
     e.g. convertAlleleStringToChromosomes("a:t,b:t,a:h,b:H,a:Dl", female) =>
       {"1": {a: ["t"], b: ["t"]}, "2": {a: ["h"], b: ["H"]}, "XY": {x1: ["Dl"]}}
+    Also supports limited options for alleles, e.g. "a:T/Tk" or b:x/y/z
   ###
   convertAlleleStringToGenotypeHash: (alleleString, sex) ->
     split = BioLogica.Genetics.parseAlleleString alleleString
@@ -28,11 +29,17 @@ class BioLogica.Genetics
     for own side, alleles of split
       continue unless alleles
       for allele in alleles
+        if (~allele.indexOf("/")) then allele = @selectOption allele
         chromoName = @findChromosome allele
         continue unless chromoName
         sides = @getSides(chromoName, sex)
         genotypeHash[chromoName][if side == "a" then sides[0] else sides[1]].push allele
     genotypeHash
+
+  selectOption: (alleles) ->
+    alleleOptions = (allele.trim() for allele in alleles.split("/"))
+    rand = Math.floor Math.random() * alleleOptions.length
+    alleleOptions[rand]
 
   getAlleleString: ->
     @genotype.getAlleleString()
