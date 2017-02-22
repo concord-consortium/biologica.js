@@ -70,13 +70,13 @@ BioLogica.Species.Drake =
       'T': 'Long tail'
       'Tk': 'Kinked tail'
       't': 'Short tail'
-      'M': 'Metallic'
-      'm': 'Nonmetallic'
+      'M': 'Shiny'
+      'm': 'Dull'
       'W': 'Wings'
       'w': 'No wings'
       'H': 'No horns'
       'h': 'Horns'
-      'C': 'Colored'
+      'C': 'Color'
       'c': 'Colorless'
       'Fl': 'Forelimbs'
       'fl': 'No forelimbs'
@@ -85,8 +85,8 @@ BioLogica.Species.Drake =
       'A1': "5 armor"
       'A2': "3 armor"
       'a': "0 armor"
-      'B': 'Black'
-      'b': 'Brown'
+      'B': 'Gray'
+      'b': 'Orange'
       'D': 'Full color'
       'd': 'Dilute color'
       'dl': 'dl'
