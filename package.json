@@ -7,7 +7,16 @@
   "devDependencies": {
     "yuicompressor": "^2.4.8"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "cake build",
+    "build:noExtensions": "cake --excludeArrayExtensions build",
+    "build:noSpecies": "cake build-without-species",
+    "build:noSpeciesOrExtensions": "cake --excludeArrayExtensions build-without-species",
+    "compile": "cake compile",
+    "compile:noExtensions": "cake --excludeArrayExtensions compile",
+    "compile:noSpecies": "cake compile-without-species",
+    "compile:noSpeciesOrExtensions": "cake --excludeArrayExtensions compile-without-species"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/concord-consortium/biologica.js.git"
