@@ -1,8 +1,8 @@
 {
   "name": "biologica.js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A genetics and breeding engine",
-  "main": "dist/biologica.min.js",
+  "main": "dist/biologica.js",
   "dependencies": {},
   "devDependencies": {
     "yuicompressor": "^2.4.8"
