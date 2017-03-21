@@ -1,6 +1,6 @@
 {
   "name": "biologica.js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "homepage": "https://github.com/concord-consortium/biologica.js",
   "description": "A genetics and breeding engine",
   "authors": [
@@ -8,6 +8,6 @@
   ],
   "license": "MIT",
   "main": [
-    "dist/biologica.min.js"
+    "dist/biologica.js"
   ]
 }
