@@ -100,3 +100,8 @@ BioLogica.Organism.createFromGametes = (species, motherGamete, fatherGamete) ->
     genotypeHash[chromoName][chromatidB.side] = chromatidB.alleles
 
   return new BioLogica.Organism(species, genotypeHash)
+
+BioLogica.Organism. ensureValidOrganism = (orgOrDef, species) ->
+  if orgOrDef.getAlleleString
+    return orgOrDef
+  new (BioLogica.Organism)(species, orgOrDef.alleleString, orgOrDef.sex)

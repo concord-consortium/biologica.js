@@ -245,3 +245,23 @@ BioLogica.Genetics.getGeneOfAllele = (species, allele) ->
     if ~gene.alleles.indexOf allele
       gene.name = geneName
       return gene
+
+###
+    Goes through the traitRules to find out what unique alleles are associated with each trait
+    e.g. For "tail" it will return ["T", "Tk", "t"]. Adapted from:
+    @see https://github.com/concord-consortium/Geniverse-SproutCore/blob/master/frameworks/geniverse/controllers/match.js
+###
+BioLogica.Genetics.collectAllAllelesForTrait = (trait, traitRules) ->
+  allelesHash = {}
+  alleles = []
+  for characteristic of traitRules[trait]
+    for possibileAllelesCombo of traitRules[trait][characteristic]
+      if traitRules[trait][characteristic].hasOwnProperty(possibileAllelesCombo)
+        i = 0
+        ii = traitRules[trait][characteristic][possibileAllelesCombo].length
+        while i < ii
+          allelesHash[traitRules[trait][characteristic][possibileAllelesCombo][i]] = 1
+          i++
+  for allele of allelesHash
+    alleles.push allele
+  alleles
