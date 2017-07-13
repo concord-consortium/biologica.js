@@ -53,7 +53,7 @@ BioLogica.Phenotype.numberOfAlleleChangesToReachPhenotype = (testCharacteristics
         j = 0
         jj = possibleSolutions.length
         while j < jj
-          solution = possibleSolutions[i].slice()
+          solution = possibleSolutions[j].slice()
           pathLength = 0
           k = 0
           kk = characteristicAlleles.length
