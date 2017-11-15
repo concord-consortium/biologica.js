@@ -265,3 +265,34 @@ BioLogica.Genetics.collectAllAllelesForTrait = (trait, traitRules) ->
   for allele of allelesHash
     alleles.push allele
   alleles
+
+###
+  Goes through the traitRules to find out what unique genes are associated with the characteristic.
+  For many characteristics, this will return the same as the above function, but for some with
+  epistasis (one gene trumping others), it will return only those alleles that are relavant.
+  e.g.
+  For "Steel" it will return ["Color", "Metalic", "Brown", "Dilute"].
+  For "Albino" it will return ["Color"]
+###
+BioLogica.Genetics.collectAllGenesForCharacteristic = (trait, characteristic, species) ->
+  traitRules = species.traitRules
+  allelesHash = {}
+  genes = []
+  for possibileAllelesCombo of traitRules[trait][characteristic]
+    if traitRules[trait][characteristic].hasOwnProperty(possibileAllelesCombo)
+      i = 0
+      ii = traitRules[trait][characteristic][possibileAllelesCombo].length
+      while i < ii
+        allelesHash[traitRules[trait][characteristic][possibileAllelesCombo][i]] = 1
+        i++
+  for allele of allelesHash
+    genes.push BioLogica.Genetics.getGeneOfAllele(species, allele)
+
+  # get only the unique values
+  genes = genes.reduce (p, c) ->
+    if p.indexOf(c) < 0
+      p.push(c)
+    return p
+  , []
+
+  genes

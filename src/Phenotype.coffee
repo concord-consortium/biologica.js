@@ -20,7 +20,7 @@ class BioLogica.Phenotype
 BioLogica.Phenotype.numberOfChangesToReachPhenotype = (testOrganism, targetOrganism, species) ->
   testOrganism = BioLogica.Organism.ensureValidOrganism(testOrganism, species)
   targetOrganism = BioLogica.Organism.ensureValidOrganism(targetOrganism, species)
-  requiredChangeCount = BioLogica.Phenotype.numberOfAlleleChangesToReachPhenotype(testOrganism.phenotype.characteristics, targetOrganism.phenotype.characteristics, testOrganism.genetics.genotype.allAlleles, testOrganism.species.traitRules)
+  requiredChangeCount = BioLogica.Phenotype.numberOfAlleleChangesToReachPhenotype(testOrganism.phenotype.characteristics, targetOrganism.phenotype.characteristics, testOrganism.genetics.genotype.allAlleles, testOrganism.species)
   if testOrganism.sex != targetOrganism.sex
     ++requiredChangeCount
   requiredChangeCount
@@ -31,7 +31,8 @@ BioLogica.Phenotype.numberOfChangesToReachPhenotype = (testOrganism, targetOrgan
     characterized by 'targetCharacteristics'. Adapted from:
     @see https://github.com/concord-consortium/Geniverse-SproutCore/blob/master/frameworks/geniverse/controllers/match.js
 ###
-BioLogica.Phenotype.numberOfAlleleChangesToReachPhenotype = (testCharacteristics, targetCharacteristics, testAlleles, traitRules) ->
+BioLogica.Phenotype.numberOfAlleleChangesToReachPhenotype = (testCharacteristics, targetCharacteristics, testAlleles, species) ->
+  traitRules = species.traitRules
   alleles = testAlleles
   moves = 0
   for trait of traitRules
@@ -39,13 +40,15 @@ BioLogica.Phenotype.numberOfAlleleChangesToReachPhenotype = (testCharacteristics
       if testCharacteristics[trait] != targetCharacteristics[trait]
         # first we have to work out what alleles the original drake has that correspond to
         # their non-matching trait
-        possibleTraitAlleles = BioLogica.Genetics.collectAllAllelesForTrait(trait, traitRules)
+        possibleTraitGenes = BioLogica.Genetics.collectAllGenesForCharacteristic(trait, targetCharacteristics[trait], species)
         characteristicAlleles = []
         i = 0
         ii = alleles.length
         while i < ii
-          if possibleTraitAlleles.indexOf(alleles[i]) >= 0
-            characteristicAlleles.push alleles[i]
+          for gene in possibleTraitGenes
+            if BioLogica.Genetics.getGeneOfAllele(species, alleles[i]) is gene
+              characteristicAlleles.push alleles[i]
+              continue
           i++
         # now work out the smallest number of steps to get from there to the desired characteristic
         possibleSolutions = traitRules[trait][targetCharacteristics[trait]]
