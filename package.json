@@ -1,6 +1,6 @@
 {
   "name": "biologica.js",
-  "version": "0.0.5",
+  "version": "0.0.11",
   "description": "A genetics and breeding engine",
   "main": "dist/biologica.js",
   "dependencies": {},

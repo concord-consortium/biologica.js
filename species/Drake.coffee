@@ -54,7 +54,7 @@ BioLogica.Species.Drake =
       start: 90000000
       length: 425156
     dilute:
-      alleles: ['D', 'd', 'dl']
+      alleles: ['D', 'd']
       start: 20000000
       length: 152673
     bogbreath:
@@ -89,7 +89,6 @@ BioLogica.Species.Drake =
       'b': 'Orange'
       'D': 'Deep'
       'd': 'Faded'
-      'dl': 'dl'
       'Rh': 'Spiked'
       'rh': 'Spikeless'
       'Bog': 'Normal'
@@ -132,22 +131,21 @@ BioLogica.Species.Drake =
 
     "color":
       "Frost":    [["c","c"]]
-      "Steel":    BioLogica.combinations([["C"],["C","c"],["M"],["M","m"],["B"],["B","b"],["D"],["D","d","dl","Y"]])
-      "Copper":   BioLogica.combinations([["C"],["C","c"],["M"],["M","m"],["b"],["b"],["D"],["D","d","dl","Y"]])
-      "Silver":   BioLogica.combinations([["C"],["C","c"],["M"],["M","m"],["B"],["B","b"],["d","dl"],["d","dl","Y"]])
-      "Gold":     BioLogica.combinations([["C"],["C","c"],["M"],["M","m"],["b"],["b"],["d","dl"],["d","dl","Y"]])
-      "Charcoal": BioLogica.combinations([["C"],["C","c"],["m"],["m"],["B"],["B","b"],["D"],["D","d","dl","Y"]])
-      "Lava":     BioLogica.combinations([["C"],["C","c"],["m"],["m"],["b"],["b"],["D"],["D","d","dl","Y"]])
-      "Ash":      BioLogica.combinations([["C"],["C","c"],["m"],["m"],["B"],["B","b"],["d","dl"],["d","dl","Y"]])
-      "Sand":     BioLogica.combinations([["C"],["C","c"],["m"],["m"],["b"],["b"],["d","dl"],["d","dl","Y"]])
+      "Steel":    BioLogica.combinations([["C"],["C","c"],["M"],["M","m"],["B"],["B","b"],["D"],["D","d","Y"]])
+      "Copper":   BioLogica.combinations([["C"],["C","c"],["M"],["M","m"],["b"],["b"],["D"],["D","d","Y"]])
+      "Silver":   BioLogica.combinations([["C"],["C","c"],["M"],["M","m"],["B"],["B","b"],["d"],["d","Y"]])
+      "Gold":     BioLogica.combinations([["C"],["C","c"],["M"],["M","m"],["b"],["b"],["d"],["d","Y"]])
+      "Charcoal": BioLogica.combinations([["C"],["C","c"],["m"],["m"],["B"],["B","b"],["D"],["D","d","Y"]])
+      "Lava":     BioLogica.combinations([["C"],["C","c"],["m"],["m"],["b"],["b"],["D"],["D","d","Y"]])
+      "Ash":      BioLogica.combinations([["C"],["C","c"],["m"],["m"],["B"],["B","b"],["d"],["d","Y"]])
+      "Sand":     BioLogica.combinations([["C"],["C","c"],["m"],["m"],["b"],["b"],["d"],["d","Y"]])
 
     "health":
       "Bog breath": [['bog','bog'],['bog','Y']]
       "Healthy": [['Bog', 'Bog'],['Bog','bog'],['Bog','Y']]
 
     "liveliness":
-      "Alive":    BioLogica.combinations([["D","d"],["D","d","dl","Y"]])
-      "Dead":     [["dl", "dl"], ["dl", "Y"]]
+      "Alive":    BioLogica.combinations([["D","d"],["D","d","Y"]])
 
   ###
     Gets the image name based on the organism's characteristics.
@@ -214,11 +212,5 @@ BioLogica.Species.Drake =
 
   ###
   makeAlive: (org) ->
-    if org.getCharacteristic("liveliness") is "Dead"
-      xChromoName = if org.sex is BioLogica.MALE then "x"
-      else if ExtMath.flip() then "x1" else "x2"
-      chromsome = org.getGenotype().chromosomes["XY"][xChromoName]
-
-      replacementAllele = if ExtMath.flip() then "D" else "d"
-      org.getGenotype().replaceAllele chromsome, "dl", replacementAllele
-      org.resetPhenotype()
+    # legacy of an earlier version which supported the "dl" allele
+    # which could result in dead drakes
