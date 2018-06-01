@@ -35,30 +35,30 @@ describe("For a Drake, the characteristic", function() {
     [ female,    "a:a,b:a",       "armor",        "No armor"      ],
 
     [ female,    "a:Rh",          "nose spike",   "Nose spike"    ],
-    [ female,    "a:rh,b:rh",       "nose spike",   "No nose spike" ],
+    [ female,    "a:rh,b:rh",     "nose spike",   "No nose spike" ],
     [ male,      "a:Rh",          "nose spike",   "Nose spike"    ],
     [ male,      "a:rh",          "nose spike",   "No nose spike" ],
 
     [ female,    "a:c,b:c",                      "color",      "Frost"    ],
     [ female,    "a:C,a:M,b:M,a:B,a:D",          "color",      "Steel"    ],
     [ female,    "a:C,b:c,a:M,b:m,a:B,a:D,b:d",  "color",      "Steel"    ],
-    [ female,    "a:C,b:c,a:M,b:m,a:B,a:D,b:dl", "color",      "Steel"    ],
+    [ female,    "a:C,b:c,a:M,b:m,a:B,a:D,b:d",  "color",      "Steel"    ],
     [ female,    "a:C,a:M,b:M,a:b,b:b,a:D",      "color",      "Copper"   ],
     [ male,      "a:C,a:M,b:M,a:b,b:b,a:D",      "color",      "Copper"   ],
     [ female,    "a:C,a:M,b:M,a:B,a:d,b:d",      "color",      "Silver"   ],
-    [ female,    "a:C,a:M,b:M,a:B,a:dl,b:d",     "color",      "Silver"   ],
+    [ female,    "a:C,a:M,b:M,a:B,a:d,b:d",      "color",      "Silver"   ],
     [ male,      "a:C,a:M,b:M,a:B,a:d",          "color",      "Silver"   ],
     [ female,    "a:C,a:M,b:m,a:b,b:b,a:d,b:d",  "color",      "Gold"     ],
-    [ female,    "a:C,a:M,b:m,a:b,b:b,a:d,b:dl", "color",      "Gold"     ],
+    [ female,    "a:C,a:M,b:m,a:b,b:b,a:d,b:d",  "color",      "Gold"     ],
     [ male,      "a:C,a:M,b:m,a:b,b:b,a:d",      "color",      "Gold"     ],
     [ female,    "a:C,a:m,b:m,a:B,a:D",          "color",      "Charcoal" ],
-    [ female,    "a:C,a:m,b:m,a:b,b:b,a:D",      "color",      "Lava"    ],
-    [ male,      "a:C,a:m,b:m,a:b,b:b,a:D",      "color",      "Lava"    ],
-    [ female,    "a:C,a:m,b:m,a:B,a:d,b:d",      "color",      "Ash"     ],
-    [ male,      "a:C,a:m,b:m,a:B,a:d",          "color",      "Ash"     ],
+    [ female,    "a:C,a:m,b:m,a:b,b:b,a:D",      "color",      "Lava"     ],
+    [ male,      "a:C,a:m,b:m,a:b,b:b,a:D",      "color",      "Lava"     ],
+    [ female,    "a:C,a:m,b:m,a:B,a:d,b:d",      "color",      "Ash"      ],
+    [ male,      "a:C,a:m,b:m,a:B,a:d",          "color",      "Ash"      ],
     [ female,    "a:C,a:m,b:m,a:b,b:b,a:d,b:d",  "color",      "Sand"     ],
     [ male,      "a:C,a:m,b:m,a:b,b:b,a:d",      "color",      "Sand"     ],
-    [ male,      "a:c,b:c",                      "color",      "Frost"     ],
+    [ male,      "a:c,b:c",                      "color",      "Frost"    ],
 
     [ male,      "a:bog",         "health",   "Bog breath"  ],
     [ male,      "a:Bog",         "health",   "Healthy"     ],
@@ -67,10 +67,10 @@ describe("For a Drake, the characteristic", function() {
     [ female,    "a:bog,b:Bog",   "health",   "Healthy"     ],
     [ female,    "a:Bog,b:Bog",   "health",   "Healthy"     ],
 
-    [ female,    "a:M,b:M,a:dl,b:dl,a:A1,b:A1",  "liveliness", "Dead"     ],
-    [ male,      "a:dl",                         "liveliness", "Dead"     ],
-    [ female,    "a:M,b:M,a:d,b:dl,a:A1",        "liveliness", "Alive"    ],
-    [ female,    "a:M,b:m,a:D,b:dl,a:A2",        "liveliness", "Alive"    ],
+    [ female,    "a:M,b:M,a:d,b:d,a:A1,b:A1",    "liveliness", "Alive"    ],
+    [ male,      "a:d",                          "liveliness", "Alive"    ],
+    [ female,    "a:M,b:M,a:d,b:d,a:A1",         "liveliness", "Alive"    ],
+    [ female,    "a:M,b:m,a:D,b:d,a:A2",         "liveliness", "Alive"    ],
     [ female,    "a:M,b:M,a:D,b:D,a:a,b:a",      "liveliness", "Alive"    ],
     [ male,      "a:D",                          "liveliness", "Alive"    ],
     [ male,      "a:d",                          "liveliness", "Alive"    ]
@@ -108,7 +108,7 @@ describe("The traits", function() {
 
   it ("of an fully-specified organism should be exactly as defined", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake,
-                              "a:t,b:Tk,a:m,b:M,a:w,b:w,a:H,b:H,a:C,b:c,a:Fl,b:fl,a:hl,b:hl,a:a,b:A2,a:B,b:B,a:dl,b:d,a:rh,b:Rh",
+                              "a:t,b:Tk,a:m,b:M,a:w,b:w,a:H,b:H,a:C,b:c,a:Fl,b:fl,a:hl,b:hl,a:a,b:A2,a:B,b:B,a:d,b:d,a:rh,b:Rh",
                               female);
     expect(org).toHaveCharacteristic("tail", "Kinked tail");
     expect(org).toHaveCharacteristic("color", "Silver");
@@ -144,9 +144,10 @@ describe("The traits", function() {
 
 describe("Given we may not want dead drakes", function() {
   it ("if we have a dead drake we can make it alive again", function() {
-    var org = BioLogica.Organism.createOrganism(BioLogica.Species.Drake, "a:dl,b:dl");
+    var org = BioLogica.Organism.createOrganism(BioLogica.Species.Drake, "a:d,b:d");
 
-    expect(org.getCharacteristic("liveliness")).toBe("Dead");
+    // we no longer support the dl allele or dead drakes
+    // expect(org.getCharacteristic("liveliness")).toBe("Dead");
 
     org.species.makeAlive(org);
 
@@ -154,7 +155,7 @@ describe("Given we may not want dead drakes", function() {
   });
 
   it ("we can request an alive drake", function() {
-    var org = BioLogica.Organism.createLiveOrganism(BioLogica.Species.Drake, "a:dl,b:dl");
+    var org = BioLogica.Organism.createLiveOrganism(BioLogica.Species.Drake, "a:d,b:d");
 
     expect(org.getCharacteristic("liveliness")).toBe("Alive");
   });
@@ -163,7 +164,7 @@ describe("Given we may not want dead drakes", function() {
 describe("The image name of an appropriate org", function() {
   it ("should be ar_f_noWing_fore_a1_kink_noHorn_rostral_healthy.png", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake,
-                "a:t,b:Tk,a:m,b:M,a:w,b:w,a:H,b:H,a:C,b:c,a:Fl,b:fl,a:hl,b:hl,a:a,b:A2,a:B,b:B,a:dl,b:d,a:rh,b:Rh,a:Bog",
+                "a:t,b:Tk,a:m,b:M,a:w,b:w,a:H,b:H,a:C,b:c,a:Fl,b:fl,a:hl,b:hl,a:a,b:A2,a:B,b:B,a:d,b:d,a:rh,b:Rh,a:Bog",
                 female);
     expect(org.getImageName()).toBe("ar_f_noWing_fore_a1_kink_noHorn_rostral_healthy.png");
   });
@@ -177,23 +178,24 @@ describe("The image name of an appropriate org", function() {
 
   it ("should be sa_f_wing_allLimb_a0_flair_horn_noRostral_healthy.png", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake,
-                "a:t,b:T,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:dl,a:rh,b:rh,a:Bog",
+                "a:t,b:T,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:d,a:rh,b:rh,a:Bog",
                 female);
     expect(org.getImageName()).toBe("sa_f_wing_allLimb_a0_flair_horn_noRostral_healthy.png");
   });
 
   it ("should be sa_f_wing_allLimb_a0_flair_horn_noRostral_bogbreath.png", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake,
-                "a:t,b:T,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:dl,a:rh,b:rh,a:bog,b:bog",
+                "a:t,b:T,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:d,a:rh,b:rh,a:bog,b:bog",
                 female);
     expect(org.getImageName()).toBe("sa_f_wing_allLimb_a0_flair_horn_noRostral_bogbreath.png");
   });
 
-  it ("should be dead-drake.png", function() {
-    var org = new BioLogica.Organism(BioLogica.Species.Drake,
-                "a:dl,b:dl",
-                female);
-    window.org = org;
-    expect(org.getImageName()).toBe("dead-drake.png");
-  });
+  // we no longer support the dl allele or dead drakes
+  // it ("should be dead-drake.png", function() {
+  //   var org = new BioLogica.Organism(BioLogica.Species.Drake,
+  //               "a:dl,b:dl",
+  //               female);
+  //   window.org = org;
+  //   expect(org.getImageName()).toBe("dead-drake.png");
+  // });
 });
