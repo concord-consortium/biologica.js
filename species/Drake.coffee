@@ -144,9 +144,6 @@ BioLogica.Species.Drake =
       "Bog breath": [['bog','bog'],['bog','Y']]
       "Healthy": [['Bog', 'Bog'],['Bog','bog'],['Bog','Y']]
 
-    "liveliness":
-      "Alive":    BioLogica.combinations([["D","d"],["D","d","Y"]])
-
   ###
     Gets the image name based on the organism's characteristics.
     Requires the BioLogica.js library, and for org to be a BioLogica.js organism

@@ -66,14 +66,6 @@ describe("For a Drake, the characteristic", function() {
     [ female,    "a:Bog,b:bog",   "health",   "Healthy"     ],
     [ female,    "a:bog,b:Bog",   "health",   "Healthy"     ],
     [ female,    "a:Bog,b:Bog",   "health",   "Healthy"     ],
-
-    [ female,    "a:M,b:M,a:d,b:d,a:A1,b:A1",    "liveliness", "Alive"    ],
-    [ male,      "a:d",                          "liveliness", "Alive"    ],
-    [ female,    "a:M,b:M,a:d,b:d,a:A1",         "liveliness", "Alive"    ],
-    [ female,    "a:M,b:m,a:D,b:d,a:A2",         "liveliness", "Alive"    ],
-    [ female,    "a:M,b:M,a:D,b:D,a:a,b:a",      "liveliness", "Alive"    ],
-    [ male,      "a:D",                          "liveliness", "Alive"    ],
-    [ male,      "a:d",                          "liveliness", "Alive"    ]
   ];
 
   for (var i=0,ii=phenotypeTests.length; i<ii; i++ ) {
@@ -94,7 +86,7 @@ function testCharacteristic(desc, test) {
 describe("The traits", function() {
   it ("of an under-specified organism should be fully specified", function() {
     var org = new BioLogica.Organism(BioLogica.Species.Drake, "", female),
-        traits = ["wings", "tail", "horns", "forelimbs", "hindlimbs", "armor", "nose spike", "color", "liveliness"],
+        traits = ["wings", "tail", "horns", "forelimbs", "hindlimbs", "armor", "nose spike", "color"],
         allTraitsSpecified = true;
 
     for (var i=0, ii=traits.length; i<ii;i++){
@@ -139,25 +131,6 @@ describe("The traits", function() {
     expect(characteristics).toContain("Hornless");
     expect(characteristics).toContain("Wings");
     expect(characteristics).not.toContain("No wings");
-  });
-});
-
-describe("Given we may not want dead drakes", function() {
-  it ("if we have a dead drake we can make it alive again", function() {
-    var org = BioLogica.Organism.createOrganism(BioLogica.Species.Drake, "a:d,b:d");
-
-    // we no longer support the dl allele or dead drakes
-    // expect(org.getCharacteristic("liveliness")).toBe("Dead");
-
-    org.species.makeAlive(org);
-
-    expect(org.getCharacteristic("liveliness")).toBe("Alive");
-  });
-
-  it ("we can request an alive drake", function() {
-    var org = BioLogica.Organism.createLiveOrganism(BioLogica.Species.Drake, "a:d,b:d");
-
-    expect(org.getCharacteristic("liveliness")).toBe("Alive");
   });
 });
 
