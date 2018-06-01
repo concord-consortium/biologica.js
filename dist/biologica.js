@@ -1509,9 +1509,6 @@
       "health": {
         "Bog breath": [['bog', 'bog'], ['bog', 'Y']],
         "Healthy": [['Bog', 'Bog'], ['Bog', 'bog'], ['Bog', 'Y']]
-      },
-      "liveliness": {
-        "Alive": BioLogica.combinations([["D", "d"], ["D", "d", "Y"]])
       }
     },
 
