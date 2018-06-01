@@ -58,7 +58,7 @@ describe("When we breed", function() {
       }
     }
 
-    expect(wings/times).toBeBetween(0.46,0.54);
+    expect(wings/times).toBeBetween(0.45,0.55);
   });
 
   it("two heterozygous parents, we expect 75% of offspring to have the dominant trait", function() {
@@ -132,7 +132,7 @@ describe("When we breed", function() {
 
       expect(neither).toBe(0);
       expect(TW + tw).toBe(times);
-      expect(TW/times).toBeBetween(0.46,0.54);
+      expect(TW/times).toBeBetween(0.45,0.55);
     })
   });
 
