@@ -9,13 +9,14 @@ var spikeless = "a:T,b:t,a:m,b:M,a:w,b:W,a:H,b:h,a:C,b:c,a:B,b:B,a:fl,b:fl,a:hl,
 var spiked =    "a:T,b:t,a:m,b:M,a:w,b:W,a:H,b:h,a:C,b:c,a:B,b:B,a:fl,b:fl,a:hl,b:hl,a:A1,b:A2,a:d,a:Bog,a:Rh";
 var faded = "a:T,b:t,a:m,b:M,a:w,b:W,a:H,b:h,a:c,b:C,a:B,b:B,a:fl,b:fl,a:hl,b:hl,a:A1,b:A2,a:d,a:Bog,a:rh";
 var deep =  "a:T,b:t,a:m,b:M,a:w,b:W,a:H,b:h,a:c,b:C,a:B,b:B,a:fl,b:fl,a:hl,b:hl,a:A1,b:A2,a:D,a:Bog,a:rh";
+var deepSpikedFemale = "a:T,b:t,a:m,b:M,a:w,b:W,a:H,b:h,a:c,b:C,a:B,b:B,a:fl,b:fl,a:hl,b:hl,a:A1,b:A2,a:d,b:D,a:Bog,b:Bog,a:rh,b:Rh";
 var female = BioLogica.FEMALE,
     male   = BioLogica.MALE;
 function drake(alleles, sex) {
   return new BioLogica.Organism(BioLogica.Species.Drake, alleles, sex);
 }
-function changes(org1, org2) {
-  return BioLogica.Phenotype.numberOfChangesToReachPhenotype(org1, org2, BioLogica.Species.Drake);
+function changes(org1, org2, xAlleles) {
+  return BioLogica.Phenotype.numberOfChangesToReachPhenotype(org1, org2, BioLogica.Species.Drake, xAlleles);
 }
 
 describe("The Phenotype library", function() {
@@ -86,6 +87,20 @@ describe("The Phenotype library", function() {
       var org1 = drake(deep, male),
           org2 = drake(faded, male);
       expect(changes(org1, org2)).toBe(1);
+    });
+
+    it("with recessive sex-linked traits", function() {
+      var org1 = drake(spikeless, male),
+          org2 = drake(deepSpikedFemale, female);
+      expect(changes(org1, org2, "b:d,b:Bog,b:rh")).toBe(3);
+    });
+
+    it("with dominant sex-linked traits", function() {
+      var org1 = drake(spikeless, male),
+          org2 = drake(deepSpikedFemale, female);
+      // switching to female accomplishes the necessary trait changes
+      expect(changes(org1, org2, "b:D,b:Bog,b:Rh")).toBe(1);
+      expect(changes(org2, org1, "b:D,b:Bog,b:Rh")).toBe(1);
     });
   });
 });

@@ -23,18 +23,27 @@ solutionsContainsAllele = (solutions, allele) ->
 ###
     Returns the number of separate changes, including allele changes and sex changes,
     required to match the phenotype of the 'testOrganism' to that of the 'targetOrganism'.
+    xAlleles is an allele string that represents the alleles to be added in the case of
+    a male test organism being compared to a female target. If not specified, they will
+    be randomly generated, which can lead to inconsistent results.
 ###
-BioLogica.Phenotype.numberOfChangesToReachPhenotype = (testOrganism, targetOrganism, species) ->
+BioLogica.Phenotype.numberOfChangesToReachPhenotype = (testOrganism, targetOrganism, species, xAlleles) ->
   testOrganism = BioLogica.Organism.ensureValidOrganism(testOrganism, species)
   targetOrganism = BioLogica.Organism.ensureValidOrganism(targetOrganism, species)
-  requiredChangeCount = BioLogica.Phenotype.numberOfAlleleChangesToReachPhenotype(testOrganism.phenotype.characteristics, targetOrganism.phenotype.characteristics, testOrganism.genetics.genotype.allAlleles, testOrganism.species, testOrganism.sex)
-  # Note that this simplistic handling of sex can give incorrect results for sex-linked genes,
-  # given that changing sex can add/remove the alleles of the second X chromosome.
-  # The issue is complicated by the fact that changing sex from male to female requires
-  # an additional X chromosome that is not specified by the organism.
+
+  requiredChanges = 0
   if testOrganism.sex != targetOrganism.sex
-    ++requiredChangeCount
-  requiredChangeCount
+    # +1 for the sex change
+    ++requiredChanges
+    testAlleles = testOrganism.getAlleleString()
+    # add second X chromosome alleles if changing from male to female
+    if testOrganism.sex == BioLogica.MALE && xAlleles?
+      testAlleles += "," + xAlleles
+    # make a new test organism with the correct sex
+    testOrganism = new BioLogica.Organism(species, testAlleles, targetOrganism.sex)
+
+  # add the number of allele changes required
+  requiredChanges += BioLogica.Phenotype.numberOfAlleleChangesToReachPhenotype(testOrganism.phenotype.characteristics, targetOrganism.phenotype.characteristics, testOrganism.genetics.genotype.allAlleles, testOrganism.species, testOrganism.sex)
 
 ###
     Returns the number of separate allele changes required to make the phenotype of
