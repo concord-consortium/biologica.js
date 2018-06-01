@@ -9,7 +9,7 @@
  */
 
 (function() {
-  var arrayRemoveObject, arrayShuffle,
+  var arrayRemoveObject, arrayShuffle, solutionsContainsAllele,
     hasProp = {}.hasOwnProperty,
     indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
@@ -872,19 +872,43 @@
 
 
   /*
-      Returns the number of separate changes, including allele changes and sex changes,
-      required to match the phenotype of the 'testOrganism' to that of the 'targetOrganism'.
+      Returns true if the specified set of solutions includes the specified allele (or "Y").
    */
 
-  BioLogica.Phenotype.numberOfChangesToReachPhenotype = function(testOrganism, targetOrganism, species) {
-    var requiredChangeCount;
+  solutionsContainsAllele = function(solutions, allele) {
+    var l, len, solution;
+    for (l = 0, len = solutions.length; l < len; l++) {
+      solution = solutions[l];
+      if (solution.indexOf(allele) >= 0) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+
+  /*
+      Returns the number of separate changes, including allele changes and sex changes,
+      required to match the phenotype of the 'testOrganism' to that of the 'targetOrganism'.
+      xAlleles is an allele string that represents the alleles to be added in the case of
+      a male test organism being compared to a female target. If not specified, they will
+      be randomly generated, which can lead to inconsistent results.
+   */
+
+  BioLogica.Phenotype.numberOfChangesToReachPhenotype = function(testOrganism, targetOrganism, species, xAlleles) {
+    var requiredChanges, testAlleles;
     testOrganism = BioLogica.Organism.ensureValidOrganism(testOrganism, species);
     targetOrganism = BioLogica.Organism.ensureValidOrganism(targetOrganism, species);
-    requiredChangeCount = BioLogica.Phenotype.numberOfAlleleChangesToReachPhenotype(testOrganism.phenotype.characteristics, targetOrganism.phenotype.characteristics, testOrganism.genetics.genotype.allAlleles, testOrganism.species);
+    requiredChanges = 0;
     if (testOrganism.sex !== targetOrganism.sex) {
-      ++requiredChangeCount;
+      ++requiredChanges;
+      testAlleles = testOrganism.getAlleleString();
+      if (testOrganism.sex === BioLogica.MALE && (xAlleles != null)) {
+        testAlleles += "," + xAlleles;
+      }
+      testOrganism = new BioLogica.Organism(species, testAlleles, targetOrganism.sex);
     }
-    return requiredChangeCount;
+    return requiredChanges += BioLogica.Phenotype.numberOfAlleleChangesToReachPhenotype(testOrganism.phenotype.characteristics, targetOrganism.phenotype.characteristics, testOrganism.genetics.genotype.allAlleles, testOrganism.species, testOrganism.sex);
   };
 
 
@@ -895,7 +919,7 @@
       @see https://github.com/concord-consortium/Geniverse-SproutCore/blob/master/frameworks/geniverse/controllers/match.js
    */
 
-  BioLogica.Phenotype.numberOfAlleleChangesToReachPhenotype = function(testCharacteristics, targetCharacteristics, testAlleles, species) {
+  BioLogica.Phenotype.numberOfAlleleChangesToReachPhenotype = function(testCharacteristics, targetCharacteristics, testAlleles, species, sex) {
     var alleles, characteristicAlleles, gene, i, ii, j, jj, k, kk, l, len, moves, pathLength, possibleSolutions, possibleTraitGenes, shortestPathLength, solution, trait, traitRules;
     traitRules = species.traitRules;
     alleles = testAlleles;
@@ -904,6 +928,7 @@
       if (traitRules.hasOwnProperty(trait)) {
         if (testCharacteristics[trait] !== targetCharacteristics[trait]) {
           possibleTraitGenes = BioLogica.Genetics.collectAllGenesForCharacteristic(trait, targetCharacteristics[trait], species);
+          possibleSolutions = traitRules[trait][targetCharacteristics[trait]];
           characteristicAlleles = [];
           i = 0;
           ii = alleles.length;
@@ -917,7 +942,9 @@
             }
             i++;
           }
-          possibleSolutions = traitRules[trait][targetCharacteristics[trait]];
+          if (sex === BioLogica.MALE && solutionsContainsAllele(possibleSolutions, "Y")) {
+            characteristicAlleles.push("Y");
+          }
           shortestPathLength = 2e308;
           j = 0;
           jj = possibleSolutions.length;
