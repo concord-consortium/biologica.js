@@ -157,7 +157,7 @@ describe("When we breed", function() {
         }
       }
 
-      expect(neither/times).toBeBetween(0.32,0.40);
+      expect(neither/times).toBeBetween(0.30,0.42);
     })
   });
 });

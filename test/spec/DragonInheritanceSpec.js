@@ -79,12 +79,6 @@ describe("For a Dragon, the characteristic", function() {
 
     [   male,    "a:aw,a:B",          "color",          "Albino"           ],
     [   male,    "a:aw,a:b",          "color",          "Albino"           ],
-
-    [ female,    "a:B,b:B",           "liveliness",     "Alive"            ],
-    [ female,    "a:B,b:b",           "liveliness",     "Alive"            ],
-    [ female,    "a:b,b:b",           "liveliness",     "Dead"             ],
-    [   male,    "a:B",               "liveliness",     "Alive"            ],
-    [   male,    "a:b",               "liveliness",     "Dead"             ]
   ];
 
   for (var i=0,ii=phenotypeTests.length; i<ii; i++ ) {

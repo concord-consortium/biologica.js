@@ -6,7 +6,7 @@ describe("An organism's genetics", function() {
   });
 
   it("creates a genotype when an organism is created with an alleleString", function() {
-    var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:H,a:t,b:Tk,a:c,b:C,a:W,b:w,a:dl,b:D", BioLogica.FEMALE),
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:h,b:H,a:t,b:Tk,a:c,b:C,a:W,b:w,a:d,b:D", BioLogica.FEMALE),
         chromosomes = org.getGenotype().chromosomes;
 
     expect(chromosomes["1"].a.alleles).toContain("t");
@@ -19,15 +19,15 @@ describe("An organism's genetics", function() {
     expect(chromosomes["2"].a.alleles).toContain("c");
     expect(chromosomes["2"].b.alleles).toContain("C");
 
-    expect(chromosomes["XY"].x1.alleles).toContain("dl");
+    expect(chromosomes["XY"].x1.alleles).toContain("d");
     expect(chromosomes["XY"].x2.alleles).toContain("D");
   });
 
   it("creates male or female chromosomes when organisms are created with alleleStrings", function() {
-    var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:dl,b:D", BioLogica.FEMALE),
+    var org = new BioLogica.Organism(BioLogica.Species.Drake, "a:d,b:D", BioLogica.FEMALE),
         chromosomes = org.getGenotype().chromosomes;
 
-    expect(chromosomes["XY"].x1.alleles).toContain("dl");
+    expect(chromosomes["XY"].x1.alleles).toContain("d");
     expect(chromosomes["XY"].x2.alleles).toContain("D");
 
     org = new BioLogica.Organism(BioLogica.Species.Drake, "a:D", BioLogica.MALE),
@@ -344,7 +344,7 @@ describe("An species' genetics", function() {
     var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "", BioLogica.FEMALE);
 
     expect(genetics.isAlleleOfGene("T", "T")).toBe(true);
-    expect(genetics.isAlleleOfGene("dl", "D")).toBe(true);
+    expect(genetics.isAlleleOfGene("d", "D")).toBe(true);
     expect(genetics.isAlleleOfGene("Rh", "rh")).toBe(true);
     expect(genetics.isAlleleOfGene("rh", "D")).toBe(false);
   });
@@ -353,7 +353,7 @@ describe("An species' genetics", function() {
     var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "", BioLogica.FEMALE);
 
     expect(genetics.geneForAllele("T")).toBe('tail');
-    expect(genetics.geneForAllele("dl")).toBe('dilute');
+    expect(genetics.geneForAllele("d")).toBe('dilute');
     expect(genetics.geneForAllele("Rh")).toBe('nose');
     expect(genetics.geneForAllele("rh")).toBe('nose');
   });
@@ -363,26 +363,26 @@ describe("An species' genetics", function() {
 
     expect(genetics.findChromosome("t")).toBe("1");
     expect(genetics.findChromosome("Fl")).toBe("2");
-    expect(genetics.findChromosome("dl")).toBe("XY");
+    expect(genetics.findChromosome("d")).toBe("XY");
 
     expect(genetics.findChromosome("zzz")).toBe(false);
   });
 
   it("correctly filters a set of alleles", function() {
     var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "", BioLogica.FEMALE),
-        alleles = ["Tk", "m", "W", "dl"],
+        alleles = ["Tk", "m", "W", "d"],
         geneFilter = ["T", "D"],
         filteredAlleles = genetics.filter(alleles, geneFilter);
 
     expect(filteredAlleles).toContain("Tk");
-    expect(filteredAlleles).toContain("dl");
+    expect(filteredAlleles).toContain("d");
     expect(filteredAlleles).not.toContain("m");
     expect(filteredAlleles).not.toContain("W");
   });
 
   it("correctly converts an allele string into genotype", function() {
     var genetics = new BioLogica.Genetics(BioLogica.Species.Drake, "", BioLogica.FEMALE),
-        alleles = "a:c,b:C,a:t,b:Tk,b:dl,a:W,b:w,a:dl",
+        alleles = "a:c,b:C,a:t,b:Tk,b:dl,a:W,b:w,a:d",
         chromosomes =genetics.convertAlleleStringToGenotypeHash(alleles, BioLogica.FEMALE);
 
     expect(chromosomes["1"].a).toContain("t");
@@ -393,7 +393,7 @@ describe("An species' genetics", function() {
     expect(chromosomes["2"].a).toContain("c");
     expect(chromosomes["2"].b).toContain("C");
 
-    expect(chromosomes["XY"].x1).toContain("dl");
+    expect(chromosomes["XY"].x1).toContain("d");
   });
 
   it("finds if a chromosome contains a gene", function() {

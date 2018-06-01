@@ -1,9 +1,9 @@
-var wingsHetero =  "a:t,b:T,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:dl,a:rh,b:rh,a:Bog";
-var wingsHomoDom = "a:t,b:T,a:m,b:m,a:W,b:W,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:dl,a:rh,b:rh,a:Bog";
-var noWings =      "a:t,b:T,a:m,b:m,a:w,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:dl,a:rh,b:rh,a:Bog";
-var noWingsShortTail = "a:t,b:t,a:m,b:m,a:w,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:dl,a:rh,b:rh,a:Bog";
+var wingsHetero =  "a:t,b:T,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:d,a:rh,b:rh,a:Bog";
+var wingsHomoDom = "a:t,b:T,a:m,b:m,a:W,b:W,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:d,a:rh,b:rh,a:Bog";
+var noWings =      "a:t,b:T,a:m,b:m,a:w,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:d,a:rh,b:rh,a:Bog";
+var noWingsShortTail = "a:t,b:t,a:m,b:m,a:w,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:d,a:rh,b:rh,a:Bog";
 var steel =  "a:t,b:T,a:M,b:M,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:B,b:b,a:d,b:D,a:rh,b:rh,a:Bog";
-var sand =   "a:t,b:T,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:dl,a:rh,b:rh,a:Bog";
+var sand =   "a:t,b:T,a:m,b:m,a:W,b:w,a:h,b:h,a:C,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:b,b:b,a:d,b:d,a:rh,b:rh,a:Bog";
 var albino = "a:t,b:T,a:M,b:M,a:W,b:w,a:h,b:h,a:c,b:c,a:fl,b:Fl,a:Hl,b:hl,a:a,b:a,a:B,b:b,a:d,b:D,a:rh,b:rh,a:Bog";
 var female = BioLogica.FEMALE,
     male   = BioLogica.MALE;
