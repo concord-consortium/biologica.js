@@ -56,7 +56,7 @@ BioLogica.Phenotype.numberOfAlleleChangesToReachPhenotype = (testCharacteristics
   alleles = testAlleles
   moves = 0
   for trait of traitRules
-    if traitRules.hasOwnProperty(trait)
+    if traitRules.hasOwnProperty(trait) and (species.subTraits.indexOf(trait) < 0)
       if testCharacteristics[trait] != targetCharacteristics[trait]
         # first we have to work out what alleles the original drake has that correspond to the non-matching trait
         possibleTraitGenes = BioLogica.Genetics.collectAllGenesForCharacteristic(trait, targetCharacteristics[trait], species)
