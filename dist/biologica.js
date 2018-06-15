@@ -925,7 +925,7 @@
     alleles = testAlleles;
     moves = 0;
     for (trait in traitRules) {
-      if (traitRules.hasOwnProperty(trait)) {
+      if (traitRules.hasOwnProperty(trait) && (species.subTraits.indexOf(trait) < 0)) {
         if (testCharacteristics[trait] !== targetCharacteristics[trait]) {
           possibleTraitGenes = BioLogica.Genetics.collectAllGenesForCharacteristic(trait, targetCharacteristics[trait], species);
           possibleSolutions = traitRules[trait][targetCharacteristics[trait]];
@@ -1536,8 +1536,25 @@
       "health": {
         "Bog breath": [['bog', 'bog'], ['bog', 'Y']],
         "Healthy": [['Bog', 'Bog'], ['Bog', 'bog'], ['Bog', 'Y']]
+      },
+      "metallic": {
+        "Shiny": [["M", "M"], ["M", "m"]],
+        "Dull": [["m", "m"]]
+      },
+      "colored": {
+        "Colored": [["C", "C"], ["C", "c"]],
+        "Albino": [["c", "c"]]
+      },
+      "black": {
+        "Gray": [["B", "B"], ["B", "b"]],
+        "Orange": [["b", "b"]]
+      },
+      "dilute": {
+        "Deep": [["D", "D"], ["D", "d"]],
+        "Faded": [["d", "d"]]
       }
     },
+    subTraits: ["metallic", "colored", "black", "dilute"],
 
     /*
       Gets the image name based on the organism's characteristics.

@@ -144,6 +144,26 @@ BioLogica.Species.Drake =
       "Bog breath": [['bog','bog'],['bog','Y']]
       "Healthy": [['Bog', 'Bog'],['Bog','bog'],['Bog','Y']]
 
+    # color sub-traits added for convenience of ITS
+    "metallic":
+      "Shiny":    [["M", "M"], ["M", "m"]]
+      "Dull":     [["m", "m"]]
+    
+    "colored":
+      "Colored":  [["C", "C"], ["C", "c"]]
+      "Albino":   [["c", "c"]]
+
+    "black":
+      "Gray":     [["B", "B"], ["B", "b"]]
+      "Orange":   [["b", "b"]]
+
+    "dilute":
+      "Deep":     [["D", "D"], ["D", "d"]]
+      "Faded":    [["d", "d"]]
+
+  # these traits are ignored by move calculations
+  subTraits: ["metallic", "colored", "black", "dilute"]
+
   ###
     Gets the image name based on the organism's characteristics.
     Requires the BioLogica.js library, and for org to be a BioLogica.js organism
