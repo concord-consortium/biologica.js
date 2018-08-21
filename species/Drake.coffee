@@ -148,7 +148,7 @@ BioLogica.Species.Drake =
     "metallic":
       "Shiny":    [["M", "M"], ["M", "m"]]
       "Dull":     [["m", "m"]]
-    
+
     "colored":
       "Colored":  [["C", "C"], ["C", "c"]]
       "Albino":   [["c", "c"]]
@@ -158,8 +158,8 @@ BioLogica.Species.Drake =
       "Orange":   [["b", "b"]]
 
     "dilute":
-      "Deep":     [["D", "D"], ["D", "d"]]
-      "Faded":    [["d", "d"]]
+      "Deep":     [["D", "D"], ["D", "d"], ["D", "Y"]]
+      "Faded":    [["d", "d"], ["d", "Y"]]
 
   # these traits are ignored by move calculations
   subTraits: ["metallic", "colored", "black", "dilute"]

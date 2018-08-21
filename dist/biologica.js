@@ -1550,8 +1550,8 @@
         "Orange": [["b", "b"]]
       },
       "dilute": {
-        "Deep": [["D", "D"], ["D", "d"]],
-        "Faded": [["d", "d"]]
+        "Deep": [["D", "D"], ["D", "d"], ["D", "Y"]],
+        "Faded": [["d", "d"], ["d", "Y"]]
       }
     },
     subTraits: ["metallic", "colored", "black", "dilute"],
